@@ -1,0 +1,46 @@
+{
+  "name": "@toolman/libs",
+  "version": "1.0.0",
+  "description": "",
+  "license": "MIT",
+  "type": "module",
+  "author": "arsh <https://github.com/evilArsh>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/evilArsh/toolman.git",
+    "directory": "packages/libs"
+  },
+  "keywords": [
+    "vue"
+  ],
+  "exports": {
+    ".": "./index.mjs",
+    "./*": "./*"
+  },
+  "main": "./index.mjs",
+  "module": "./index.mjs",
+  "types": "./index.d.mts",
+  "files": [
+    "*.d.mts",
+    "*.js",
+    "*.mjs"
+  ],
+  "scripts": {},
+  "dependencies": {
+    "@toolman/shared": "workspace:*"
+  },
+  "devDependencies": {
+    "@babel/types": "^7.28.2",
+    "@types/hash-sum": "^1.0.2",
+    "@types/hast": "^3.0.4",
+    "hash-sum": "^2.0.0",
+    "hotkeys-js": "^3.13.15",
+    "rfdc": "^1.4.1",
+    "shiki": "^3.9.2",
+    "sucrase": "^3.35.0"
+  },
+  "peerDependencies": {
+    "@vueuse/core": "^13.6.0",
+    "vue": "^3.5.18"
+  }
+}

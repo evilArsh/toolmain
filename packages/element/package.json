@@ -1,0 +1,37 @@
+{
+  "name": "@toolman/element",
+  "version": "1.0.0",
+  "description": "element-plus toolkit",
+  "license": "MIT",
+  "type": "module",
+  "author": "arsh <https://github.com/evilArsh>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/evilArsh/toolman.git",
+    "directory": "packages/shared"
+  },
+  "keywords": [
+    "vue",
+    "element-plus"
+  ],
+  "exports": {
+    ".": "./index.mjs",
+    "./*": "./*"
+  },
+  "main": "./index.mjs",
+  "module": "./index.mjs",
+  "types": "./index.d.mts",
+  "files": [
+    "*.d.mts",
+    "*.js",
+    "*.mjs"
+  ],
+  "scripts": {},
+  "dependencies": {
+    "@toolman/shared": "workspace:*"
+  },
+  "peerDependencies": {
+    "element-plus": "^2.10.0",
+    "vue": "^3.5.0"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "recommendations": [
+    "Vue.volar",
+    "esbenp.prettier-vscode",
+    "EditorConfig.EditorConfig",
+    "dbaeumer.vscode-eslint"
+    // "Lokalise.i18n-ally"
+  ]
+}

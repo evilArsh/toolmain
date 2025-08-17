@@ -1,0 +1,43 @@
+{
+  "name": "@toolman/shared",
+  "version": "1.0.0",
+  "description": "",
+  "license": "MIT",
+  "type": "module",
+  "author": "arsh <https://github.com/evilArsh>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/evilArsh/toolman.git",
+    "directory": "packages/shared"
+  },
+  "keywords": [
+    "vue"
+  ],
+  "exports": {
+    ".": "./index.mjs",
+    "./*": "./*"
+  },
+  "main": "./index.mjs",
+  "module": "./index.mjs",
+  "types": "./index.d.mts",
+  "files": [
+    "*.d.mts",
+    "*.js",
+    "*.mjs"
+  ],
+  "scripts": {},
+  "devDependencies": {
+    "@types/lodash.merge": "^4.6.9",
+    "csstype": "^3.1.3",
+    "lodash.merge": "^4.6.2",
+    "nanoid": "^5.1.5",
+    "serialize-error": "^12.0.0",
+    "style-value-types": "^5.1.2"
+  },
+  "peerDependencies": {
+    "@vueuse/core": "^13.6.0",
+    "axios": "^1.11.0",
+    "vue": "^3.5.18"
+  }
+}
+
