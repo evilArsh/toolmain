@@ -10,6 +10,9 @@
     "url": "git+https://github.com/evilArsh/toolman.git",
     "directory": "packages/shared"
   },
+  "scripts": {
+    "build": "rollup --config=rollup.config.ts --configPlugin=rollup-plugin-esbuild"
+  },
   "keywords": [
     "vue"
   ],
@@ -25,7 +28,6 @@
     "*.js",
     "*.mjs"
   ],
-  "scripts": {},
   "devDependencies": {
     "@types/lodash.merge": "^4.6.9",
     "csstype": "^3.1.3",

@@ -6,7 +6,8 @@
   "private": true,
   "scripts": {
     "preinstall": "npx only-allow pnpm",
-    "build": "pnpm -r run build"
+    "build": "pnpm -r run build",
+    "clean": "tsx scripts/clean.ts"
   },
   "keywords": [],
   "author": "arsh <https://github.com/evilArsh>",
@@ -45,7 +46,9 @@
     "rollup": "^4.46.3",
     "rollup-plugin-dts": "^6.2.3",
     "rollup-plugin-esbuild": "^6.2.1",
+    "sass": "^1.90.0",
     "tinyglobby": "^0.2.14",
+    "tsx": "^4.20.4",
     "typescript": "^5.9.2",
     "typescript-eslint": "^8.39.1",
     "unocss": "^66.4.2",
@@ -60,4 +63,3 @@
     "vue-tsc": "^3.0.5"
   }
 }
-
