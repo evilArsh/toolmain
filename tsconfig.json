@@ -36,10 +36,10 @@
       "@toolman/element/*": ["./packages/element/*"],
       "@toolman/shared": ["./packages/shared/index.ts"],
       "@toolman/shared/*": ["./packages/shared/*"],
-      "@toolman/libs": ["packages/libs/useEvent.ts"],
+      "@toolman/libs": ["./packages/libs"],
       "@toolman/libs/*": ["./packages/libs/*"]
     }
   },
-  "include": ["*.ts", "packages"],
+  "include": ["*.ts", "packages", "scripts"],
   "exclude": ["unocss.config.ts", "node_modules", "**/*.md", "**/dist"]
 }

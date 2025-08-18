@@ -35,12 +35,12 @@
     "@types/hast": "^3.0.4",
     "hash-sum": "^2.0.0",
     "hotkeys-js": "^3.13.15",
-    "rfdc": "^1.4.1",
     "shiki": "^3.9.2",
     "sucrase": "^3.35.0"
   },
   "peerDependencies": {
     "@vueuse/core": "^13.6.0",
-    "vue": "^3.5.18"
+    "vue": "^3.5.18",
+    "vue-i18n": "^11.1.11"
   }
 }

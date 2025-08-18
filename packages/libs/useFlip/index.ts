@@ -19,7 +19,7 @@ import { CallBackFn, FixedArray } from "@toolman/shared"
  */
 
 /**
- Keyword values
+Keyword values
 transform: none;
 
 Function values

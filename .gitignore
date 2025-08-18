@@ -143,3 +143,4 @@ packages/**/*.[cm]js
 packages/**/*.d.ts
 packages/**/*.d.[cm]ts
 packages/*/LICENSE
+types/packages/**

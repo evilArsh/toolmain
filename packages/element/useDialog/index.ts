@@ -1,11 +1,12 @@
+import { merge } from "@toolman/shared"
 import { DialogEmits, DialogProps } from "element-plus"
-import { ref } from "vue"
+import { reactive, ref } from "vue"
 
 type Writable<T> = {
   -readonly [K in keyof T]: T[K]
 }
 export default function (preset?: Partial<Writable<DialogProps>>) {
-  const data = ref<Partial<Writable<DialogProps>>>({
+  const initial: Partial<Writable<DialogProps>> = {
     modelValue: false,
     title: "",
     width: "50%",
@@ -19,27 +20,25 @@ export default function (preset?: Partial<Writable<DialogProps>>) {
     draggable: true,
     overflow: true,
     showClose: false,
-  })
-  if (preset) {
-    Object.assign(data.value, preset)
   }
+  const data = reactive<Partial<Writable<DialogProps>>>(merge(initial, preset))
   const event = ref<DialogEmits>({
     open: (): boolean => true,
     opened: (): boolean => true,
     close: (): boolean => true,
     closed: (): boolean => true,
     "update:modelValue": (value: boolean): boolean => {
-      data.value.modelValue = value
+      data.modelValue = value
       return true
     },
     openAutoFocus: (): boolean => true,
     closeAutoFocus: (): boolean => true,
   })
   function open() {
-    data.value.modelValue = true
+    data.modelValue = true
   }
   function close() {
-    data.value.modelValue = false
+    data.modelValue = false
   }
   return {
     dlgProps: data,

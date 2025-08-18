@@ -1,5 +1,22 @@
 import type * as CSS from "csstype"
 
+// xs sm md lg xl
+export enum z {
+  ABSOLUTE = 100,
+  ABSOLUTE_CONFIG = 110,
+  ABSOLUTE_TOP = 198,
+  ABSOLUTE_MAX = 199,
+
+  FIXED = 200,
+  FIXED_CONFIG = 210,
+  FIXED_TOP = 298,
+  FIXED_MAX = 299,
+
+  MAX = 999,
+  MAX2 = 1000,
+  HIDDEN = -999,
+}
+
 export interface CSSProperties extends CSS.Properties<string | number>, CSS.PropertiesHyphen<string | number> {
   // for css variable
   [v: `--${string}`]: string | number | undefined
@@ -16,15 +33,24 @@ export type FixedArray<T, L extends number> = Pick<T[], Exclude<keyof T[], ArrMu
 export interface CallBack {
   callback: (...arg: any[]) => void
 }
+/**
+ * 回调函数类型
+ */
 export type CallBackFn = (...arg: any[]) => void
+/**
+ * 异步回调函数类型
+ */
 export type AsyncCallBackFn = (...arg: any[]) => Promise<void>
 
-export interface BridgeResponse<T = unknown> {
+/**
+ * 通用响应格式
+ */
+export interface Response<T = unknown> {
   code: HttpStatusCode
   msg: string
   data: T
 }
-export type BridgeStatusResponse = BridgeResponse<undefined>
+export type StatusResponse = Response<undefined>
 
 export enum HttpStatusCode {
   Continue = 100,

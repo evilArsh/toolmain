@@ -1,10 +1,7 @@
-/**
- * author: arshdebian@163.com
- */
 import { onBeforeUnmount, ref, watch, WatchHandle } from "vue"
 import hotkeys from "hotkeys-js"
 
-export default () => {
+export function useShortcut() {
   const handler: Array<{ key: string; handler: WatchHandle }> = []
   hotkeys.filter = () => {
     return true

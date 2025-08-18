@@ -1,5 +1,5 @@
 import type { ValueType } from "style-value-types"
-import { alpha, color, complex, degrees, filter, number, progressPercentage, px as _px, scale } from "style-value-types"
+import { alpha, color, complex, degrees, filter, number, progressPercentage, px, scale } from "style-value-types"
 import { CSSProperties } from "../types"
 
 type ValueTypeMap = Record<string, ValueType>
@@ -20,7 +20,7 @@ const int = {
   transform: Math.round,
 }
 
-export const valueTypes: ValueTypeMap = {
+export const styleValueTypes: ValueTypeMap = {
   // Color props
   color,
   backgroundColor: color,
@@ -34,40 +34,40 @@ export const valueTypes: ValueTypeMap = {
   borderRightColor: color,
   borderBottomColor: color,
   borderLeftColor: color,
-  borderWidth: _px,
-  borderTopWidth: _px,
-  borderRightWidth: _px,
-  borderBottomWidth: _px,
-  borderLeftWidth: _px,
-  borderRadius: _px,
-  radius: _px,
-  borderTopLeftRadius: _px,
-  borderTopRightRadius: _px,
-  borderBottomRightRadius: _px,
-  borderBottomLeftRadius: _px,
+  borderWidth: px,
+  borderTopWidth: px,
+  borderRightWidth: px,
+  borderBottomWidth: px,
+  borderLeftWidth: px,
+  borderRadius: px,
+  radius: px,
+  borderTopLeftRadius: px,
+  borderTopRightRadius: px,
+  borderBottomRightRadius: px,
+  borderBottomLeftRadius: px,
 
   // Positioning props
-  width: _px,
-  maxWidth: _px,
-  height: _px,
-  maxHeight: _px,
-  size: _px,
-  top: _px,
-  right: _px,
-  bottom: _px,
-  left: _px,
+  width: px,
+  maxWidth: px,
+  height: px,
+  maxHeight: px,
+  size: px,
+  top: px,
+  right: px,
+  bottom: px,
+  left: px,
 
   // Spacing props
-  padding: _px,
-  paddingTop: _px,
-  paddingRight: _px,
-  paddingBottom: _px,
-  paddingLeft: _px,
-  margin: _px,
-  marginTop: _px,
-  marginRight: _px,
-  marginBottom: _px,
-  marginLeft: _px,
+  padding: px,
+  paddingTop: px,
+  paddingRight: px,
+  paddingBottom: px,
+  paddingLeft: px,
+  margin: px,
+  marginTop: px,
+  marginRight: px,
+  marginBottom: px,
+  marginLeft: px,
 
   // Transform props
   rotate: degrees,
@@ -81,19 +81,19 @@ export const valueTypes: ValueTypeMap = {
   skew: degrees,
   skewX: degrees,
   skewY: degrees,
-  distance: _px,
-  translateX: _px,
-  translateY: _px,
-  translateZ: _px,
-  x: _px,
-  y: _px,
-  z: _px,
-  perspective: _px,
-  transformPerspective: _px,
+  distance: px,
+  translateX: px,
+  translateY: px,
+  translateZ: px,
+  x: px,
+  y: px,
+  z: px,
+  perspective: px,
+  transformPerspective: px,
   opacity: alpha,
   originX: progressPercentage,
   originY: progressPercentage,
-  originZ: _px,
+  originZ: px,
 
   // Misc
   zIndex: int,
@@ -107,19 +107,23 @@ export const valueTypes: ValueTypeMap = {
 }
 
 /**
- * Return the value type for a key.
- *
- * @param key
+ * 根据css`property`获取对应的值类型
  */
-export const getValueType = (key: string) => valueTypes[key]
+export const getStyleValueType = (property: string) => styleValueTypes[property]
 
 /**
- * Transform the value using its value type, or return the value.
+ * 将`value`转换为给定`type`类型的值
  *
+ * @example
+ * ```js
+ * import { px, vh } from "style-value-types"
+ * getStyleValueAsType(2,px) // '2px'
+ * getStyleValueAsType(2,vh) // '2vh'
+ * ```
  * @param value
  * @param type
  */
-export function getValueAsType(value: any, type?: ValueType) {
+export function getStyleValueAsType(value: unknown, type?: ValueType) {
   return type && typeof value === "number" && type.transform ? type.transform(value) : value
 }
 
@@ -129,19 +133,39 @@ export function getValueAsType(value: any, type?: ValueType) {
  * @param key
  * @param value
  */
-export function getAnimatableNone(key: string, value: string): any {
-  let defaultValueType = getValueType(key)
+export function getStyleAnimatableNone(key: string, value: string): any {
+  let defaultValueType = getStyleValueType(key)
   if (defaultValueType !== filter) defaultValueType = complex
   // If value is not recognised as animatable, ie "none", create an animatable version origin based on the target
   return defaultValueType.getAnimatableNone ? defaultValueType.getAnimatableNone(value) : undefined
 }
 
-export function getValue(key: string, value: string | number | undefined): any {
-  const type = getValueType(key)
-  return getValueAsType(value, type)
+/**
+ * 根据css`property`构造出正确类型的`value`
+ *
+ * @example
+ * ```js
+ * getStyleValue("width", 10) // "10px"
+ * getStyleValue("border", "10px solid red") // "10px solid red"
+ * ```
+ */
+export function getStyleValue(property: string, value?: string | number): any {
+  const type = getStyleValueType(property)
+  return getStyleValueAsType(value, type)
 }
 
-export function setStyle(ele?: HTMLElement, styles?: Partial<CSSProperties>) {
+/**
+ * 设置元素`ele`的样式
+ *
+ * @example
+ * ```ts
+ * const ele = document.getElementById("id")
+ * setStyle(ele, {
+ *   width: "10px",
+ * })
+ * ```
+ */
+export function setStyle(ele: HTMLElement, styles?: Partial<CSSProperties>) {
   if (!(ele && styles)) {
     return
   }

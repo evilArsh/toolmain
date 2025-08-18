@@ -20,7 +20,7 @@ export interface EventBus<T extends Record<string, any>> {
   once<K extends keyof T>(type: K, listener: T[K]): void
 }
 export type EventBusCallback = (...args: any[]) => any
-export const useEvent = <T extends Record<string, any> = { [x: string]: any }>(): EventBus<T> => {
+export function useEvent<T extends Record<string, any> = { [x: string]: any }>(): EventBus<T> {
   const defaultMaxListeners = 10
   let _events: Record<string, any> = {}
   let _eventCount = 0
