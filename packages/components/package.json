@@ -17,24 +17,20 @@
     "vue"
   ],
   "exports": {
-    ".": "./index.mjs",
-    "./*": "./*"
+    ".": "./dist/index.js",
+    "./*": "./dist/*"
   },
-  "main": "./index.mjs",
-  "module": "./index.mjs",
-  "types": "./index.d.mts",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "files": [
-    "*.d.mts",
-    "*.js",
-    "*.mjs"
+    "dist"
   ],
-  "dependencies": {
-    "@toolman/shared": "workspace:*",
-    "@toolman/libs": "workspace:*"
-  },
+  "dependencies": {},
   "peerDependencies": {
-    "vue": "^3.5.0",
     "@vueuse/core": "^13.7.0",
-    "unocss": "^66.4.2"
-  }
+    "unocss": "^66.4.2",
+    "vue": "^3.5.0"
+  },
+  "devDependencies": {}
 }
