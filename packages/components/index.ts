@@ -1,3 +1,3 @@
-// import "virtual:uno.css"
-export * from "./Affix/index"
-export * from "./ScalePanel/index"
+import "virtual:uno.css"
+export * from "./src/Affix/index"
+export * from "./src/ScalePanel/index"

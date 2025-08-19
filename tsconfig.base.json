@@ -1,0 +1,35 @@
+{
+  "compilerOptions": {
+    "lib": ["ESNext", "DOM", "DOM.Iterable", "webworker"],
+    "jsx": "preserve",
+    "jsxFactory": "h",
+    "jsxFragmentFactory": "Fragment",
+    "baseUrl": ".",
+    "rootDir": ".",
+    "target": "ESNext",
+    "module": "ESNext",
+    "strict": true,
+    "strictFunctionTypes": true,
+    "strictNullChecks": true,
+    "sourceMap": false,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "jsxImportSource": "vue",
+    "moduleResolution": "bundler",
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "noEmit": false,
+    "forceConsistentCasingInFileNames": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "types": ["vite/client"],
+    "paths": {
+      "@toolman/components": ["./packages/components/index.ts"],
+      "@toolman/element": ["./packages/element/index.ts"],
+      "@toolman/shared": ["./packages/shared/index.ts"],
+      "@toolman/libs": ["./packages/libs/index.ts"]
+    }
+  },
+  "exclude": ["node_modules", "**/**.md", "**/dist", "eslint.config.mts"]
+}

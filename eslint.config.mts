@@ -60,7 +60,7 @@ const cnf: Config = tseslint.config(
         parser: tseslint.parser,
         tsconfigRootDir: __dirname,
         sourceType: "module",
-        project: ["./tsconfig.json"],
+        project: ["./tsconfig.json", "./tsconfig.web.json", "./tsconfig.node.json", "./tsconfig.base.json"],
         extraFileExtensions: [".vue"],
         ecmaVersion: "latest",
         ecmaFeatures: {
@@ -71,7 +71,7 @@ const cnf: Config = tseslint.config(
   },
   {
     name: "vue global config",
-    files: ["packages/components/**/*.vue"],
+    files: ["packages/components/src/**/*.vue"],
     languageOptions: {
       parser: parserVue,
       parserOptions: {
@@ -142,7 +142,7 @@ const cnf: Config = tseslint.config(
         "error",
         {
           version: ">=18.0.0",
-          ignores: [window],
+          ignores: [],
         },
       ],
     },

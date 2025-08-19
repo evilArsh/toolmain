@@ -30,7 +30,8 @@
     "*.mjs"
   ],
   "dependencies": {
-    "@toolman/shared": "workspace:*"
+    "@toolman/shared": "workspace:^",
+    "@toolman/libs": "workspace:^"
   },
   "peerDependencies": {
     "element-plus": "^2.10.0",

@@ -10,10 +10,11 @@ export default defineConfig([
     output: [
       {
         file: "index.mjs",
+        format: "esm",
       },
     ],
-    plugins: [esbuild(), json(), dts()],
-    external: ["vue", /@vueuse\/.*/, "element-plus"],
+    plugins: [esbuild(), json()],
+    external: ["vue", /@vueuse\/.*/, "element-plus", /@toolman.*/],
   },
   {
     input: ["index.ts"],

@@ -1,12 +1,18 @@
 import { merge } from "@toolman/shared"
-import { DialogEmits, DialogProps } from "element-plus"
-import { reactive, ref } from "vue"
+import { DialogEmits, DialogPropsPublic } from "element-plus"
+import { Reactive, reactive, ShallowRef, shallowRef } from "vue"
 
-type Writable<T> = {
+export type Writable<T> = {
   -readonly [K in keyof T]: T[K]
 }
-export default function (preset?: Partial<Writable<DialogProps>>) {
-  const initial: Partial<Writable<DialogProps>> = {
+export interface DialogReturn {
+  props: Reactive<DialogPropsPublic>
+  emit: ShallowRef<DialogEmits>
+  close: () => void
+  open: () => void
+}
+export function useDialog(preset?: DialogPropsPublic): DialogReturn {
+  const initial: DialogPropsPublic = {
     modelValue: false,
     title: "",
     width: "50%",
@@ -21,8 +27,8 @@ export default function (preset?: Partial<Writable<DialogProps>>) {
     overflow: true,
     showClose: false,
   }
-  const data = reactive<Partial<Writable<DialogProps>>>(merge(initial, preset))
-  const event = ref<DialogEmits>({
+  const data = reactive<Partial<Writable<DialogPropsPublic>>>(merge(initial, preset))
+  const event = shallowRef<DialogEmits>({
     open: (): boolean => true,
     opened: (): boolean => true,
     close: (): boolean => true,
@@ -41,8 +47,8 @@ export default function (preset?: Partial<Writable<DialogProps>>) {
     data.modelValue = false
   }
   return {
-    dlgProps: data,
-    dlgEvent: event,
+    props: data,
+    emit: event,
     open,
     close,
   }
