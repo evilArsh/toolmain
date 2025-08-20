@@ -7,10 +7,10 @@ type ValueTypeMap = Record<string, ValueType>
 /**
  * ValueType for "auto"
  */
-export const auto: ValueType = {
-  test: (v: any) => v === "auto",
-  parse: v => v,
-}
+// export const auto: ValueType = {
+//   test: (v: any) => v === "auto",
+//   parse: v => v,
+// }
 
 /**
  * ValueType for ints
