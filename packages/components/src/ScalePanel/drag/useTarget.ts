@@ -1,4 +1,4 @@
-import { useEvent } from "@toolman/libs"
+import { useEvent } from "@toolmain/libs"
 import { initDragAttr, initRect } from "./types"
 import type { DragAttr, Rect, Target } from "./types"
 

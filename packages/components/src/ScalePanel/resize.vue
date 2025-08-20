@@ -14,7 +14,7 @@ import useHandle from "./useHandle"
 import useScale from "./useScale"
 import { MoveType } from "./drag"
 import { computed } from "vue"
-import { z } from "@toolman/shared"
+import { z } from "@toolmain/shared"
 const props = defineProps<{
   config: ScaleConfig
   scale?: ReturnType<typeof useScale>

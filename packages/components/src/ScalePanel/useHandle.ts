@@ -3,8 +3,8 @@ import { Reactive, ref, ShallowRef } from "vue"
 import { useElementBounding } from "@vueuse/core"
 import { useDragOffset } from "./helper"
 import { type Ref } from "vue"
-import { useFlip, useEvent, FlipParam } from "@toolman/libs"
-import { AsyncCallBackFn, FixedArray, merge, toNumber, isNumber, CallBackFn, px } from "@toolman/shared"
+import { useFlip, useEvent, FlipParam } from "@toolmain/libs"
+import { AsyncCallBackFn, FixedArray, merge, toNumber, isNumber, CallBackFn, px } from "@toolmain/shared"
 export enum Status {
   NORMAL = "NORMAL",
   HIDDEN = "HIDDEN",

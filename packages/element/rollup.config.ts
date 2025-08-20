@@ -14,7 +14,7 @@ export default defineConfig([
       },
     ],
     plugins: [esbuild(), json()],
-    external: ["vue", /@vueuse\/.*/, "element-plus", /@toolman.*/],
+    external: ["vue", /@vueuse\/.*/, "element-plus", /@toolmain.*/],
   },
   {
     input: ["index.ts"],

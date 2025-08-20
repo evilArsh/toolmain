@@ -1,5 +1,5 @@
 {
-  "name": "@toolman/shared",
+  "name": "@toolmain/shared",
   "version": "1.0.0",
   "description": "",
   "license": "MIT",
@@ -7,7 +7,7 @@
   "author": "arsh <https://github.com/evilArsh>",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/evilArsh/toolman.git",
+    "url": "git+https://github.com/evilArsh/toolmain.git",
     "directory": "packages/shared"
   },
   "scripts": {

@@ -8,7 +8,7 @@ import {
 } from "./common"
 import { createSandBoxComponent, defineSandBoxComponent } from "./shadow"
 import { eventListenerRemove, usePatch } from "./patch"
-import { CSSProperties, uniqueId } from "@toolman/shared"
+import { CSSProperties, uniqueId } from "@toolmain/shared"
 defineSandBoxComponent()
 
 export class SandBox implements SandboxInstance {

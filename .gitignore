@@ -147,3 +147,5 @@ scripts/**/*.js
 scripts/**/*.[cm]js
 scripts/**/*.d.ts
 scripts/**/*.d.[cm]ts
+temp
+tsdoc-metadata.json

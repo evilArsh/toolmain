@@ -60,7 +60,7 @@ const cnf: Config = tseslint.config(
         parser: tseslint.parser,
         tsconfigRootDir: __dirname,
         sourceType: "module",
-        project: ["./tsconfig.json", "./tsconfig.web.json", "./tsconfig.node.json", "./tsconfig.base.json"],
+        project: ["./tsconfig.json", "./tsconfig.base.json"],
         extraFileExtensions: [".vue"],
         ecmaVersion: "latest",
         ecmaFeatures: {

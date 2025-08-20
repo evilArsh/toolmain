@@ -1,5 +1,5 @@
 {
-  "name": "@toolman/element",
+  "name": "@toolmain/element",
   "version": "1.0.0",
   "description": "element-plus toolkit",
   "license": "MIT",
@@ -7,8 +7,8 @@
   "author": "arsh <https://github.com/evilArsh>",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/evilArsh/toolman.git",
-    "directory": "packages/shared"
+    "url": "git+https://github.com/evilArsh/toolmain.git",
+    "directory": "packages/element"
   },
   "scripts": {
     "build": "rollup --config=rollup.config.ts --configPlugin=rollup-plugin-esbuild"
@@ -30,8 +30,8 @@
     "*.mjs"
   ],
   "dependencies": {
-    "@toolman/shared": "workspace:^",
-    "@toolman/libs": "workspace:^"
+    "@toolmain/shared": "workspace:^",
+    "@toolmain/libs": "workspace:^"
   },
   "peerDependencies": {
     "element-plus": "^2.10.0",

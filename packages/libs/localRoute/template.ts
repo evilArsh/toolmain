@@ -1,7 +1,7 @@
 import type { AsyncComponnet, IterableRoute, ResolveConfig, Router, RouterTreeConfig } from "./types"
 import * as vars from "./variable"
 import Node from "./node"
-import { resolvePath } from "@toolman/shared"
+import { resolvePath } from "@toolmain/shared"
 
 export class RouterTree {
   readonly root: Node

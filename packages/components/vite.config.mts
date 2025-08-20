@@ -16,12 +16,12 @@ const defaultConfig = (_mode: string, _command: string): UserConfig => {
     build: {
       lib: {
         entry: "./index.ts",
-        name: "ToolManComponents",
+        name: "toolmainComponents",
         formats: ["es"],
         fileName: "index",
       },
       rollupOptions: {
-        external: ["vue", "@vueuse/core", /@toolman.*/],
+        external: ["vue", "@vueuse/core", /@toolmain.*/],
         output: {
           globals: {
             vue: "Vue",
@@ -32,10 +32,10 @@ const defaultConfig = (_mode: string, _command: string): UserConfig => {
     },
     resolve: {
       alias: [
-        { find: "@toolman/components", replacement: resolve(__dirname, "../../", "components") },
-        { find: "@toolman/element", replacement: resolve(__dirname, "../../", "element") },
-        { find: "@toolman/shared", replacement: resolve(__dirname, "../../", "shared") },
-        { find: "@toolman/libs", replacement: resolve(__dirname, "../../", "libs") },
+        { find: "@toolmain/components", replacement: resolve(__dirname, "../../", "components") },
+        { find: "@toolmain/element", replacement: resolve(__dirname, "../../", "element") },
+        { find: "@toolmain/shared", replacement: resolve(__dirname, "../../", "shared") },
+        { find: "@toolmain/libs", replacement: resolve(__dirname, "../../", "libs") },
       ],
     },
     plugins: [

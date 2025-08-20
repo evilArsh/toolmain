@@ -1,16 +1,16 @@
 {
-  "name": "@toolman/components",
+  "name": "@toolmain/components",
   "version": "1.0.0",
   "description": "",
   "license": "MIT",
   "type": "module",
   "author": "arsh <https://github.com/evilArsh>",
   "scripts": {
-    "build": "vue-tsc -p tsconfig.json && vite build"
+    "build": "vue-tsc -p tsconfig.json --declaration --emitDeclarationOnly && vite build && api-extractor run"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/evilArsh/toolman.git",
+    "url": "git+https://github.com/evilArsh/toolmain.git",
     "directory": "packages/components"
   },
   "keywords": [
@@ -24,7 +24,8 @@
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "files": [
-    "dist"
+    "dist/*.js",
+    "dist/*.d.ts"
   ],
   "peerDependencies": {
     "@vueuse/core": "^13.7.0",
@@ -32,7 +33,7 @@
     "vue": "^3.5.0"
   },
   "dependencies": {
-    "@toolman/shared": "workspace:^",
-    "@toolman/libs": "workspace:^"
+    "@toolmain/shared": "workspace:^",
+    "@toolmain/libs": "workspace:^"
   }
 }

@@ -1,4 +1,4 @@
-import { CSSProperties } from "@toolman/shared"
+import { CSSProperties } from "@toolmain/shared"
 
 // --- type start
 export type FuncType<T extends (...args: any) => any> = T extends (...args: any) => infer R ? R : any

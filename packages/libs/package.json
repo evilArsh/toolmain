@@ -1,5 +1,5 @@
 {
-  "name": "@toolman/libs",
+  "name": "@toolmain/libs",
   "version": "1.0.0",
   "description": "",
   "license": "MIT",
@@ -7,7 +7,7 @@
   "author": "arsh <https://github.com/evilArsh>",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/evilArsh/toolman.git",
+    "url": "git+https://github.com/evilArsh/toolmain.git",
     "directory": "packages/libs"
   },
   "scripts": {
@@ -29,7 +29,7 @@
     "*.mjs"
   ],
   "dependencies": {
-    "@toolman/shared": "workspace:^",
+    "@toolmain/shared": "workspace:^",
     "hash-sum": "^2.0.0",
     "hotkeys-js": "^3.13.15",
     "shiki": "^3.9.2",

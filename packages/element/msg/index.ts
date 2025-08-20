@@ -1,4 +1,4 @@
-import { code1xx, code2xx, code3xx, code4xx, code5xx } from "@toolman/shared"
+import { code1xx, code2xx, code3xx, code4xx, code5xx } from "@toolmain/shared"
 import { ElMessage } from "element-plus"
 
 export type ElMessageType = "success" | "warning" | "info" | "error"

@@ -4,7 +4,7 @@
  * https://aerotwist.com/blog/flip-your-animations/
  */
 
-import { CallBackFn, FixedArray } from "@toolman/shared"
+import { CallBackFn, FixedArray } from "@toolmain/shared"
 
 /**
  * [css3 transform property]

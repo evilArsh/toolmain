@@ -31,7 +31,7 @@ import {
   useTemplateRef,
   type Ref,
 } from "vue"
-import { px, toNumber, isNumber, CSSProperties, getStyleValue } from "@toolman/shared"
+import { px, toNumber, isNumber, CSSProperties, getStyleValue } from "@toolmain/shared"
 const emit = defineEmits<{
   beforeMove: [pos: MoveParams]
   moving: [pos: MoveParams]

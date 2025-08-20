@@ -1,7 +1,7 @@
 import type { VNode, Component, MaybeRef } from "vue"
 import { Status } from "./useHandle"
 import { DragAttr, MoveOptions } from "./drag"
-import { CSSProperties, FixedArray } from "@toolman/shared"
+import { CSSProperties, FixedArray } from "@toolmain/shared"
 export interface ScaleConfig {
   /**
    * 组件可改变尺寸

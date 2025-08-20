@@ -1,4 +1,4 @@
-import { CallBackFn } from "@toolman/shared"
+import { CallBackFn } from "@toolmain/shared"
 
 export type PatchBox = {
   iframe: HTMLIFrameElement

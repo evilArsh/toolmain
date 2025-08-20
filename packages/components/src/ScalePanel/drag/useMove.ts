@@ -1,4 +1,4 @@
-import { useEvent } from "@toolman/libs"
+import { useEvent } from "@toolmain/libs"
 import type { Dir, MoveOptions, DragAttr, EventMap, MoveType } from "./types"
 import useTarget from "./useTarget"
 export default function (): MoveType {

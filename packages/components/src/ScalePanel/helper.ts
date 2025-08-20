@@ -4,7 +4,7 @@ import { ref, ShallowRef, toValue, unref, watch } from "vue"
 import type { Ref, MaybeRef, Reactive } from "vue"
 import useHandle, { Status } from "./useHandle"
 import { useDebounceFn } from "@vueuse/core"
-import { CSSProperties, getStyleValue, isBoolean, isNumber, toNumber } from "@toolman/shared"
+import { CSSProperties, getStyleValue, isBoolean, isNumber, toNumber } from "@toolmain/shared"
 export const values = (style?: CSSProperties): Record<string, string | number | undefined> => {
   if (!style) return {}
   const res: Record<string, any> = {}

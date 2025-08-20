@@ -25,10 +25,10 @@
     "noUnusedParameters": true,
     "types": ["vite/client"],
     "paths": {
-      "@toolman/components": ["./packages/components/index.ts"],
-      "@toolman/element": ["./packages/element/index.ts"],
-      "@toolman/shared": ["./packages/shared/index.ts"],
-      "@toolman/libs": ["./packages/libs/index.ts"]
+      "@toolmain/components": ["./packages/components/index.ts"],
+      "@toolmain/element": ["./packages/element/index.ts"],
+      "@toolmain/shared": ["./packages/shared/index.ts"],
+      "@toolmain/libs": ["./packages/libs/index.ts"]
     }
   },
   "exclude": ["node_modules", "**/**.md", "**/dist", "eslint.config.mts"]

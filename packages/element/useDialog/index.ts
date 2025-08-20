@@ -1,4 +1,4 @@
-import { merge } from "@toolman/shared"
+import { merge } from "@toolmain/shared"
 import { DialogEmits, DialogPropsPublic } from "element-plus"
 import { Reactive, reactive, ShallowRef, shallowRef } from "vue"
 

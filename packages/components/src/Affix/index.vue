@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { px } from "@toolman/shared"
+import { px } from "@toolmain/shared"
 import { useElementBounding, useIntersectionObserver, useThrottleFn } from "@vueuse/core"
 import { computed, CSSProperties, onBeforeUnmount, onMounted, reactive, shallowRef, useTemplateRef } from "vue"
 
