@@ -1,4 +1,4 @@
-# @toolmain/shared
+# @toolmain/libs
 
 ## 1.1.0
 
@@ -6,8 +6,7 @@
 
 - refactor: move usable hooks to `@toolmain/shared`
 
-## 1.0.1
-
 ### Patch Changes
 
-- chore: rebuild dependencies
+- Updated dependencies
+  - @toolmain/shared@1.1.0

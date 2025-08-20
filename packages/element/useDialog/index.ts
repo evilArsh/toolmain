@@ -7,7 +7,7 @@ export type Writable<T> = {
 }
 export interface DialogReturn {
   props: Reactive<DialogPropsPublic>
-  emit: ShallowRef<DialogEmits>
+  event: ShallowRef<DialogEmits>
   close: () => void
   open: () => void
 }
@@ -25,30 +25,30 @@ export function useDialog(preset?: DialogPropsPublic): DialogReturn {
     center: false,
     draggable: true,
     overflow: true,
-    showClose: false,
+    showClose: true,
   }
-  const data = reactive<Partial<Writable<DialogPropsPublic>>>(merge(initial, preset))
+  const props = reactive<Partial<Writable<DialogPropsPublic>>>(merge(initial, preset))
   const event = shallowRef<DialogEmits>({
     open: (): boolean => true,
     opened: (): boolean => true,
     close: (): boolean => true,
     closed: (): boolean => true,
     "update:modelValue": (value: boolean): boolean => {
-      data.modelValue = value
+      props.modelValue = value
       return true
     },
     openAutoFocus: (): boolean => true,
     closeAutoFocus: (): boolean => true,
   })
   function open() {
-    data.modelValue = true
+    props.modelValue = true
   }
   function close() {
-    data.modelValue = false
+    props.modelValue = false
   }
   return {
-    props: data,
-    emit: event,
+    props,
+    event,
     open,
     close,
   }

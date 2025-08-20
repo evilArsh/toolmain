@@ -1,5 +1,5 @@
-export const objectToString = Object.prototype.toString
-export const toTypeString = (value: unknown): string => objectToString.call(value)
+const objectToString = Object.prototype.toString
+const toTypeString = (value: unknown): string => objectToString.call(value)
 export const isArray = Array.isArray
 export const isMap = (val: unknown): val is Map<any, any> => toTypeString(val) === "[object Map]"
 export const isSet = (val: unknown): val is Set<any> => toTypeString(val) === "[object Set]"

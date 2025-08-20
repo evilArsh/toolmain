@@ -3,7 +3,7 @@ import rfdc from "rfdc"
 import { AxiosError } from "axios"
 import { serializeError } from "serialize-error"
 import _merge from "lodash.merge"
-import { isNumber, isString, isUndefined } from "../is"
+import { isNumber, isString, isUndefined } from "./is"
 
 export const cloneDeep = rfdc()
 /**
@@ -108,3 +108,10 @@ export function resolvePath(path: string | string[], withPrefix: boolean = true,
   }
   return p
 }
+
+export * from "./response"
+export * from "./index"
+export * from "./is"
+export * from "./resources"
+export * from "./styles"
+export * from "./time"

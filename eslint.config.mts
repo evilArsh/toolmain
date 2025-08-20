@@ -129,7 +129,7 @@ const cnf: Config = tseslint.config(
   },
   {
     name: "nodejs rules",
-    ignores: ["packages/components/"],
+    ignores: ["packages"],
     plugins: {
       n: pluginN,
     },

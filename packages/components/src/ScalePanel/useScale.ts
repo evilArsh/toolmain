@@ -2,7 +2,7 @@ import { toRef, type Ref } from "vue"
 import { type ScaleConfig } from "./types"
 import { useElementBounding } from "@vueuse/core"
 import { useStyleHandler } from "./helper"
-import { useEvent } from "@toolmain/libs"
+import { useEvent } from "@toolmain/shared"
 import { toNumber, CallBackFn } from "@toolmain/shared"
 interface ScalePos {
   l: number
