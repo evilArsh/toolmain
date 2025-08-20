@@ -1,3 +1,8 @@
+/**
+ * http状态码
+ *
+ * 额外值 `RequestAbort = 499` 表示 `Request Abort`
+ */
 export enum HttpStatusCode {
   Continue = 100,
   SwitchingProtocols = 101,
@@ -67,6 +72,9 @@ export enum HttpStatusCode {
   NotExtended = 510,
   NetworkAuthenticationRequired = 511,
 }
+/**
+ * http method
+ */
 export type Method =
   | "get"
   | "GET"
@@ -89,9 +97,14 @@ export type Method =
   | "unlink"
   | "UNLINK"
 
+/**
+ * 响应数据类型
+ */
 export type ResponseType = "arraybuffer" | "blob" | "document" | "json" | "text" | "stream" | "formdata"
-
-export type responseEncoding =
+/**
+ * 响应数据编码
+ */
+export type ResponseEncoding =
   | "ascii"
   | "ASCII"
   | "ansi"
@@ -117,6 +130,9 @@ export type responseEncoding =
   | "utf16le"
   | "UTF16LE"
 
+/**
+ * ContentType
+ */
 export enum ContentType {
   TextPlain = "text/plain; charset=utf-8",
   TextHtml = "text/html; charset=utf-8",
@@ -165,6 +181,9 @@ export interface Response<T = unknown> {
   msg: string
   data: T
 }
+/**
+ * 只有状态码的响应
+ */
 export type StatusResponse = Response<undefined>
 
 /**

@@ -2,6 +2,9 @@ import type * as CSS from "csstype"
 import type { ValueType } from "style-value-types"
 import { alpha, color, complex, degrees, filter, number, progressPercentage, px, scale } from "style-value-types"
 
+/**
+ * CSS Properties
+ */
 export interface CSSProperties extends CSS.Properties<string | number>, CSS.PropertiesHyphen<string | number> {
   // for css variable
   [v: `--${string}`]: string | number | undefined
