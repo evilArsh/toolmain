@@ -9,16 +9,13 @@ export default defineConfig({
       "@toolmain/shared": resolve(import.meta.dirname, "packages/shared/index.ts"),
       "@toolmain/libs": resolve(import.meta.dirname, "packages/libs/index.ts"),
     },
-    dedupe: ["vue", "@vue/runtime-core"],
   },
-  define: {},
+  // define: {},
   cacheDir: resolve(import.meta.dirname, "node_modules/.vite"),
   test: {
     reporters: "dot",
-    env: {
-      TZ: "UTC-1", // to have some actual results with timezone offset
-    },
     coverage: {
+      // enabled: true,
       exclude: [
         "packages/.vitepress/**",
         "playgrounds/**",
@@ -27,7 +24,6 @@ export default defineConfig({
         ...coverageConfigDefaults.exclude,
       ],
     },
-
     clearMocks: true,
     projects: [
       "packages/*/vitest.config.ts",
@@ -47,11 +43,7 @@ export default defineConfig({
             enabled: true,
             provider: "playwright",
             headless: true,
-            instances: [
-              { browser: "chromium" },
-              // { browser: 'firefox' }, // flaky FF test: https://github.com/vitest-dev/vitest/issues/7377
-              { browser: "webkit" },
-            ],
+            instances: [{ browser: "chromium" }, { browser: "webkit" }],
           },
         },
       },
@@ -64,14 +56,11 @@ export default defineConfig({
           include: ["!packages/**/*.browser.{test,spec}.ts", "packages/**/*.{test,spec}.ts", "test/*.{test,spec}.ts"],
           server: {
             deps: {
-              inline: ["vue", "msw", "vitest-package-exports"],
+              inline: ["vue", "msw"],
             },
           },
         },
       },
     ],
-  },
-  ssr: {
-    noExternal: [/@vueuse\/.*/],
   },
 })

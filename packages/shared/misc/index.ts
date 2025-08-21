@@ -3,8 +3,11 @@ import rfdc from "rfdc"
 import { AxiosError } from "axios"
 import { serializeError } from "serialize-error"
 import _merge from "lodash.merge"
-import { isNumber, isString, isUndefined } from "./is"
+import { isBoolean, isNumber, isString, isSymbol, isUndefined } from "./is"
 
+/**
+ * 使用 rfdc 默认配置深拷贝对象，函数不会被深拷贝
+ */
 export const cloneDeep = rfdc()
 /**
  * 合并对象(`lodash.merge`)
@@ -44,13 +47,20 @@ export function uniqueNanoFnId(length: number): string {
  * 将任意错误对象转换为字符串
  */
 export function errorToText(error: unknown): string {
-  if (isNumber(error) || isString(error)) {
+  if (
+    isNumber(error) ||
+    isString(error) ||
+    isBoolean(error) ||
+    isSymbol(error) ||
+    error === null ||
+    error === undefined
+  ) {
     return String(error)
   }
   if (error instanceof AxiosError) {
-    return JSON.stringify(error.response?.data) ?? error.message
+    return error.response?.data ? JSON.stringify(error.response?.data) : (error.message ?? error.response?.statusText)
   } else {
-    if (error instanceof Error && error.message) {
+    if (error instanceof Error) {
       return error.message
     }
     return JSON.stringify(serializeError(error))
@@ -64,9 +74,9 @@ export function px(value?: string | number): string {
   if (!value) return "0"
   if (isString(value)) {
     const num = parseFloat(value)
-    return !isNaN(num) ? `${num}px` : value
+    return isNumber(num) ? `${num}px` : "0"
   }
-  return `${value}px`
+  return isNumber(value) ? `${value}px` : "0"
 }
 
 /**
@@ -78,7 +88,7 @@ export function toNumber(value?: string | number): number {
     return value
   } else {
     const num = parseFloat(value)
-    return isNaN(num) ? 0 : num
+    return isNumber(num) ? num : 0
   }
 }
 
@@ -86,27 +96,31 @@ export function toNumber(value?: string | number): number {
  * 将字符串组装为路径格式
  *
  * @param path 路径或路径数组
- * @param withPrefix 是否需要 `/` 前缀
+ * @param prefix 是否需要 `/` 前缀,`path`为 URL Scheme 时，会被忽略
  * @default true
  *
- * @param withSuffix 是否需要 `/` 前缀
+ * @param suffix 是否需要 `/` 前缀
  * @default false
  *
- * @example eg: ["foo","bar"] ==> "foo/bar"
+ * @example
+ * ```js
+ * resolvePath(["foo","bar"]) ==> "/foo/bar"
+ * resolvePath("https://examples.com") ==> "https://examples.com"
+ * ```
  */
-export function resolvePath(path: string | string[], withPrefix: boolean = true, withSuffix: boolean = false): string {
+export function resolvePath(path: string | string[], prefix: boolean = true, suffix: boolean = false): string {
+  if (!path) return prefix || suffix ? "/" : ""
+  if (path == "/") return prefix || suffix ? "/" : ""
+  const doPrefix = (s: string, prefix?: boolean) =>
+    s.startsWith("/") ? (prefix ? s : s.slice(1)) : prefix ? `/${s}` : s
+  const doSuffix = (s: string, suffix?: boolean) =>
+    s.endsWith("/") ? (suffix ? s : s.slice(0, -1)) : suffix ? `${s}/` : s
   let p = Array.isArray(path) ? path.join("/") : path
-  if (/^[a-zA-Z]+:\/\//.test(p)) {
-    return p.replace(/(?<!:\/)\/+/g, "/")
+  p = p.replace(/\\+|\/+/g, "/")
+  if (/^[a-zA-Z][a-zA-Z0-9+.-]*:\//.test(p)) {
+    return doSuffix(doPrefix(p.replace(/:\//g, "://"), false), suffix)
   }
-  p = p.replace(/\/+/g, "/")
-  p = p === "/" ? p : p.endsWith("/") && !withSuffix ? p.slice(0, -1) : p
-  if (withPrefix) {
-    p = p.startsWith("/") ? p : `/${p}`
-  } else {
-    p = p.startsWith("/") ? p.slice(1) : p
-  }
-  return p
+  return doSuffix(doPrefix(p.replace(/\/+/g, "/"), prefix), suffix)
 }
 
 export * from "./response"
