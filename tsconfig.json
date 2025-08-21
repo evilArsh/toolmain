@@ -4,7 +4,7 @@
     "types": ["vite/client", "element-plus/global", "unplugin-icons/types/vue"],
     "composite": true,
     "declaration": true,
-    "declarationDir": "./types",
+    "declarationDir": "./types"
   },
   "include": ["*.ts", "packages", "scripts", "playground"],
   "exclude": ["unocss.config.ts", "node_modules", "**/*.md", "**/dist"]

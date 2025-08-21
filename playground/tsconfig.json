@@ -1,0 +1,16 @@
+{
+  "extends": "../tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "types": ["element-plus/global", "unplugin-icons/types/vue"],
+    "paths": {
+      "@/*": ["src/*"],
+      "@toolmain/components": ["../packages/components/index.ts"],
+      "@toolmain/element": ["../packages/element/index.ts"],
+      "@toolmain/shared": ["../packages/shared/index.ts"],
+      "@toolmain/libs": ["../packages/libs/index.ts"]
+    }
+  },
+  "include": ["index.ts", "src", "auto-imports.d.ts", "components.d.ts", "eslint.config.mts"],
+  "exclude": ["node_modules", "dist", "src/**/*.js", "src/**/*.d.ts"]
+}

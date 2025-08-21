@@ -1,6 +1,6 @@
 packages:
   - packages/*
-  - "!playgrounds"
+  - "!playground"
 
 onlyBuiltDependencies:
   - core-js

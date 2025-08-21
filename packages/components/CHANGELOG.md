@@ -1,5 +1,13 @@
 # @toolmain/components
 
+## 1.1.1
+
+### Patch Changes
+
+- feat: new component
+- Updated dependencies
+  - @toolmain/shared@1.1.2
+
 ## 1.1.0
 
 ### Minor Changes

@@ -1,5 +1,11 @@
 # @toolmain/shared
 
+## 1.1.2
+
+### Patch Changes
+
+- feat: new hooks
+
 ## 1.1.1
 
 ### Patch Changes

@@ -2,7 +2,7 @@ import { fileURLToPath } from "node:url"
 import path from "node:path"
 import globals from "globals"
 import pluginJs from "@eslint/js"
-import tseslint, { Config } from "typescript-eslint"
+import tseslint, { Config, InfiniteDepthConfigWithExtends } from "typescript-eslint"
 import typescriptEslint from "@typescript-eslint/eslint-plugin"
 import parserVue from "vue-eslint-parser"
 import pluginVue from "eslint-plugin-vue"
@@ -15,9 +15,10 @@ import pluginN from "eslint-plugin-n"
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 //eslint inspect：npx @eslint/config-inspector@latest
-const cnf: Config = tseslint.config(
+
+export const config: InfiniteDepthConfigWithExtends[] = [
   {
-    files: ["packages/**/*.{js,mjs,cjs,ts,vue,jsx,tsx}"],
+    files: ["packages/**/*.{js,mjs,cjs,ts,vue,jsx,tsx}", "playground/**/*.{js,mjs,cjs,ts,vue,jsx,tsx}"],
   },
   {
     // If ignores is used without any other keys in the configuration object, then the patterns act as global ignores
@@ -147,6 +148,7 @@ const cnf: Config = tseslint.config(
       ],
     },
   },
-  configPrettier
-)
+  configPrettier,
+]
+const cnf: Config = tseslint.config(config)
 export default cnf

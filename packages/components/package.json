@@ -1,6 +1,6 @@
 {
   "name": "@toolmain/components",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "",
   "license": "MIT",
   "type": "module",
@@ -30,10 +30,11 @@
   "peerDependencies": {
     "@vueuse/core": "^13.7.0",
     "unocss": "^66.4.2",
-    "vue": "^3.5.0"
+    "vue": "^3.5.0",
+    "vue-router": "^4.5.1"
   },
   "dependencies": {
-    "@toolmain/shared": "workspace:^",
-    "@toolmain/libs": "workspace:^"
+    "@toolmain/libs": "workspace:^",
+    "@toolmain/shared": "workspace:^"
   }
 }
