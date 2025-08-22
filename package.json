@@ -28,7 +28,7 @@
     "@changesets/cli": "^2.29.6",
     "@commitlint/config-conventional": "^19.8.1",
     "@eslint/js": "^9.33.0",
-    "@iconify/json": "^2.2.376",
+    "@iconify/json": "^2.2.377",
     "@iconify/types": "^2.0.0",
     "@microsoft/api-extractor": "^7.52.11",
     "@rollup/plugin-json": "^6.1.0",
@@ -59,7 +59,7 @@
     "pinia": "^3.0.3",
     "prettier": "^3.6.2",
     "prettier-eslint": "^16.4.2",
-    "rollup": "^4.46.4",
+    "rollup": "^4.47.1",
     "rollup-plugin-dts": "^6.2.3",
     "rollup-plugin-esbuild": "^6.2.1",
     "rollup-plugin-visualizer": "^6.0.3",
@@ -77,10 +77,10 @@
     "vite-plugin-vue-devtools": "^8.0.0",
     "vitest": "^3.2.4",
     "vitest-browser-vue": "^1.1.0",
-    "vue": "^3.5.18",
+    "vue": "^3.5.19",
     "vue-eslint-parser": "^10.2.0",
     "vue-i18n": "^11.1.11",
     "vue-router": "^4.5.1",
-    "vue-tsc": "^3.0.5"
+    "vue-tsc": "^3.0.6"
   }
 }
