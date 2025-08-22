@@ -1,5 +1,13 @@
 # @toolmain/components
 
+## 1.2.1
+
+### Patch Changes
+
+- chore: update readme refactor: move usable hooks to `@toolmain/shared`
+- Updated dependencies
+  - @toolmain/shared@1.2.1
+
 ## 1.2.0
 
 ### Minor Changes
