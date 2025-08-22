@@ -124,7 +124,6 @@ export function resolvePath(path: string | string[], prefix: boolean = true, suf
 }
 
 export * from "./response"
-export * from "./index"
 export * from "./is"
 export * from "./resources"
 export * from "./styles"

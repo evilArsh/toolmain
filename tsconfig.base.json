@@ -31,5 +31,5 @@
       "@toolmain/libs": ["./packages/libs/index.ts"]
     }
   },
-  "exclude": ["node_modules", "**/**.md", "**/dist", "eslint.config.mts"]
+  "exclude": ["node_modules", "**/**.md", "**/dist"]
 }

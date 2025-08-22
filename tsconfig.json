@@ -1,7 +1,7 @@
 {
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
-    "types": ["vite/client", "element-plus/global", "unplugin-icons/types/vue"],
+    "types": ["element-plus/global", "unplugin-icons/types/vue"],
     "composite": true,
     "declaration": true,
     "declarationDir": "./types"

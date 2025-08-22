@@ -14,7 +14,7 @@ export default defineConfig([
       },
     ],
     plugins: [esbuild(), json()],
-    external: ["vue", /@vueuse\/.*/],
+    external: ["vue", /@vueuse\/.*/, "vue-i18n"],
   },
   {
     input: ["index.ts"],

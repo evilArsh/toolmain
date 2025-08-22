@@ -1,9 +1,9 @@
-import { config } from "../eslint.config.mjs"
+import { config } from "../../eslint.config.mjs"
 import tseslint, { Config } from "typescript-eslint"
 
 const cnf: Config = tseslint.config(
   config.concat({
-    files: ["src/**/*.{js,mjs,cjs,ts,vue,jsx,tsx}"],
+    files: ["**/*.{js,mjs,cjs,ts,vue,jsx,tsx}"],
   })
 )
 export default cnf

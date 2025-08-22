@@ -11,7 +11,7 @@ import configPrettier from "eslint-config-prettier/flat"
 import pluginPrettierRecommand from "eslint-plugin-prettier/recommended"
 import pluginPromise from "eslint-plugin-promise"
 import pluginImport from "eslint-plugin-import"
-import pluginN from "eslint-plugin-n"
+// import pluginN from "eslint-plugin-n"
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 //eslint inspect：npx @eslint/config-inspector@latest
@@ -128,26 +128,24 @@ export const config: InfiniteDepthConfigWithExtends[] = [
       "prettier/prettier": "error",
     },
   },
-  {
-    name: "nodejs rules",
-    ignores: ["packages"],
-    plugins: {
-      n: pluginN,
-    },
-    rules: {
-      "promise/catch-or-return": "off",
-      "promise/always-return": "off",
-      "n/exports-style": ["error", "module.exports"],
-      "n/no-missing-import": "off",
-      "n/no-unsupported-features/node-builtins": [
-        "error",
-        {
-          version: ">=18.0.0",
-          ignores: [],
-        },
-      ],
-    },
-  },
+  // {
+  //   name: "nodejs rules",
+  //   ignores: ["packages/**/*.vue"],
+  //   plugins: {
+  //     n: pluginN,
+  //   },
+  //   rules: {
+  //     "n/exports-style": ["error", "module.exports"],
+  //     "n/no-missing-import": "off",
+  //     "n/no-unsupported-features/node-builtins": [
+  //       "error",
+  //       {
+  //         version: ">=20.0.0",
+  //         ignores: [],
+  //       },
+  //     ],
+  //   },
+  // },
   configPrettier,
 ]
 const cnf: Config = tseslint.config(config)

@@ -1,6 +1,6 @@
 {
   "name": "@toolmain/element",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "element-plus toolkit",
   "license": "MIT",
   "type": "module",
@@ -32,6 +32,10 @@
   "dependencies": {
     "@toolmain/shared": "workspace:^",
     "@toolmain/libs": "workspace:^"
+  },
+  "devDependencies": {
+    "element-plus": "^2.10.0",
+    "vue": "^3.5.0"
   },
   "peerDependencies": {
     "element-plus": "^2.10.0",

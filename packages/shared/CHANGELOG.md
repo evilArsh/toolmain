@@ -1,5 +1,11 @@
 # @toolmain/shared
 
+## 1.2.0
+
+### Minor Changes
+
+- fix: fix some bugs; add new members
+
 ## 1.1.2
 
 ### Patch Changes

@@ -17,7 +17,7 @@ import { type MoveType, useMove } from "./drag"
 import Resize from "./resize.vue"
 import useHandle, { HandleEv, Status } from "./useHandle"
 import { ScaleConfig, ScaleProps, MoveParams, DragOffset, AnimateDir, MoveHook, ScaleInstance } from "./types"
-import useScale, { ScaleEv } from "./useScale"
+import { ScaleEv, useScale } from "./useScale"
 import { useComputedStyle, useDragOffset, useStatusListener, useStyleHandler, values } from "./helper"
 import {
   computed,

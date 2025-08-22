@@ -1,5 +1,16 @@
 # @toolmain/element
 
+## 1.2.0
+
+### Minor Changes
+
+- fix: fix some bugs; add new members
+
+### Patch Changes
+
+- Updated dependencies
+  - @toolmain/shared@1.2.0
+
 ## 1.1.0
 
 ### Minor Changes

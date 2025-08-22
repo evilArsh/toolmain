@@ -14,7 +14,10 @@ export enum ScaleEv {
   SCALING = "scaling",
   AFTER_SCALE = "after_scale",
 }
-export default (data: { config: Ref<ScaleConfig>; targetEle: Readonly<Ref<HTMLElement | null | undefined>> }) => {
+export const useScale = (data: {
+  config: Ref<ScaleConfig>
+  targetEle: Readonly<Ref<HTMLElement | null | undefined>>
+}) => {
   const containerStyle = toRef(data.config.value, "containerStyle")
   const { set: setContainer, sets: setContainers } = useStyleHandler(containerStyle)
 
