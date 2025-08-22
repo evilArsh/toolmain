@@ -21,7 +21,6 @@
   "license": "MIT",
   "dependencies": {
     "@toolmain/components": "workspace:^",
-    "@toolmain/element": "workspace:^",
     "@toolmain/libs": "workspace:^",
     "@toolmain/shared": "workspace:^"
   },

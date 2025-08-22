@@ -11,9 +11,6 @@ importers:
       '@toolmain/components':
         specifier: workspace:^
         version: link:packages/components
-      '@toolmain/element':
-        specifier: workspace:^
-        version: link:packages/element
       '@toolmain/libs':
         specifier: workspace:^
         version: link:packages/libs
@@ -310,6 +307,9 @@ importers:
       axios:
         specifier: ^1.11.0
         version: 1.11.0
+      element-plus:
+        specifier: ^2.10.0
+        version: 2.10.7(vue@3.5.18(typescript@5.9.2))
       vue:
         specifier: ^3.5.18
         version: 3.5.18(typescript@5.9.2)

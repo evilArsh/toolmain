@@ -14,7 +14,12 @@
     "build": "rollup --config=rollup.config.ts --configPlugin=rollup-plugin-esbuild"
   },
   "keywords": [
-    "vue"
+    "vue",
+    "element-plus",
+    "composition api",
+    "pinia",
+    "dexie",
+    "shiki"
   ],
   "exports": {
     ".": "./index.mjs",
@@ -55,3 +60,4 @@
     "vue-i18n": "^11.1.11"
   }
 }
+

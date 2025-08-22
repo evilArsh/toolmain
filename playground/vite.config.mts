@@ -30,7 +30,6 @@ const defaultConfig = (_mode: string, _command: string): UserConfig => {
           find: "@toolmain/components",
           replacement: resolve(searchForWorkspaceRoot(__dirname), "packages/components"),
         },
-        { find: "@toolmain/element", replacement: resolve(searchForWorkspaceRoot(__dirname), "packages/element") },
         { find: "@toolmain/shared", replacement: resolve(searchForWorkspaceRoot(__dirname), "packages/shared") },
         { find: "@toolmain/libs", replacement: resolve(searchForWorkspaceRoot(__dirname), "packages/libs") },
       ],

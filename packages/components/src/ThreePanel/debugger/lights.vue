@@ -186,9 +186,8 @@
 import { LightMeta, LightType, World } from "../three"
 import * as THREE from "three"
 import useDialog from "./useDialog"
-import { uniqueId, toNumber, isString } from "@toolmain/shared"
+import { uniqueId, toNumber, isString, msg } from "@toolmain/shared"
 import { shallowReactive, reactive, toRaw, computed, onMounted } from "vue"
-import { msg } from "@toolmain/element"
 const props = defineProps<{
   world: World
   lights: Array<LightMeta>

@@ -8,6 +8,21 @@ convient and utility toolkit collections base on vue or element-plus.
 pnpm add @toolmain/shared
 ```
 
+
+## 📚 Usage
+
+```ts
+import { px, localImg, msg } from '@toolmain/shared'
+```
+
+or if you want to overview all tools, just use like following: 
+
+```ts
+import * as tool from '@toolmain/shared'
+const pixel = tool.px(10)
+```
+
+
 ## 🔎 Overview
 
 clone the core monorepo
@@ -44,14 +59,6 @@ root/
 │   ├── common types definitions
 ├── README.md
 └── package.json
-```
-
-
-## 📚 Usage
-
-```ts
-import { px, localImg } from '@toolmain/shared'
-
 ```
 
 ## 👏 Contributing

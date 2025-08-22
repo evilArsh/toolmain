@@ -36,7 +36,6 @@ const defaultConfig = (_mode: string, _command: string): UserConfig => {
     resolve: {
       alias: [
         { find: "@toolmain/components", replacement: resolve(__dirname, "../../", "components") },
-        { find: "@toolmain/element", replacement: resolve(__dirname, "../../", "element") },
         { find: "@toolmain/shared", replacement: resolve(__dirname, "../../", "shared") },
         { find: "@toolmain/libs", replacement: resolve(__dirname, "../../", "libs") },
       ],
