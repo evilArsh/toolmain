@@ -8,20 +8,18 @@ convient and utility toolkit collections base on vue or element-plus.
 pnpm add @toolmain/shared
 ```
 
-
 ## 📚 Usage
 
 ```ts
-import { px, localImg, msg } from '@toolmain/shared'
+import { px, localImg, msg } from "@toolmain/shared"
 ```
 
-or if you want to overview all tools, just use like following: 
+or if you want to overview all tools, just use like following:
 
 ```ts
-import * as tool from '@toolmain/shared'
+import * as tool from "@toolmain/shared"
 const pixel = tool.px(10)
 ```
-
 
 ## 🔎 Overview
 

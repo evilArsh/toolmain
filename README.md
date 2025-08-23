@@ -30,7 +30,6 @@ you can read each package's `README.md` for more details
 
 [@toolmain/shared](./packages/shared/README.md)
 
-
 ## 👏 Contributing
 
 Pull requests are welcome

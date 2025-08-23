@@ -1,3 +1,3 @@
 # @toolmain/components
 
-components for vue3
+components for vue3.
