@@ -301,6 +301,15 @@ importers:
         specifier: ^11.1.11
         version: 11.1.11(vue@3.5.19(typescript@5.9.2))
 
+  playground:
+    dependencies:
+      '@types/node':
+        specifier: ^24.3.0
+        version: 24.3.0
+      pinia:
+        specifier: ^3.0.3
+        version: 3.0.3(typescript@5.9.2)(vue@3.5.19(typescript@5.9.2))
+
 packages:
 
   '@ampproject/remapping@2.3.0':

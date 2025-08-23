@@ -1,6 +1,36 @@
 packages:
   - packages/*
-  - "!playground"
+  - "playground"
+
+catalog:
+  "@toolmain/libs": "workspace:^"
+  "@toolmain/shared": "workspace:^"
+  "@toolmain/components": "workspace:^"
+
+  "element-plus": "^2.10.7"
+  "pinia": "^3.0.3"
+  "unocss": "^66.4.2"
+  "vue": "^3.5.18"
+  "@vueuse/core": "^13.7.0"
+  "vue-router": "^4.5.1"
+
+  "dexie": "^4.2.0"
+  "hash-sum": "^2.0.0"
+  "sucrase": "^3.35.0"
+  "@babel/types": "^7.28.2"
+  "@types/hash-sum": "^1.0.2"
+  "csstype": "^3.1.3"
+  "hotkeys-js": "^3.13.15"
+  "lodash.merge": "^4.6.2"
+  "nanoid": "^5.1.5"
+  "rfdc": "^1.4.1"
+  "serialize-error": "^12.0.0"
+  "shiki": "^3.11.0"
+  "style-value-types": "^5.1.2"
+
+  "@types/three": "^0.179.0"
+  "three": "^0.179.1"
+  "three-mesh-bvh": "^0.9.1"
 
 onlyBuiltDependencies:
   - core-js

@@ -28,30 +28,30 @@
     "dist/*.d.ts"
   ],
   "peerDependencies": {
-    "@toolmain/libs": "workspace:^",
-    "@types/three": "^0.179.0",
-    "@vueuse/core": "^13.7.0",
-    "element-plus": "^2.10.7",
-    "pinia": "^3.0.3",
-    "three": "^0.179.1",
-    "unocss": "^66.4.2",
-    "vue": "^3.5.18",
-    "vue-router": "^4.5.1"
+    "@toolmain/libs": "catalog:",
+    "@types/three": "catalog:",
+    "@vueuse/core": "catalog:",
+    "element-plus": "catalog:",
+    "pinia": "catalog:",
+    "three": "catalog:",
+    "unocss": "catalog:",
+    "vue": "catalog:",
+    "vue-router": "catalog:"
   },
   "dependencies": {
-    "@toolmain/shared": "workspace:^",
-    "dexie": "^4.2.0",
-    "three-mesh-bvh": "^0.9.1"
+    "@toolmain/shared": "catalog:",
+    "dexie": "catalog:",
+    "three-mesh-bvh": "catalog:"
   },
   "devDependencies": {
-    "@toolmain/libs": "workspace:^",
-    "@types/three": "^0.179.0",
-    "@vueuse/core": "^13.7.0",
-    "element-plus": "^2.10.7",
-    "pinia": "^3.0.3",
-    "three": "^0.179.1",
-    "unocss": "^66.4.2",
-    "vue": "^3.5.19",
-    "vue-router": "^4.5.1"
+    "@toolmain/libs": "catalog:",
+    "@types/three": "catalog:",
+    "@vueuse/core": "catalog:",
+    "element-plus": "catalog:",
+    "pinia": "catalog:",
+    "three": "catalog:",
+    "unocss": "catalog:",
+    "vue": "catalog:",
+    "vue-router": "catalog:"
   }
 }

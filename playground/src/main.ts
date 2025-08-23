@@ -1,4 +1,5 @@
 import { createApp } from "vue"
+import { createPinia } from "pinia"
 import "element-plus/theme-chalk/src/message-box.scss"
 import "element-plus/theme-chalk/src/message.scss"
 import "element-plus/theme-chalk/src/notification.scss"
@@ -9,5 +10,6 @@ import { useHtmlFontSize } from "@toolmain/shared"
 const app = createApp(App)
 useHtmlFontSize(app)
 app.use(router)
+app.use(createPinia())
 app.mount("#app")
 export default app
