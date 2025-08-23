@@ -19,7 +19,7 @@ export function useShortcut() {
     handler[index].handler.stop()
     handler.splice(index, 1)
   }
-  function listen(shortcut: string, callback: (active: boolean, ...args: unknown[]) => void) {
+  function listen(shortcut: string, callback: (active: boolean, key: string, ...args: unknown[]) => void) {
     const key = ref(shortcut)
     const watchHandler = watch(
       key,
@@ -32,8 +32,8 @@ export function useShortcut() {
             capture: true,
             // single: true,
           },
-          (event, _handler) => {
-            callback(event.type === "keydown")
+          (event, handler) => {
+            callback(event.type === "keydown", handler.key)
           }
         )
       },
@@ -44,7 +44,7 @@ export function useShortcut() {
       handler: watchHandler,
     })
     function trigger(...args: unknown[]) {
-      callback(true, ...args)
+      callback(true, key.value, ...args)
     }
     return {
       key,

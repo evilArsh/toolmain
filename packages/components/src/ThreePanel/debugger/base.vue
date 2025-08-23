@@ -8,15 +8,11 @@
           <el-tag>shift: 人物跑步</el-tag>
         </div>
       </el-descriptions-item>
-      <el-descriptions-item label="键盘事件" :span="3">
-        <el-input v-model="form.keydownCode" readonly class="flex-1"></el-input>
-      </el-descriptions-item>
     </el-descriptions>
   </div>
 </template>
 <script lang="ts" setup>
 import { onMounted, reactive } from "vue"
-import { KeyCode } from "../three"
 import { World } from "../three"
 const props = defineProps<{
   world: World
@@ -36,8 +32,6 @@ const form = reactive({
 })
 
 function init() {
-  props.world.core.keyboard.ev.on(KeyCode.keydown, (e: string[]) => (form.keydownCode = e.join(",")))
-  props.world.core.keyboard.ev.on(KeyCode.keyup, (e: string[]) => (form.keydownCode = e.join(",")))
   props.world.core.on("Log", (e: { code: number; msg: string; data?: { type?: string; data?: unknown } }) => {
     form.log.unshift(e)
   })

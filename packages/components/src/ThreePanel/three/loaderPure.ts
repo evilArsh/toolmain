@@ -1,7 +1,7 @@
 import * as THREE from "three"
-import { GLTFLoader, DRACOLoader, type GLTF } from "three/addons"
+import { GLTFLoader, DRACOLoader, type GLTF, FBXLoader, OBJLoader } from "three/addons"
 import { LoadParam, LoadOptions, ThreeEv } from "./types"
-import { EventBus, useEvent } from "@toolmain/shared"
+import { EventBus, resolvePath, useEvent } from "@toolmain/shared"
 export type LoaderEvent = Pick<ThreeEv, "LoadError" | "LoadProgress" | "LoadStart" | "Loaded" | "Log" | "Custom">
 export class LoaderPure {
   private manager: THREE.LoadingManager
@@ -19,11 +19,11 @@ export class LoaderPure {
     this.manager.onLoad = this.onLoaded.bind(this)
     this.manager.onError = this.onError.bind(this)
 
-    // this.manager.addHandler(/.*\.(mp4)$/, new THREE.Loader(this.manager))
-    this.manager.addHandler(/(.*\.(glb|gltf)|(^blob:.*))$/, new GLTFLoader(this.manager))
-    // this.manager.addHandler(/.*\.fbx$/, new FBXLoader(this.manager))
-    // this.manager.addHandler(/.*\.obj$/, new OBJLoader(this.manager))
-    // this.manager.addHandler(/.*\.(png|jpg|jpeg|bmp)$/, new THREE.TextureLoader(this.manager))
+    this.manager.addHandler(/.*\.(mp4)$/, new THREE.Loader(this.manager))
+    this.manager.addHandler(/(.*\.(glb|gltf)|(^blob:.*))$/, this.#getGLTFLoader(this.manager))
+    this.manager.addHandler(/.*\.fbx$/, new FBXLoader(this.manager))
+    this.manager.addHandler(/.*\.obj$/, new OBJLoader(this.manager))
+    this.manager.addHandler(/.*\.(png|jpg|jpeg|bmp)$/, new THREE.TextureLoader(this.manager))
   }
   on<K extends keyof LoaderEvent>(event: K, callback: LoaderEvent[K]): LoaderPure {
     this.uv.on(event, callback)
@@ -85,30 +85,28 @@ export class LoaderPure {
   }
 
   async loadGLTF(path: string, conf?: LoadOptions): Promise<GLTF | null> {
-    try {
-      return this.load<GLTF>(path, conf)
-    } catch (_error) {
-      return this.loadGLTFByDraco(path, conf)
-    }
+    return this.load<GLTF>(path, conf)
   }
 
   async loadFBX(path: string, conf?: LoadOptions): Promise<THREE.Group<THREE.Object3DEventMap> | null> {
     return this.load<THREE.Group<THREE.Object3DEventMap>>(path, conf)
   }
 
-  async loadGLTFByDraco(path: string, conf?: LoadOptions): Promise<GLTF | null> {
-    const loader = this.manager.getHandler(path) as GLTFLoader | null
-    if (!loader) {
-      this.emit("Log", { code: 500, msg: `不支持加载的资源类型：${path}` })
-      return null
-    }
+  #getGLTFLoader(manager: THREE.LoadingManager): GLTFLoader {
+    const gltf = new GLTFLoader(manager)
     const dracoLoader = new DRACOLoader()
-    dracoLoader.setDecoderPath("/draco/gltf/")
-    loader.setDRACOLoader(dracoLoader)
-    return this.load<GLTF>(path, conf)
+    const p = new URL("./draco", import.meta.url)
+    dracoLoader.setDecoderPath(resolvePath(p.href, false, true))
+    gltf.setDRACOLoader(dracoLoader)
+    return gltf
   }
   dispose() {
-    this.#loaders.forEach(loader => loader.abort())
+    this.#loaders.forEach(loader => {
+      loader.abort()
+      if (Reflect.has(loader, "dispose")) {
+        ;(loader as any).dispose()
+      }
+    })
     this.#loaders = []
     this.manager.abort()
   }

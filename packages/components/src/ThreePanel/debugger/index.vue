@@ -1,5 +1,10 @@
 <template>
   <ScalePanel ref="scaleRef" v-model="conf">
+    <template #header>
+      <div class="flex justify-between">
+        <el-text type="primary">threejs 调试控制台,用于本地开发和测试v2.0</el-text>
+      </div>
+    </template>
     <div class="px-10px py-10px w-100% h-100%">
       <el-collapse v-model="sw.collapseActive">
         <el-collapse-item title="基础配置" :name="1">
@@ -36,6 +41,7 @@
   </ScalePanel>
 </template>
 <script lang="ts" setup>
+import { ScalePanel } from "@toolmain/components"
 import { useScale } from "./useScale"
 import Log from "./log.vue"
 import Base from "./base.vue"
@@ -62,14 +68,13 @@ const sw = reactive({
   tabExtra: 1,
 })
 function init() {
-  // 控制面板初始位置
-  scaleRef.value?.stickTo("right", true)
+  scaleRef.value?.hideTo("right", false)
   props.world.core.keyboard.ev.on("KeyM", (s: boolean) => {
     if (!s) return
     if (conf.value.visible) {
-      scaleRef.value?.hideTo("right", false)
+      scaleRef.value?.hideTo("right", true)
     } else {
-      scaleRef.value?.show(false, "right")
+      scaleRef.value?.show(true, "right")
     }
   })
 }
