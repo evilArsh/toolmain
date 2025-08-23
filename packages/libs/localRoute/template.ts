@@ -167,12 +167,7 @@ export class RouterTree {
         this.routes.set(current, currentNode)
         parent.pushChild(currentNode)
       }
-      this.push(
-        currentNode,
-        current,
-        resolvePath(paths.slice(1).join(resolvePath([vars.SUBPAGES, vars.SEPARATOR], true, true))),
-        comp
-      )
+      this.push(currentNode, current, resolvePath(paths.slice(1).join(resolvePath(vars.SUBPAGES, true, true))), comp)
     }
   }
 }

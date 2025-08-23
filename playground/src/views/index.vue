@@ -8,7 +8,7 @@ import { localImg } from "@toolmain/shared"
       <el-button>按钮</el-button>
       <el-image class="w-50rem h-50rem" :src="localImg('test.jpg')"></el-image>
     </Affix>
-    <router-view></router-view>
+    <!-- <router-view></router-view> -->
   </div>
 </template>
 <style lang="scss" scoped></style>

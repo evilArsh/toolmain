@@ -29,15 +29,15 @@
     "*.mjs"
   ],
   "dependencies": {
-    "@toolmain/shared": "catalog:",
-    "hash-sum": "catalog:",
-    "sucrase": "catalog:"
+    "@toolmain/shared": "workspace:^",
+    "hash-sum": "catalog:tools",
+    "sucrase": "catalog:tools"
   },
   "devDependencies": {
-    "@babel/types": "catalog:",
-    "@types/hash-sum": "catalog:"
+    "@babel/types": "catalog:tools",
+    "@types/hash-sum": "catalog:tools"
   },
   "peerDependencies": {
-    "vue": "catalog:"
+    "vue": "catalog:vue"
   }
 }
