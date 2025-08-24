@@ -2,7 +2,6 @@ import type { AsyncComponnet, IterableRoute, Router, RouterMeta } from "./types"
 export default class Node {
   private path: string
   private component?: AsyncComponnet
-  private redirect?: string
   private readonly children: Node[]
   private readonly meta: RouterMeta
   constructor(path: string) {
@@ -11,7 +10,7 @@ export default class Node {
     this.meta = {
       title: this.path,
       path: this.path,
-      fullPath: "", // 动态拼接
+      fullPath: "",
     }
   }
 
@@ -46,14 +45,6 @@ export default class Node {
     return this
   }
 
-  setRedirect(path: string | undefined): void {
-    this.redirect = path
-  }
-
-  getRedirect(): string | undefined {
-    return this.redirect
-  }
-
   updateMeta(meta: Partial<RouterMeta>): void {
     Object.assign(this.meta, meta)
   }
@@ -75,8 +66,7 @@ export default class Node {
   generateRouter(): Router {
     return {
       path: this.path,
-      meta: this.getMeta(),
-      redirect: this.redirect,
+      // meta: this.getMeta(),
       component: this.component,
       children: this.children.map(v => v.generateRouter()),
     }

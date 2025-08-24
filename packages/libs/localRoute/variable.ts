@@ -1,46 +1,47 @@
 /**
  *  文件名以及路径名
  */
-export const NAME_REG = /[^\\/:*?"<>|]+/
+export const NameReg = /[^\\/:*?"<>|]+/
 /**
  * 子页面标识
  */
-export const SUBPAGE_REG = /\/subpages\//
+export const SubpageReg = /\/subpages\//
+
 /**
  * 组件标识
  */
-export const COMPONENT_REG = /\/components\//
+export const ComponentReg = /\/components\//
 /**
- * 文件扩展名
+ * 文件扩展名 `.([jt]sx|vue)`
  */
-export const FILE_EXT_REG = /\.([jt]sx|vue)$/
+export const FileExtReg = /\.([jt]sx|vue)$/
 /**
  * 文件名
  */
-export const FILE_REG = new RegExp(`${NAME_REG.source}(${FILE_EXT_REG.source})`)
+export const FileReg = new RegExp(`${NameReg.source}(${FileExtReg.source})`)
 /**
  * 路径分隔符
  */
-export const SEPARATOR_REG = /\//
+export const SeparatorReg = /\//
 /**
  * 路径分隔符
  */
-export const SEPARATOR = "/"
-export const SUBPAGES = "/subpages"
+export const Separator = "/"
+export const Subpages = "subpages"
+/**
+ * 默认 `index.([jt]sx|vue)` 文件
+ */
+export const DefaultPathReg = new RegExp(`index${FileExtReg.source}`)
 /**
  * 默认路径
  */
-export const DEFAULT_PATH_REG = new RegExp(`index${FILE_EXT_REG.source}`)
-/**
- * 默认路径
- */
-export const DEFAULT_PATH = "index"
+export const DefaultPath = "index"
 /**
  *  包含views一级子目录的文件
  */
-export const WITH_ROOT_REG = new RegExp(`/src/views/${FILE_REG.source}`)
+export const WithRootReg = new RegExp(`/src/views/${FileReg.source}`)
 /**
  *  路径中带有 /component[s]/ 的组件文件.TODO: ios不支持零宽断言
  */
-export const WITH_COMPONENT_REG = new RegExp(`components(/${NAME_REG.source}){0,}/${FILE_REG.source}`)
-export const VIEWS_DIR = "/src/views/"
+export const WithComponentReg = new RegExp(`components(/${NameReg.source}){0,}/${FileReg.source}`)
+export const DefaultViewsDir = "/src/views/"

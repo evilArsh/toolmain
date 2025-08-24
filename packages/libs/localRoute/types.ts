@@ -19,17 +19,18 @@ export interface RouterMeta {
  */
 export interface Router {
   path: string
-  meta: RouterMeta
+  // meta: RouterMeta
   redirect?: string
   component?: AsyncComponnet
   children?: Router[]
 }
-export type Platform = "mobile" | "desktop"
 /**
  * 路由解析配置
  */
 export interface ResolveConfig {
-  platform: Platform
+  /**
+   * 在已有的基础上添加，否则清空 @default false
+   */
   append?: boolean
 }
 /**
@@ -37,7 +38,7 @@ export interface ResolveConfig {
  */
 export interface RouterTreeConfig {
   /**
-   *  路由前缀
+   *  根路由,默认为 `/`
    */
   index: string
   /**
@@ -49,7 +50,7 @@ export interface RouterTreeConfig {
    */
   layout: AsyncComponnet
   /**
-   *  需要截断的路由路径字符串前缀 default: `/src/views/`
+   *  路由根目录 @default `/src/views/`
    */
   viewsDir?: string | RegExp
   /**

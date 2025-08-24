@@ -2,7 +2,7 @@
 
 ```typescript
 import { createWebHistory, createRouter, type RouteRecordRaw } from "vue-router"
-import * as localRoute from "@renderer/lib/local-route"
+import { localRoute } from "@toolmain/libs"
 
 export const initNode = new localRoute.tpl.RouterTree({
   index: "/",
@@ -30,53 +30,32 @@ const router = createRouter({
   ],
 })
 export default router
-
 ```
 
-## 相对路径用法
+## 路径解析
 
-如果路径中存在以下结构
+`/src/views/` 为根目录，如果 `src/` 目录存在以下结构，并且路由前缀为 `/`
 
-```typescript
+```plaintext
 |--views
-|  |--static
-|  |  |--xxxx
-|  |--mobile
-|  |  |--home
+|  |--web
+|  |  |--login
+|  |  |  |--A
+|  |  |  |  |--index.vue
+|  |  |--index.vue
+|  |  |--user
+|  |  |  |--A
+|  |  |  |  |--index.vue
+|  |  |  |--B
+|  |  |  |  |--index.vue
+|  |  |--subpages
+|  |  |  |--home
+|  |  |  |  |--index.vue
+|  |  |  |--profile
+|  |  |  |  |--index.vue
 |  |  |  |--index.vue
-
 ```
 
-默认为前缀为`/src/views/`，访问`home/index.vue`的路由为`/mobile/home/index`,如果想以`mobile`为根路径，即通过`/home/index`访问；可以调用`tpl.setPrefix("/src/views/mobile/")`修改路径前缀,此时`mobile`的同级的`static`目录将不可用
+1. `user/` 和 `login/` 目录不在 `subpages/` 目录下，会被解析为 `/web/user` 和 `/web/login` 根路由，顶级 `<router-view>` 将跳过父级 `/web` 并仅使用子路由组件。
 
-## 注意事项
-
-```typescript
-|--login
-|  |--A
-|  |  --index.vue
-|  |--B
-|  |  --index.vue
-
-以上结构被解析为 `login/A/index` `login/B/index`
-
-|--login
-|  |--A
-|  | --index.vue
-|  |--B
-|  | --index.vue
-|--index.vue
-
-以上结构被解析为 `login/A/index` `login/B/index` `login/index`
-```
-
-## FIXME
-
-## TODO
-
-- 最小化功能动态路由支持,开发中
-- 文件夹命名为`subpages`,里面的页面均为子页面。`vue`中需要在父页面添加`<RouterView />`,`react`需要添加`<Outlet />`
-- react：
-
-  1. 支持动态添加一个组件，同时支持React-Route 中的 element,Component,lazy;
-  2. 加入路由全局状态管理，以及持久化
+2. `subpages/` 目录下的 `home/` 和 `profile/` 被视为 `/web` 的子路由，最终路由为 `/web/home` 和 `/web/profile` 。只有 `web/` 目录下存在 `index.vue` 文件并且存在 `<router-view>` 才会渲染出子组件

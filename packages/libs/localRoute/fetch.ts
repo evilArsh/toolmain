@@ -6,14 +6,14 @@ import * as vars from "./variable"
  * @param {string} path - 路径
  * @param {RegExp} reg - 正则表达式
  */
-export function isInclude(path: string, reg: RegExp): boolean {
+function isInclude(path: string, reg: RegExp): boolean {
   return reg.test(path)
 }
 
 /**
  * 多个正则表达式以`|`合并为一个
  */
-export function regsOr(regs: RegExp[]): RegExp {
+function regsOr(regs: RegExp[]): RegExp {
   const r: string[] = regs.map<string>(v => {
     return `(${v.source})`
   })
@@ -54,7 +54,7 @@ export function filterRecord<T>(records: Record<string, T>, filter?: Filter): Re
 // }
 
 function _fetch<T>(pages: Record<string, () => Promise<T>>, config?: FetchConfig): Record<string, AsyncComponnet> {
-  const res = filterRecord(pages, config?.withComponents ? undefined : val => !isInclude(val, vars.WITH_COMPONENT_REG))
+  const res = filterRecord(pages, config?.withComponents ? undefined : val => !isInclude(val, vars.WithComponentReg))
   return filterRecord(res, config?.filter)
 }
 /**
