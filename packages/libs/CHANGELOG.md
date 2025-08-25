@@ -1,5 +1,11 @@
 # @toolmain/libs
 
+## 1.1.2
+
+### Patch Changes
+
+- fix: optimize localRoute
+
 ## 1.1.1
 
 ### Patch Changes
