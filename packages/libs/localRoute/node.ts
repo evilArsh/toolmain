@@ -1,17 +1,11 @@
-import type { AsyncComponnet, IterableRoute, Router, RouterMeta } from "./types"
+import type { AsyncComponnet } from "./types"
 export default class Node {
   private path: string
   private component?: AsyncComponnet
   private readonly children: Node[]
-  // private readonly meta: RouterMeta
   constructor(path: string) {
     this.path = path
     this.children = []
-    // this.meta = {
-    //   title: this.path,
-    //   path: this.path,
-    //   fullPath: "",
-    // }
   }
 
   static create(path: string): Node {
@@ -43,32 +37,5 @@ export default class Node {
   setPath(path: string): this {
     this.path = path
     return this
-  }
-
-  // updateMeta(meta: Partial<RouterMeta>): void {
-  //   Object.assign(this.meta, meta)
-  // }
-
-  // getMeta(): RouterMeta {
-  //   return this.meta
-  // }
-
-  generate<T extends IterableRoute<T>>(router: Router, callback: (node: Router) => T): T {
-    const dst: T = callback(router)
-    if (router.children?.length) {
-      dst.children = router.children.map(v => this.generate(v, callback))
-    } else {
-      dst.children = undefined
-    }
-    return dst
-  }
-
-  generateRouter(): Router {
-    return {
-      path: this.path,
-      // meta: this.getMeta(),
-      component: this.component,
-      children: this.children.map(v => v.generateRouter()),
-    }
   }
 }

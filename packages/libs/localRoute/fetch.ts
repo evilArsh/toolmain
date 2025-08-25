@@ -49,10 +49,6 @@ export function filterRecord<T>(records: Record<string, T>, filter?: Filter): Re
   return records
 }
 
-// export function refreshDir(fConfig?: FetchConfig): Record<string, AsyncComponnet> {
-//   return fetchAllDir(fConfig)
-// }
-
 function _fetch<T>(pages: Record<string, () => Promise<T>>, config?: FetchConfig): Record<string, AsyncComponnet> {
   const res = filterRecord(pages, config?.withComponents ? undefined : val => !isInclude(val, vars.WithComponentReg))
   return filterRecord(res, config?.filter)

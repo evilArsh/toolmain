@@ -59,3 +59,5 @@ export default router
 1. `user/` 和 `login/` 目录不在 `subpages/` 目录下，会被解析为 `/web/user` 和 `/web/login` 根路由，顶级 `<router-view>` 将跳过父级 `/web` 并仅使用子路由组件。
 
 2. `subpages/` 目录下的 `home/` 和 `profile/` 被视为 `/web` 的子路由，最终路由为 `/web/home` 和 `/web/profile` 。只有 `web/` 目录下存在 `index.vue` 文件并且存在 `<router-view>` 才会渲染出子组件
+
+3. 根目录下的文件和文件夹会被作为 为根路由解析

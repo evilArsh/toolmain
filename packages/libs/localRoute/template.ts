@@ -8,7 +8,6 @@ export class RouterTree {
   #routes: Map<string, Node>
   #__PREFIX__ = "__PREFIX__"
   #config: RouterTreeConfig
-  #cache: Map<string, Node>
   constructor(config: RouterTreeConfig) {
     this.#routes = new Map()
     this.#config = {
@@ -16,10 +15,7 @@ export class RouterTree {
       index: config.index ?? "/",
       viewsDir: config.viewsDir ?? vars.DefaultViewsDir,
     }
-    this.#cache = new Map()
     this.root = Node.create(this.#config.index)
-    this.root.setComponent(this.#config.layout)
-    // this.#routes.set(this.root.getPath(), this.root)
   }
   /**
    * 返回当前文件夹根路径,默认`/src/views/`
@@ -50,13 +46,13 @@ export class RouterTree {
   /**
    * 对节点树进行遍历迭代
    */
-  generate<T extends IterableRoute<T>>() {
+  generate() {
     const routes: Router[] = []
     const gen = (current: Node, absPath: string, currentRouter?: Router) => {
       const child = current.getChild()
       child.forEach(childNode => {
+        // index.vue
         if (vars.DefaultPathReg.test(childNode.getPath())) {
-          // index.vue
           if (currentRouter) {
             // handle: /subpages/index.vue
             if (current.getPath() === vars.Subpages) {
@@ -65,16 +61,20 @@ export class RouterTree {
                 component: childNode.getComponent(),
               })
             } else {
-              if (routes.find(v => v.path === current.getPath())) {
-                // TODO
-              } else {
-                currentRouter.component = childNode.getComponent()
-              }
+              currentRouter.component = childNode.getComponent()
             }
           } else {
             const router = routes.find(r => r.path === absPath)
             if (router) {
-              router.component = childNode.getComponent()
+              if (!router.component) {
+                router.component = childNode.getComponent()
+              } else {
+                // foo/index.vue 和 foo.vue 存在同级
+                routes.push({
+                  path: resolvePath([absPath, "index"]),
+                  component: childNode.getComponent(),
+                })
+              }
             } else {
               routes.push({
                 path: resolvePath(absPath),
@@ -128,18 +128,29 @@ export class RouterTree {
         }
       })
     }
-    this.root.getChild().forEach(root => {
-      if (vars.FileExtReg.test(root.getPath())) {
-        const path = root.getPath().replace(vars.FileExtReg, "")
+    this.root.getChild().forEach(topRoot => {
+      if (vars.FileExtReg.test(topRoot.getPath())) {
+        const path = topRoot.getPath().replace(vars.FileExtReg, "")
         routes.push({
-          path: resolvePath(path),
-          component: root.getComponent(),
+          path: resolvePath([this.root.getPath(), resolvePath(path == vars.DefaultPath ? "/" : path)]),
+          component: topRoot.getComponent(),
         })
       } else {
-        gen(root, root.getPath())
+        gen(topRoot, resolvePath([this.root.getPath(), topRoot.getPath()]))
       }
     })
-    return routes
+    return routes.sort((a, b) => b.path.length - a.path.length)
+  }
+  iter<T extends IterableRoute<T>>(callback: (node: Router) => T) {
+    const routes = this.generate()
+    const iterate = (route: Router): T => {
+      const dst: T = callback(route)
+      if (route.children?.length) {
+        dst.children = route.children.map(v => iterate(v))
+      }
+      return dst
+    }
+    return routes.map(route => iterate(route))
   }
   /**
    * 添加路由节点
@@ -153,16 +164,15 @@ export class RouterTree {
     }
     const fileName = path.slice(path.lastIndexOf("/") + 1)
     if (vars.FileReg.test(fileName)) {
-      this.#push2(resolvePath(path.replace(this.getPrefix(), ""), false, false), asyncComp)
+      this.#push(resolvePath(path.replace(this.getPrefix(), ""), false, false), asyncComp)
     }
     return this
   }
-  #push2(path: string, comp: AsyncComponnet) {
+  #push(path: string, comp: AsyncComponnet) {
     const pathArr = path.split(vars.Separator)
     let p: string | undefined
     let parent: Node = this.root
     let newNode: Node
-    console.log(pathArr)
     while (true) {
       p = pathArr.shift()
       if (isUndefined(p)) break
@@ -180,84 +190,6 @@ export class RouterTree {
         }
         parent = node
       }
-    }
-  }
-  find(path: string): Node | null {
-    const p = resolvePath(path)
-    const curNode: Node = this.root
-    const cache = this.#cache.get(p)
-    if (cache) {
-      return cache
-    }
-    const res = this.#find(p, curNode.getPath(), curNode)
-    if (res) {
-      this.#cache.set(p, res)
-      return res
-    }
-    return null
-  }
-
-  #find(dstPath: string, curPath: string, curNode: Node): Node | null {
-    if (dstPath === curPath) {
-      return curNode
-    } else {
-      const child = curNode.getChild()
-      if (child.length > 0) {
-        for (let i = 0; i < child.length; i++) {
-          const res = this.#find(dstPath, resolvePath([curNode.getPath(), child[i].getPath()]), child[i])
-          if (res) {
-            return res
-          }
-        }
-        return null
-      } else {
-        return null
-      }
-    }
-  }
-
-  /**
-   * 添加路由
-   * @param parent 要添加的路由的父节点
-   * @param parentAbsPath 父节点绝对路由地址
-   * @param path 要添加的路由地址
-   * @param comp 要添加的路由对应的 Component
-   */
-  #push(parent: Node, parentAbsPath: string, path: string, comp: AsyncComponnet): void {
-    if (path.length === 0) return
-    const subCount = path.match(vars.SubpageReg)?.length ?? 0
-    if (subCount === 0) {
-      if (path.replace(vars.DefaultPathReg, "").length == 0) {
-        parent.setComponent(comp)
-      } else {
-        const finalPath = resolvePath(path.replace(vars.DefaultPathReg, "").replace(vars.FileExtReg, ""))
-        const currentPath = resolvePath(finalPath, false)
-        // 路径: `{当前路径}`
-        const childNode = Node.create(currentPath)
-        // 路径映射:`/{绝对路径}/{当前路径}`
-        this.#routes.set(resolvePath([parentAbsPath, currentPath]), childNode)
-        childNode.setComponent(comp)
-        parent.pushChild(childNode)
-        if (this.#config.redirect) {
-          const child = parent.getChild()
-          const def = child.find(v => v.getPath() === vars.DefaultPath)
-          if (def) {
-            // parent.setRedirect(resolvePath([parentAbsPath, def.getPath()]))
-          } else if (child.length > 0 && this.#config.redirectToChild) {
-            // parent.setRedirect(resolvePath([parentAbsPath, child[0].getPath()]))
-          }
-        }
-      }
-    } else {
-      const paths = path.split(vars.SubpageReg)
-      const current = resolvePath([parentAbsPath, paths[0]])
-      let currentNode = this.#routes.get(current)
-      if (!currentNode) {
-        currentNode = Node.create(paths[0])
-        this.#routes.set(current, currentNode)
-        parent.pushChild(currentNode)
-      }
-      this.#push(currentNode, current, resolvePath(paths.slice(1).join(resolvePath(vars.Subpages, true, true))), comp)
     }
   }
 }
