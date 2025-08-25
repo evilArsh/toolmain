@@ -3,15 +3,15 @@ export default class Node {
   private path: string
   private component?: AsyncComponnet
   private readonly children: Node[]
-  private readonly meta: RouterMeta
+  // private readonly meta: RouterMeta
   constructor(path: string) {
     this.path = path
     this.children = []
-    this.meta = {
-      title: this.path,
-      path: this.path,
-      fullPath: "",
-    }
+    // this.meta = {
+    //   title: this.path,
+    //   path: this.path,
+    //   fullPath: "",
+    // }
   }
 
   static create(path: string): Node {
@@ -45,13 +45,13 @@ export default class Node {
     return this
   }
 
-  updateMeta(meta: Partial<RouterMeta>): void {
-    Object.assign(this.meta, meta)
-  }
+  // updateMeta(meta: Partial<RouterMeta>): void {
+  //   Object.assign(this.meta, meta)
+  // }
 
-  getMeta(): RouterMeta {
-    return this.meta
-  }
+  // getMeta(): RouterMeta {
+  //   return this.meta
+  // }
 
   generate<T extends IterableRoute<T>>(router: Router, callback: (node: Router) => T): T {
     const dst: T = callback(router)

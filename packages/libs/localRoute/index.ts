@@ -1,6 +1,6 @@
 /**
  * @author arsh <arshdebian@163.com>
- * @copyright arsh 2024
+ * @copyright arsh 2025
  * @license MIT
  */
 import * as fetch from "./fetch"

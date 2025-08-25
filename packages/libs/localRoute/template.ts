@@ -2,7 +2,7 @@ import type { AsyncComponnet, IterableRoute, ResolveConfig, Router, RouterTreeCo
 import * as vars from "./variable"
 import Node from "./node"
 import { isUndefined, resolvePath } from "@toolmain/shared"
-
+import { pushRouterChild } from "./utils"
 export class RouterTree {
   readonly root: Node
   #routes: Map<string, Node>
@@ -51,49 +51,94 @@ export class RouterTree {
    * 对节点树进行遍历迭代
    */
   generate<T extends IterableRoute<T>>() {
-    // generate<T extends IterableRoute<T>>(callback: (node: Router) => T) {
-    // const router = this.root.generateRouter()
-    // return this.root.generate(router, callback)
     const routes: Router[] = []
-    const gen = (current: Node, parentPath: string, parentRouter?: Router) => {
+    const gen = (current: Node, absPath: string, currentRouter?: Router) => {
       const child = current.getChild()
-      // const hasSubpages = child.findIndex(n => n.getPath() == vars.Subpages)
       child.forEach(childNode => {
-        if (childNode.getPath() == vars.Subpages) {
-          if (parentRouter) {
-            gen(childNode, parentPath, parentRouter)
-          } else {
-            const router: Router = {
-              path: parentPath,
-              component: childNode.getComponent(),
+        if (vars.DefaultPathReg.test(childNode.getPath())) {
+          // index.vue
+          if (currentRouter) {
+            // handle: /subpages/index.vue
+            if (current.getPath() === vars.Subpages) {
+              pushRouterChild(currentRouter, {
+                path: childNode.getPath().replace(vars.FileExtReg, ""),
+                component: childNode.getComponent(),
+              })
+            } else {
+              if (routes.find(v => v.path === current.getPath())) {
+                // TODO
+              } else {
+                currentRouter.component = childNode.getComponent()
+              }
             }
-            routes.push(router)
-            gen(childNode, parentPath, router)
+          } else {
+            const router = routes.find(r => r.path === absPath)
+            if (router) {
+              router.component = childNode.getComponent()
+            } else {
+              routes.push({
+                path: resolvePath(absPath),
+                component: childNode.getComponent(),
+              })
+            }
           }
-        } else {
-          if (childNode.getComponent()) {
-            const router: Router = {
+        } else if (vars.FileExtReg.test(childNode.getPath())) {
+          // *.vue
+          if (currentRouter) {
+            pushRouterChild(currentRouter, {
+              path: resolvePath(childNode.getPath().replace(vars.FileExtReg, ""), false, false),
+              component: childNode.getComponent(),
+            })
+          } else {
+            routes.push({
+              path: resolvePath([absPath, childNode.getPath().replace(vars.FileExtReg, "")], true, false),
+              component: childNode.getComponent(),
+            })
+          }
+        } else if (childNode.getPath() == vars.Subpages || current.getPath() == vars.Subpages) {
+          currentRouter = currentRouter ?? routes.find(r => r.path === absPath)
+          if (!currentRouter) {
+            currentRouter = {
+              path: resolvePath(absPath),
+              component: current.getComponent(),
+              children: [],
+            }
+            routes.push(currentRouter)
+          }
+          if (childNode.getPath() == vars.Subpages) {
+            gen(childNode, resolvePath(absPath), currentRouter)
+          } else if (current.getPath() == vars.Subpages) {
+            const r: Router = {
               path: childNode.getPath(),
               component: childNode.getComponent(),
+              children: [],
             }
-            if (parentRouter) {
-              if (!parentRouter.children) parentRouter.children = []
-              parentRouter.children?.push(router)
-              gen(childNode, resolvePath([parentPath, childNode.getPath()]), router)
+            if (currentRouter) {
+              if (!currentRouter.children) currentRouter.children = []
+              currentRouter.children.push(r)
+              gen(childNode, resolvePath([absPath, childNode.getPath()]), r)
             } else {
-              router.path = resolvePath([parentPath, childNode.getPath()])
-              routes.push(router)
-              gen(childNode, resolvePath([parentPath, childNode.getPath()]), router)
+              r.path = resolvePath([absPath, r.path])
+              routes.push(r)
+              gen(childNode, resolvePath([absPath, childNode.getPath()]), r)
             }
-          } else {
-            gen(childNode, resolvePath([parentPath, childNode.getPath()]))
           }
+        } else {
+          gen(childNode, resolvePath([absPath, childNode.getPath()]), currentRouter)
         }
       })
     }
-
-    // this.root.getChild().forEach(root => gen(root, this.root.getPath()))
-    gen(this.root, this.root.getPath())
+    this.root.getChild().forEach(root => {
+      if (vars.FileExtReg.test(root.getPath())) {
+        const path = root.getPath().replace(vars.FileExtReg, "")
+        routes.push({
+          path: resolvePath(path),
+          component: root.getComponent(),
+        })
+      } else {
+        gen(root, root.getPath())
+      }
+    })
     return routes
   }
   /**
@@ -109,24 +154,11 @@ export class RouterTree {
     const fileName = path.slice(path.lastIndexOf("/") + 1)
     if (vars.FileReg.test(fileName)) {
       this.#push2(resolvePath(path.replace(this.getPrefix(), ""), false, false), asyncComp)
-      // this.#push(this.root, this.root.getPath(), path.replace(this.getPrefix(), ""), asyncComp)
     }
     return this
   }
   #push2(path: string, comp: AsyncComponnet) {
-    // path.split(vars.Separator).reduce<string>((parent, current, currentIndex, pathArr) => {
-    //   if (currentIndex === pathArr.length - 1) {
-    //     if (vars.DefaultPathReg.test(current)) {
-    //       // this.#routes.
-    //       const node = this.#routes.get()
-    //     } else if (vars.FileExtReg.test(current)) {
-    //     }
-    //   } else {
-    //   }
-    //   return resolvePath([parent, current], true, false)
-    // }, resolvePath(this.#config.index))
     const pathArr = path.split(vars.Separator)
-    const pathLen = pathArr.length
     let p: string | undefined
     let parent: Node = this.root
     let newNode: Node
@@ -134,29 +166,14 @@ export class RouterTree {
     while (true) {
       p = pathArr.shift()
       if (isUndefined(p)) break
-      const pureP = p.replace(vars.FileExtReg, "")
-      const node = parent.getChild().find(v => v.getPath() === pureP)
+      const node = parent.getChild().find(v => v.getPath() === p)
       if (!node) {
-        if (vars.DefaultPathReg.test(p)) {
-          // 根目录存在 /index.vue
-          if (pathLen == 1) {
-            newNode = Node.create(pureP)
-            newNode.setComponent(comp)
-            parent.pushChild(newNode)
-            parent = newNode
-          } else {
-            parent.setComponent(comp)
-          }
-        } else if (vars.FileExtReg.test(p)) {
-          newNode = Node.create(pureP)
+        newNode = Node.create(p)
+        if (vars.FileExtReg.test(p)) {
           newNode.setComponent(comp)
-          parent.pushChild(newNode)
-          parent = newNode
-        } else {
-          newNode = Node.create(pureP)
-          parent.pushChild(newNode)
-          parent = newNode
         }
+        parent.pushChild(newNode)
+        parent = newNode
       } else {
         if (vars.FileExtReg.test(p)) {
           node.setComponent(comp)
@@ -165,15 +182,6 @@ export class RouterTree {
       }
     }
   }
-  // find2(path: string): Node | null {
-  //   const pathArr = path.split(vars.Separator)
-  //   let parent: Node = this.root
-  //   let p: string | undefined
-  //   while (true) {
-  //     p = pathArr.shift()
-  //     if (!p) break
-  //   }
-  // }
   find(path: string): Node | null {
     const p = resolvePath(path)
     const curNode: Node = this.root
