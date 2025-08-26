@@ -34,6 +34,7 @@
     "*.mjs"
   ],
   "dependencies": {
+    "p-queue": "catalog:tools",
     "csstype": "catalog:tools",
     "hotkeys-js": "catalog:tools",
     "lodash.merge": "catalog:tools",
