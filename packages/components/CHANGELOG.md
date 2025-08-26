@@ -1,5 +1,13 @@
 # @toolmain/components
 
+## 1.2.5
+
+### Patch Changes
+
+- fix: fix types error
+- Updated dependencies
+  - @toolmain/shared@1.2.4
+
 ## 1.2.4
 
 ### Patch Changes
