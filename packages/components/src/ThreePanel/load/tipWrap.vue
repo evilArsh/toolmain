@@ -24,6 +24,7 @@
 <script lang="ts" setup>
 import { computed } from "vue"
 import { LoadParam } from "../three"
+import { ElProgress } from "element-plus"
 
 const props = defineProps<{
   data: LoadParam

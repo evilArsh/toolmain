@@ -1,4 +1,2 @@
-import * as localRoute from "./localRoute/index"
-import * as container from "./container/index"
-
-export { localRoute, container }
+export * from "./localRoute/index"
+export * from "./container/index"

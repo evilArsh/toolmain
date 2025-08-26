@@ -41,6 +41,7 @@
   </ScalePanel>
 </template>
 <script lang="ts" setup>
+import { ElCollapse, ElCollapseItem, ElTabs, ElTabPane, ElText } from "element-plus"
 import { ScalePanel } from "@toolmain/components"
 import { useScale } from "./useScale"
 import Log from "./log.vue"

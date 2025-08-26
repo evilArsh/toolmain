@@ -1,5 +1,19 @@
 # @toolmain/libs
 
+## 1.1.5
+
+### Patch Changes
+
+- fix: fix export types
+
+## 1.1.4
+
+### Patch Changes
+
+- fix: fix type error
+- Updated dependencies
+  - @toolmain/shared@1.2.6
+
 ## 1.1.3
 
 ### Patch Changes

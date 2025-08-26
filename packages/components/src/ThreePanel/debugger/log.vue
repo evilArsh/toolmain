@@ -44,6 +44,7 @@
   </div>
 </template>
 <script lang="ts" setup>
+import { ElDescriptions, ElDescriptionsItem, ElCard, ElButton, ElTooltip, ElInput } from "element-plus"
 import { ref, reactive, onMounted } from "vue"
 import { World } from "../three"
 import { CallBackFn } from "@toolmain/shared"

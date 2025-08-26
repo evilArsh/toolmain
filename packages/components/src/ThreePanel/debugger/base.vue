@@ -12,6 +12,7 @@
   </div>
 </template>
 <script lang="ts" setup>
+import { ElDescriptions, ElDescriptionsItem, ElTag } from "element-plus"
 import { onMounted, reactive } from "vue"
 import { World } from "../three"
 const props = defineProps<{

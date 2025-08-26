@@ -1,5 +1,5 @@
 import type { AsyncComponnet } from "./types"
-export default class Node {
+export class Node {
   private path: string
   private component?: AsyncComponnet
   private readonly children: Node[]

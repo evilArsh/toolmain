@@ -1,5 +1,17 @@
 # @toolmain/shared
 
+## 1.2.6
+
+### Patch Changes
+
+- fix: fix type error
+
+## 1.2.5
+
+### Patch Changes
+
+- fix: fix types error
+
 ## 1.2.4
 
 ### Patch Changes

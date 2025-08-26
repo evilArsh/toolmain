@@ -183,16 +183,36 @@
   </div>
 </template>
 <script lang="ts" setup>
+import {
+  ElDialog,
+  ElForm,
+  ElFormItem,
+  ElRadioButton,
+  ElRadioGroup,
+  ElCollapse,
+  ElCollapseItem,
+  ElDescriptions,
+  ElDescriptionsItem,
+  ElColorPicker,
+  ElButton,
+  ElSwitch,
+  ElText,
+  ElInputNumber,
+} from "element-plus"
 import { LightMeta, LightType, World } from "../three"
 import * as THREE from "three"
-import useDialog from "./useDialog"
-import { uniqueId, toNumber, isString, msg } from "@toolmain/shared"
+import { uniqueId, toNumber, isString, msg, useDialog } from "@toolmain/shared"
 import { shallowReactive, reactive, toRaw, computed, onMounted } from "vue"
 const props = defineProps<{
   world: World
   lights: Array<LightMeta>
 }>()
-const { dlgProps, dlgEvent, open, close } = useDialog({
+const {
+  props: dlgProps,
+  event: dlgEvent,
+  open,
+  close,
+} = useDialog({
   width: 500,
 })
 const lightHandler = shallowReactive({

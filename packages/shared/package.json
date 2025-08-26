@@ -1,6 +1,6 @@
 {
   "name": "@toolmain/shared",
-  "version": "1.2.4",
+  "version": "1.2.6",
   "description": "utility toolkit collections",
   "license": "MIT",
   "type": "module",

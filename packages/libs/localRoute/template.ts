@@ -1,6 +1,6 @@
 import type { AsyncComponnet, IterableRoute, ResolveConfig, Router, RouterTreeConfig } from "./types"
 import * as vars from "./variable"
-import Node from "./node"
+import { Node } from "./node"
 import { isUndefined, resolvePath } from "@toolmain/shared"
 import { pushRouterChild } from "./utils"
 export class RouterTree {

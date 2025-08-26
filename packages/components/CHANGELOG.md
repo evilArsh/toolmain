@@ -1,5 +1,28 @@
 # @toolmain/components
 
+## 1.2.8
+
+### Patch Changes
+
+- fix: fix element-plus import
+
+## 1.2.7
+
+### Patch Changes
+
+- fix: fix type error
+- Updated dependencies
+  - @toolmain/shared@1.2.6
+  - @toolmain/libs@1.1.4
+
+## 1.2.6
+
+### Patch Changes
+
+- fix: fix types error
+- Updated dependencies
+  - @toolmain/shared@1.2.5
+
 ## 1.2.5
 
 ### Patch Changes

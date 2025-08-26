@@ -18,6 +18,7 @@
   </div>
 </template>
 <script lang="ts" setup>
+import { ElProgress } from "element-plus"
 import { computed, watch } from "vue"
 import { LoadParam, World } from "../three"
 const emit = defineEmits<{

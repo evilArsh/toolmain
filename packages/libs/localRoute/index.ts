@@ -3,9 +3,8 @@
  * @copyright arsh 2025
  * @license MIT
  */
-import * as fetch from "./fetch"
-import * as tpl from "./template"
-import * as vars from "./variable"
-import * as types from "./types"
-import Node from "./node"
-export { fetch, vars, tpl, types, Node }
+export * from "./fetch"
+export * from "./template"
+export * from "./variable"
+export * from "./types"
+export * from "./node"

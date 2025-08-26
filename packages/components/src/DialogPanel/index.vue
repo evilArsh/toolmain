@@ -1,4 +1,6 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import { ElCard, ElScrollbar } from "element-plus"
+</script>
 <template>
   <el-card
     class="dialog-panel"

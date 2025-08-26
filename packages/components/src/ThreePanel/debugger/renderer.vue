@@ -8,6 +8,7 @@
   </div>
 </template>
 <script lang="ts" setup>
+import { ElRow, ElFormItem, ElColorPicker } from "element-plus"
 import { reactive, onMounted } from "vue"
 import { World } from "../three"
 import * as THREE from "three"

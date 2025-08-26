@@ -1,8 +1,5 @@
 {
   "extends": "../../tsconfig.base.json",
   "include": ["index.ts", "src", "*.mts", "*.ts"],
-  "compilerOptions": {
-    "types": ["element-plus/global"]
-  },
   "exclude": ["node_modules", "dist", "src/**/*.js", "src/**/*.d.ts", "eslint.config.mts"]
 }

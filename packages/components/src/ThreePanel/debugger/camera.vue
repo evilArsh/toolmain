@@ -187,6 +187,7 @@
   </div>
 </template>
 <script lang="ts" setup>
+import { ElDescriptions, ElDescriptionsItem, ElInputNumber, ElSwitch } from "element-plus"
 import { computed, onMounted, reactive } from "vue"
 import { World } from "../three"
 import { useDebounceFn } from "@vueuse/core"

@@ -219,6 +219,16 @@
   </div>
 </template>
 <script lang="ts" setup>
+import {
+  ElRadioButton,
+  ElRadioGroup,
+  ElDescriptions,
+  ElDescriptionsItem,
+  ElButton,
+  ElSwitch,
+  ElInputNumber,
+  ElUpload,
+} from "element-plus"
 import { UploadFile } from "element-plus"
 import { World } from "../three"
 import { useThrottleFn } from "@vueuse/core"
