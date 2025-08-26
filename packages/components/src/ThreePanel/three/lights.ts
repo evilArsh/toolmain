@@ -95,9 +95,7 @@ function newHemisphereLight(data: LightMeta) {
 
 function newLightTransformerCtrl(core: Core, _meta: LightMeta, _light: THREE.Light) {
   const control = new TransformControls(core.camera, core.renderer.domElement)
-  control.setMode("translate") // 移动
-  // control.setMode("rotate") // 旋转
-  // control.setMode("scale") // 缩放
+  control.setMode("translate")
   return control
 }
 

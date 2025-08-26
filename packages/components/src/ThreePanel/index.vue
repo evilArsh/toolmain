@@ -39,7 +39,20 @@ const emit = defineEmits<{
   loaded: [World]
 }>()
 const props = defineProps<{
+  /**
+   * if true, will add a panel for debugging. press `m` to toggle the panel
+   */
   debug?: boolean
+  /**
+   * if you want to use draco decoder, must specify `dracoDecoderPath`
+   *
+   * 1. you can set the path with cdn url: `https://www.gstatic.com/draco/versioned/decoders/1.5.7/`
+   * 2. or copy the draco decoder files to your `/public/droc/gltf` directory, and set the value to `/droc/gltf`
+   */
+  dracoDecoderPath?: string
+  /**
+   * config for rendering models
+   */
   config: ThreePanelConf
 }>()
 const config = computed(() => props.config)
@@ -57,7 +70,11 @@ const core = markRaw(new Core())
 const world: World = {
   core: core,
   bot: null,
-  scene: markRaw(new Scene(core)),
+  scene: markRaw(
+    new Scene(core, {
+      dracoLoaderPath: props.dracoDecoderPath,
+    })
+  ),
   lights: markRaw(new Lights(core)),
 }
 function init() {
@@ -102,9 +119,9 @@ function init() {
     emit("loaded", world)
     addPanel({
       id: "Config",
-      label: "配置页",
+      label: "Config",
       node: h(ElDescriptions, { border: true, column: 1 }, () =>
-        h(ElDescriptionsItem, { label: "配置" }, () =>
+        h(ElDescriptionsItem, { label: "config" }, () =>
           h(ElInput, {
             readonly: true,
             type: "textarea",
@@ -131,7 +148,6 @@ function refreshUrl(url?: string) {
 }
 function refreshCamera(data?: CameraConf) {
   if (!data) return
-  // 设置相机聚焦位置
   core.camera.position.copy(data.position)
 }
 function refreshControl(data?: ControlConf) {

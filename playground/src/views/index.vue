@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Affix } from "@toolmain/components"
+import { Affix, Copy } from "@toolmain/components"
 import { localImg } from "@toolmain/shared"
 </script>
 <template>
@@ -8,6 +8,7 @@ import { localImg } from "@toolmain/shared"
       <el-button>按钮</el-button>
       <el-image class="w-50rem h-50rem" :src="localImg('test.jpg')"></el-image>
     </Affix>
+    <Copy text="copy text"></Copy>
   </div>
 </template>
 <style lang="scss" scoped></style>

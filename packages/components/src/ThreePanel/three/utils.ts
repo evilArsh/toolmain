@@ -1,5 +1,5 @@
 export function gradientColor(startColorHex: string, endColorHex: string, step: number): Array<string> {
-  const startRGB = hex2rgb(startColorHex) //转换为rgb数组模式
+  const startRGB = hex2rgb(startColorHex)
   const startR = startRGB[0]
   const startG = startRGB[1]
   const startB = startRGB[2]
@@ -9,7 +9,7 @@ export function gradientColor(startColorHex: string, endColorHex: string, step: 
   const endG = endRGB[1]
   const endB = endRGB[2]
 
-  const sR = (endR - startR) / step //总差值
+  const sR = (endR - startR) / step
   const sG = (endG - startG) / step
   const sB = (endB - startB) / step
 
@@ -22,7 +22,7 @@ export function gradientColor(startColorHex: string, endColorHex: string, step: 
 }
 
 /**
- * 将hex表示方式转换为rgb表示方式(这里返回rgb数组模式)
+ * translate hex color to rgb color array
  */
 export function hex2rgb(sColor: string): Array<number> {
   const reg = /^#([0-9a-fA-f]{3}|[0-9a-fA-f]{6})$/
@@ -45,7 +45,7 @@ export function hex2rgb(sColor: string): Array<number> {
 }
 
 /**
- * 将rgb表示方式转换为hex表示方式
+ * tranlate rgb color to hex string
  */
 export function rgb2Hex(rgb: string): string {
   const reg = /^#([0-9a-fA-f]{3}|[0-9a-fA-f]{6})$/
@@ -55,7 +55,7 @@ export function rgb2Hex(rgb: string): string {
     let strHex = "#"
     for (let i = 0; i < aColor.length; i++) {
       let hex = parseInt(aColor[i]).toString(16)
-      hex = parseInt(hex) < 10 ? "0" + hex : hex // 保证每个rgb的值为2位
+      hex = parseInt(hex) < 10 ? "0" + hex : hex
       if (hex === "0") {
         hex += hex
       }
@@ -83,14 +83,14 @@ export function rgb2Hex(rgb: string): string {
 }
 
 /**
- * 角度->弧度
+ * anger to rad
  */
 export function a2r(angle: number): number {
   return angle * (Math.PI / 180)
 }
 
 /**
- * 弧度->角度
+ * rad to anger
  */
 export function r2a(radian: number): number {
   return radian * (180 / Math.PI)

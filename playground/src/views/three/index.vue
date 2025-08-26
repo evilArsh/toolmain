@@ -99,10 +99,11 @@ const defaultConf = (): ThreePanelConf => {
   }
 }
 const config = ref<ThreePanelConf>(defaultConf())
+const dracoUrl = "https://www.gstatic.com/draco/versioned/decoders/1.4.3/"
 </script>
 <template>
   <div class="p-1rem w-full h-full">
-    <ThreePanel :config debug></ThreePanel>
+    <ThreePanel :config debug :draco-decoder-path="dracoUrl"></ThreePanel>
   </div>
 </template>
 <style lang="scss" scoped></style>

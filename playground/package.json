@@ -21,7 +21,8 @@
     "lint-fix": "eslint --fix"
   },
   "dependencies": {
-    "pinia": "catalog:vue"
+    "pinia": "catalog:vue",
+    "three": "catalog:tools"
   },
   "devDependencies": {
     "@types/node": "catalog:dev"

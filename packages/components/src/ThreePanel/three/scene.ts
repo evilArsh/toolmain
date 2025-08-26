@@ -3,7 +3,7 @@ import { type GLTF } from "three/addons"
 import { Core } from "./core"
 // import { MeshBVH, MeshBVHHelper, StaticGeometryGenerator, type MeshBVHOptions } from "three-mesh-bvh"
 import { LoadOptions, RemoteSrc, TargetSrc } from "./types"
-import { LoaderPure } from "./loaderPure"
+import { Loader, LoaderConfig } from "./loader"
 import { getModel } from "./db"
 import { resolvePath } from "@toolmain/shared"
 
@@ -14,14 +14,15 @@ export class Scene {
   // bvhHelper?: MeshBVHHelper
   remoteTarget: Record<string, TargetSrc> = {}
   /**
-   * RendererClick 事件发生时，是否emit，用于调试
+   * when true,emit the `RendererClick` event
    */
   clickNotify: boolean = false
   private blobUrls: string[] = []
-  readonly loader = new LoaderPure()
+  readonly loader: Loader
   private core: Core
-  constructor(core: Core) {
+  constructor(core: Core, loaderConfig?: LoaderConfig) {
     this.core = core
+    this.loader = new Loader(loaderConfig)
     this.init()
   }
   private createVideo(url: string) {
@@ -37,27 +38,23 @@ export class Scene {
     return video
   }
   /**
-   * 设置一个面的纹理
+   * set texture
    */
   setRemoteTexture(src: RemoteSrc) {
     if (!this.model) {
-      this.core.emit("Log", { code: 500, msg: `[设置资源：模型还未加载]:${src.fileUrl}` })
+      this.core.emit("Log", { code: 500, msg: `[setRemoteTexture：model not loaded yet]:${src.fileUrl}` })
       return
     }
-    this.remoteResources[src.slotId] = { ...src }
-    const target = this.core.scene.getObjectByName(src.slotId)
+    this.remoteResources[src.objectName] = { ...src }
+    const target = this.core.scene.getObjectByName(src.objectName)
     if (!target) {
-      this.core.emit("Log", { code: 500, msg: `[设置资源：插槽不存在]：${JSON.stringify(src)}` })
+      this.core.emit("Log", { code: 500, msg: `[setRemoteTexture：slot is undefined]：${JSON.stringify(src)}` })
     }
     if (target && (target as THREE.Mesh).isMesh) {
       const tar = target as THREE.Mesh<THREE.PlaneGeometry, THREE.MeshStandardMaterial>
-      /**
-       * TODO: 优化逻辑
-       * 1:图片 2:视频 3:链接 4:接口
-       */
       if (src.sourceType == 1) {
-        this.core.emit("Log", { code: 200, msg: `[设置图片资源]${JSON.stringify(src)}` })
-        // 图片
+        this.core.emit("Log", { code: 200, msg: `[set images texture]${JSON.stringify(src)}` })
+        // image
         if (src.fileUrl) {
           this.core.loader
             .load<THREE.Texture>(resolvePath(src.fileUrl), {})
@@ -69,14 +66,14 @@ export class Scene {
               }
             })
             .catch(e => {
-              this.core.emit("Log", { code: 500, msg: `[资源加载失败]${(e as Error).message}` })
+              this.core.emit("Log", { code: 500, msg: `[images load failed]${(e as Error).message}` })
             })
         } else {
-          this.core.emit("Log", { code: 500, msg: `[资源加载失败,url不存在]${JSON.stringify(src)}` })
+          this.core.emit("Log", { code: 500, msg: `[images url not exist]${JSON.stringify(src)}` })
         }
       } else if (src.sourceType == 2) {
         // video
-        this.core.emit("Log", { code: 200, msg: `[设置视频资源]${JSON.stringify(src)}` })
+        this.core.emit("Log", { code: 200, msg: `[set videos texture]${JSON.stringify(src)}` })
         if (src.fileUrl) {
           const video = this.createVideo(resolvePath(src.fileUrl))
           const texture = new THREE.VideoTexture(video)
@@ -84,37 +81,34 @@ export class Scene {
           tar.material.map = texture
           tar.material.needsUpdate = true
         } else {
-          this.core.emit("Log", { code: 500, msg: `[资源加载失败,url不存在]${JSON.stringify(src)}` })
+          this.core.emit("Log", { code: 500, msg: `[load video failed,url not exist]${JSON.stringify(src)}` })
         }
       } else if (src.sourceType == 3) {
-        this.core.emit("Log", { code: 500, msg: `[暂不支持链接资源]${JSON.stringify(src)}` })
-        // 网站链接
-        // const domObj = this.createWebSite(gtUrl(src.content), child.position)
-        // this.core.scene.add(domObj)
+        this.core.emit("Log", { code: 500, msg: `[unsupported resources type]${JSON.stringify(src)}` })
       } else if (src.sourceType == 4) {
         tar.material.color.set(new THREE.Color(src.color))
       } else if (src.sourceType == 5) {
-        this.core.emit("Log", { code: 500, msg: `[暂不支持接口资源]${JSON.stringify(src)}` })
+        this.core.emit("Log", { code: 500, msg: `[unsupported api resource]${JSON.stringify(src)}` })
       }
     }
   }
   /**
-   * 设置一个面的锚点数据,当点击时判断跳转或者弹出网页
+   * set a anchor of an object, when click the object,the corresponding event will be triggered
    */
   setRemoteTarget(src: TargetSrc[] | TargetSrc) {
     this.core.emit("Log", { code: 200, msg: `[setRemoteTarget] ${JSON.stringify(src)}` })
     if (Array.isArray(src)) {
       this.remoteTarget = {}
       src.forEach(val => {
-        this.remoteTarget[val.slotId] = { ...val }
+        this.remoteTarget[val.objectName] = { ...val }
       })
     } else {
-      this.remoteTarget[src.slotId] = { ...src }
+      this.remoteTarget[src.objectName] = { ...src }
     }
   }
   async load(gltfPath: string, conf?: LoadOptions) {
     let url = gltfPath
-    this.core.emit("Log", { code: 100, msg: `[加载场景]${url}` })
+    this.core.emit("Log", { code: 100, msg: `[load scene]${url}` })
     const res = await getModel(url, e => {
       this.loader.emit("LoadProgress", {
         loaded: e.loaded,
@@ -123,14 +117,13 @@ export class Scene {
         independent: true,
       })
     })
-    this.core.emit("Log", { code: res.code, msg: `[模型加载完成] ${res.msg}` })
-    console.log("[加载 indexedDB scene]", res)
+    this.core.emit("Log", { code: res.code, msg: `[model load complete] ${res.msg}` })
     if (res.data) {
-      this.core.emit("Log", { code: 100, msg: `[scene加载本地缓存]${url}` })
+      this.core.emit("Log", { code: 100, msg: `[load local cached data]${url}` })
       url = URL.createObjectURL(res.data)
       this.blobUrls.push(url)
     } else {
-      this.core.emit("Log", { code: 500, msg: `[加载场景:indexedDB出错]${JSON.stringify(res)}` })
+      this.core.emit("Log", { code: 500, msg: `[error loading scene]${JSON.stringify(res)}` })
     }
     const model = await this.loader.loadGLTF(url, conf)
     if (!model) {
@@ -142,7 +135,7 @@ export class Scene {
         child.receiveShadow = true
       }
     })
-    // 构建 bvh
+    // construct bvh
     // const staticGenerator = new StaticGeometryGenerator(model.scene)
     // staticGenerator.attributes = ["position"]
     // const generateGeometry = staticGenerator.generate() as THREE.BufferGeometry<THREE.NormalBufferAttributes> & {
@@ -177,7 +170,6 @@ export class Scene {
     const disposeChild = (mesh: THREE.Object3D) => {
       if (mesh instanceof THREE.Mesh) {
         mesh.geometry?.dispose()
-        // 处理材质
         if (mesh.material) {
           const materials = Array.isArray(mesh.material) ? mesh.material : [mesh.material]
           materials.forEach(mat => {
@@ -214,7 +206,7 @@ export class Scene {
     this.initSceneInteraction()
   }
   /**
-   * 发出点击事件,用于debug
+   * emit click event for debug
    */
   private onEmitClick(intersects: THREE.Intersection<THREE.Object3D<THREE.Object3DEventMap>>[]) {
     if (this.clickNotify) {

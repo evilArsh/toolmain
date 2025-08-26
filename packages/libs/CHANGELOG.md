@@ -1,5 +1,16 @@
 # @toolmain/libs
 
+## 1.1.3
+
+### Patch Changes
+
+- fix: fix some problems
+
+  feat: add new components
+
+- Updated dependencies
+  - @toolmain/shared@1.2.3
+
 ## 1.1.2
 
 ### Patch Changes

@@ -1,5 +1,4 @@
 /**
- * @author arshdebian@163.com
  * @description changed origin: https://github.com/browserify/events
  */
 export interface EventBus<T extends Record<string, any>> {

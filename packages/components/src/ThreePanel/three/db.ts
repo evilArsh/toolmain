@@ -64,9 +64,8 @@ export async function getModel(
     if (!res) {
       return fetchRemote(url, onProgress)
     }
-    console.log(`[从IndexedDB加载成功] url:${url}`)
     if (onProgress) {
-      onProgress({ loaded: 100, total: 100, url, describe: "从IndexedDB加载成功" })
+      onProgress({ loaded: 100, total: 100, url, describe: "loaded from indexedDB" })
     }
     return { code: 200, msg: "ok", data: res.data }
   } catch (error) {

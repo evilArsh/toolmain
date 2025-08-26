@@ -2,9 +2,9 @@
 import { RouterView } from "vue-router"
 </script>
 <template>
-  <router-view v-slot="{ Component }">
-    <transition name="slide">
+  <RouterView v-slot="{ Component }">
+    <transition mode="out-in" appear>
       <component :is="Component" />
     </transition>
-  </router-view>
+  </RouterView>
 </template>

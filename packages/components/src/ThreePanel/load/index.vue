@@ -52,7 +52,7 @@ function init() {
   if (!props.world.bot) load.initFinish.bot = true
   if (!props.world.scene) load.initFinish.scene = true
   props.world.core.on("LoadProgress", e => {
-    console.log("[core LoadProgress]", e)
+    // console.log("[core LoadProgress]", e)
     progressHandle(e)
     load.tip = e
   })

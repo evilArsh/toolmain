@@ -42,7 +42,6 @@ watchEffect(() => {
     independent.dataList = Array.from(independent.data.values())
   } else {
     single.data = { ...load.value }
-    // Object.assign(single.data, load.value)
   }
 })
 </script>

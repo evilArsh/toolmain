@@ -3,7 +3,7 @@ import { type GLTF } from "three/addons"
 import { Core } from "./core"
 import { KeyCode } from "./useKeyboard"
 import { LoadOptions } from "./types"
-import { LoaderPure } from "./loaderPure"
+import { Loader } from "./loader"
 import { useCollider } from "./useCollider"
 import { getModel } from "./db"
 import { EventBus, useEvent } from "@toolmain/shared"
@@ -46,7 +46,7 @@ export class Bot {
   mixer: THREE.AnimationMixer | undefined = undefined
   skeleton: THREE.SkeletonHelper | undefined = undefined
   /**
-   * 预设的动作列表，包括权重、名称以及实际的Action对象
+   * preset actions lists,in clude weight,name,and Action instance
    */
   baseActions: BotAction[] = []
 
@@ -56,8 +56,8 @@ export class Bot {
     backward: false,
     left: false,
     right: false,
-    speed: 0, // 移动速度
-    jumpHeight: 0, // 跳跃高度
+    speed: 0,
+    jumpHeight: 0,
     canJump: true,
     jumping: false,
     status: "idle",
@@ -65,7 +65,7 @@ export class Bot {
   }
   initPosition: THREE.Vector3
 
-  readonly loader = new LoaderPure()
+  readonly loader: Loader
   readonly core: Core
   readonly collider?: ReturnType<typeof useCollider>
 
@@ -89,11 +89,12 @@ export class Bot {
     this.initPosition = opts.initPosition ?? new THREE.Vector3(0, 5, 10)
     this.move.speed = opts.speed ?? 4.0
     this.move.jumpHeight = opts.jumpHeight ?? 3
+    this.loader = new Loader()
     this.init()
     this.collider = useCollider(this)
   }
   /**
-   * 加载人物bot
+   * load bot
    */
   async load(gltfPath: string, conf?: LoadOptions): Promise<GLTF | null> {
     let url = gltfPath
@@ -106,16 +107,16 @@ export class Bot {
       })
     })
     this.core.emit("Log", resDb)
-    console.log("[加载 indexedDB bot]", resDb)
+    console.log("[load indexedDB bot]", resDb)
     if (resDb.data) {
       url = URL.createObjectURL(resDb.data)
-      this.core.emit("Log", { code: 100, msg: `[bot加载本地缓存]${url}` })
+      this.core.emit("Log", { code: 100, msg: `[load local bot cache]${url}` })
     } else {
-      this.core.emit("Log", { code: 500, msg: `[加载bot:indexedDB出错]${JSON.stringify(resDb)}` })
+      this.core.emit("Log", { code: 500, msg: `[load bot error in indexedDB]${JSON.stringify(resDb)}` })
     }
     const model = await this.loader.loadGLTF(url, conf)
-    console.log("[加载人物模型]", model)
-    this.core.emit("Log", { code: 100, msg: `加载人物模型:${url}` })
+    console.log("[load bot model]", model)
+    this.core.emit("Log", { code: 100, msg: `load bot model:${url}` })
     if (!model) return null
     this.emit("BotLoaded", model.scene)
     model.scene.traverse(child => {
@@ -139,7 +140,7 @@ export class Bot {
           action: action,
         }
         this.baseActions.push(newAction)
-        // 初始设置状态为idle
+        // set initialized status: idle
         if (clip.name == this.actionMap.idle) {
           newAction.action.play()
           this.currentAction = newAction
@@ -154,7 +155,7 @@ export class Bot {
     return model
   }
   /**
-   * 瞬移人物到指定向量位置
+   * teleport bot to a new position
    */
   teleport(x: number, y: number, z: number) {
     this.collider?.teleport(x, y, z)
@@ -189,8 +190,7 @@ export class Bot {
     this._action(this.baseActions.find(v => v.name === this.actionMap.idle))
   }
   dispose() {
-    // TODO: 释放资源
-    this.core.emit("Log", { code: 100, msg: `Bot 释放资源` })
+    this.core.emit("Log", { code: 100, msg: `Bot resources release` })
   }
 
   // 计算和判断人物移动方向

@@ -21,6 +21,14 @@ import * as tool from "@toolmain/shared"
 const pixel = tool.px(10)
 ```
 
+if you want auto completion, you can update your `tsconfig.json` or `jsconfig.json`:
+
+```json
+"compilerOptions": {
+  "types": ["@toolmain/shared"],
+},
+```
+
 ## 🔎 Overview
 
 clone the core monorepo

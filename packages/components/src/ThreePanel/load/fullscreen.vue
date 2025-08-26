@@ -1,5 +1,4 @@
 <template>
-  <!-- <div v-if="!finish" class="wrap fixed z-100 left-0 right-0 top-0 bottom-0 flex items-center justify-center"> -->
   <div v-show="!finish" class="wrap absolute z-100 left-0 right-0 top-0 bottom-0 flex items-center justify-center">
     <div class="flex flex-col gap-10px w-50% items-center text-30px">
       <el-progress
@@ -48,7 +47,6 @@ watch(
 </script>
 <style lang="scss" scoped>
 .wrap {
-  // background-image: url(/src/assets/img/login-background.png);
   background-size: 100% 100%;
   background-repeat: no-repeat;
 }

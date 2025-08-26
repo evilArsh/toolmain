@@ -3,22 +3,20 @@ import { OrbitControls } from "three/addons"
 import Stats from "three/addons/libs/stats.module.js"
 import { El } from "./el"
 import { useKeyboard } from "./useKeyboard"
-import { Loader } from "./loader"
 import { ThreeEv, World } from "./types"
 import { db } from "./db"
 import { EventBus, useEvent } from "@toolmain/shared"
+import { Loader } from "./loader"
 
-// TODO: 添加ScalePanel等比缩放 或者 window.resize事件
 export class Core {
-  scene: THREE.Scene // 场景
-  camera: THREE.PerspectiveCamera // 相机
-  renderer: THREE.WebGLRenderer // 渲染器
+  scene: THREE.Scene
+  camera: THREE.PerspectiveCamera
+  renderer: THREE.WebGLRenderer
   db = db
-  stats: Stats = new Stats() //fps 统计
-  clock: THREE.Clock = new THREE.Clock() // 时间控制器
-  // prevTime: DOMHighResTimeStamp = performance.now()
-  raycaster: THREE.Raycaster = new THREE.Raycaster() // 射线投射器
-  // pointerCtrls: PointerLockControls // 鼠标控制器
+  stats: Stats = new Stats() //fps statistic
+  clock: THREE.Clock = new THREE.Clock()
+  raycaster: THREE.Raycaster = new THREE.Raycaster()
+  // pointerCtrls: PointerLockControls
   orbitCtrls: OrbitControls
   keyboard = useKeyboard()
   container: El = new El()
@@ -27,7 +25,7 @@ export class Core {
   #uv: EventBus<any> = useEvent()
   constructor() {
     this.keyboard.init()
-    this.loader = new Loader(this)
+    this.loader = new Loader()
     this.scene = new THREE.Scene()
     this.camera = new THREE.PerspectiveCamera()
     this.renderer = new THREE.WebGLRenderer({
@@ -47,9 +45,6 @@ export class Core {
     this.renderer.setSize(width, height)
     this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
   }
-  /**
-   * 资源初始化
-   */
   init(el: HTMLElement) {
     this.container.setEl(el)
     this.scene = this.#initScene()
@@ -141,10 +136,7 @@ export class Core {
       const mouse = new THREE.Vector2()
       mouse.x = (event.clientX / width) * 2 - 1
       mouse.y = -(event.clientY / height) * 2 + 1
-      //将鼠标点击位置的屏幕坐标转换成threejs中的标准坐标
-      //通过鼠标点的位置和当前相机的矩阵计算出raycaster
       this.raycaster.setFromCamera(mouse, this.camera)
-      // 获取raycaster直线和所有模型相交的数组集合
       const intersects = this.raycaster.intersectObjects(this.scene.children)
       this.emit("RendererClick", mouse.clone(), intersects)
     })

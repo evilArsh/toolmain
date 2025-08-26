@@ -1,4 +1,3 @@
-import "virtual:uno.css"
 import useDebugger from "./debugger/useDebugger"
 import useDialog from "./debugger/useDialog"
 import ThreePanel from "./index.vue"

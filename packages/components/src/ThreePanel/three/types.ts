@@ -9,11 +9,11 @@ import { Lights } from "./lights"
 export interface LoadProgressData {
   url: string
   /**
-   * 资源已加载数
+   * loaded resources' number
    */
   loaded: number
   /**
-   * 资源总数
+   * total resources' number
    */
   total: number
   describe?: string
@@ -25,7 +25,7 @@ export type TargetData =
   | { type: "Object"; data: THREE.Object3D<THREE.Object3DEventMap> }
 export interface LoadOptions {
   /**
-   * 独立弹框提示，而不是被新的消息覆盖
+   * mark the loading progress bar is independent
    */
   independent?: boolean
 }
@@ -42,19 +42,19 @@ export interface World {
 
 export interface ThreeEv {
   /**
-   * OrbitControl 控制器 change 事件触发
+   * OrbitControl trigger `change` event
    */
   OrbitChanged: (e: THREE.Event<"change", OrbitControls>) => void
   /**
-   * PointerLockControls lock事件
+   * PointerLockControls trigger `lock` event
    */
   PointerLock: (e: THREE.Event<"lock", PointerLockControls>) => void
   /**
-   * PointerLockControls unlock事件
+   * PointerLockControls trigger `unlock` event
    */
   PointerUnlock: (e: THREE.Event<"unlock", PointerLockControls>) => void
   /**
-   * 调用一次render前触发
+   * triggered before each render loop
    */
   Render: (delta: number) => void
   RendererClick: (
@@ -62,35 +62,35 @@ export interface ThreeEv {
     intersects: THREE.Intersection<THREE.Object3D<THREE.Object3DEventMap>>[]
   ) => void
   /**
-   * 窗口尺寸发生变化触发
+   * triggered when window resize
    */
   Resize: () => void
   /**
-   * 场景和渲染器资源即将被释放
+   * scene and renderer resources will be disposed
    */
   Dispose: () => void
   /**
-   * 全局资源加载进度
+   * global resource loading progress
    */
   LoadStart: (e: LoadParam) => void
   /**
-   * 全局资源加载进度
+   * global resource loading progress
    */
   LoadProgress: (e: LoadParam) => void
   /**
-   * 全局资源加载进度
+   * global resource loading progress
    */
   Loaded: () => void
   /**
-   * 全局资源加载进度
+   * global resource loading progress
    */
   LoadError: (url: string) => void
   /**
-   * 日志
+   * log event
    */
   Log: (msg: { code: number; msg: string; data?: { type?: string; data?: unknown } }) => void
   /**
-   * 相机参数改变
+   * camera params update
    */
   CameraUpdate: (e: {
     position: {
@@ -104,11 +104,11 @@ export interface ThreeEv {
     far?: number
   }) => void
   /**
-   * 用作EventBus的自定义事件
+   * custom event for eventbus
    */
   Custom: (e: { type: string; data?: unknown }) => void
   /**
-   * 点击目标触发,该目标配置了点击一个面的行为:跳转到指定位置或弹出一个url弹窗
+   * when click the specified object
    */
   TargetClick: (e: TargetData) => void
   /**
@@ -124,48 +124,28 @@ export interface ThreeEv {
  */
 export interface RemoteSrc {
   /**
-   * 资源类型
-   *  1:图片 2:视频 3:链接 4:颜色 5:接口
+   * resource type
+   *
+   *  1:image 2:video 3:link 4:color 5:api
    */
   sourceType: number
+  objectName: string
   /**
-   * 插槽ID（名字）
-   */
-  slotId: string
-  /**
-   * 自定义插槽名
-   */
-  slotName?: string
-  /**
-   * 要设置的颜色
+   * color will be used as texture
    */
   color?: string
   /**
-   * 图片/视频地址
+   * image/video address
    */
   fileUrl?: string
   /**
-   * 除了图片/视频外的其它资源
+   * other resource except image/video
    */
   content?: string
 }
 export interface TargetSrc {
-  id: number
-  /**
-   * 跳转位置名称
-   */
-  targetPosition: string
-  /**
-   * 1=>内部菜单跳转
-   *
-   * 2=>外部菜单跳转
-   */
-  jumpType: number
-  /**
-   * url链接或者场景内其它面的name
-   */
-  targetId: string
-  slotId: string
+  objectName: string
+  data: Record<string, any>
 }
 // --- scene
 
@@ -180,27 +160,22 @@ export enum LightType {
 
 export interface LightMeta {
   /**
-   * 必须指定唯一id
+   * unique id is required
    */
   id: string
   type: LightType | string
   color: string | THREE.Color
   groundColor?: string | THREE.Color
-
   /**
-   * helper 会被创建，该字段控制其可视性
+   * light helper will be created, this field control it's visibility
    */
   helper?: boolean
   helperColor?: string
   helperSize?: number
   visible?: boolean
-
   position?: { x: number; y: number; z: number }
   rotate?: { x: number; y: number; z: number }
   name?: string
-  /**
-   * 强度
-   */
   intensity?: number
   distance?: number
   angle?: number
@@ -208,11 +183,11 @@ export interface LightMeta {
   penumbra?: number
   decay?: number
   /**
-   * 是否需要TransformControls
+   * if need TransformControls
    */
   debugger?: boolean
   /**
-   * 调试器模式
+   * debugger mode
    */
   mode?: TransformControlsMode
   [x: string]: any

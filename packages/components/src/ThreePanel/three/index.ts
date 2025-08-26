@@ -1,6 +1,5 @@
 /**
- * @description threejs 通用库
- * @author wxl <arshdebian@163.com>
+ * @description threejs common library
  * @created 2025-08-14
  * @version 1.0.0
  */
@@ -11,7 +10,6 @@ export * from "./el"
 export * from "./index"
 export * from "./lights"
 export * from "./loader"
-export * from "./loaderPure"
 export * from "./scene"
 export * from "./types"
 export * from "./useCollider"
