@@ -1,0 +1,43 @@
+{
+  "name": "@toolmain/jssip",
+  "version": "1.0.6",
+  "description": "",
+  "author": "arshdebian@163.com",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "type": "module",
+  "types": "./dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/evilArsh/toolmain.git",
+    "directory": "packages/jssip"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./*": "./*"
+  },
+  "scripts": {
+    "build": "rollup --config=rollup.config.ts --configPlugin=rollup-plugin-esbuild"
+  },
+  "keywords": [
+    "jssip"
+  ],
+  "dependencies": {
+    "events": "^3.3.0",
+    "jssip": "3.10.0",
+    "ulid": "^2.3.0"
+  },
+  "files": [
+    "*.d.mts",
+    "*.js",
+    "*.mjs"
+  ],
+  "devDependencies": {
+    "@types/events": "^3.0.0"
+  }
+}

@@ -14,7 +14,7 @@
     "test:cov": "vitest run --coverage --project=\"browser (chromium)\" --project=unit",
     "test:browser": "vitest --project=\"browser*\"",
     "test:chromium": "vitest --project=\"browser (chromium)\"",
-    "test:unit": "vitest --project unit"
+    "typecheck": "vue-tsc --noEmit -p tsconfig.json --composite false"
   },
   "keywords": [],
   "author": "arsh <https://github.com/evilArsh>",
@@ -42,6 +42,7 @@
     "@vueuse/core": "catalog:vue",
     "axios": "catalog:tools",
     "commitlint": "catalog:dev",
+    "dayjs": "catalog:tools",
     "element-plus": "catalog:vue",
     "eslint": "catalog:dev",
     "eslint-config-prettier": "catalog:dev",
@@ -67,6 +68,7 @@
     "sass": "catalog:dev",
     "tinyglobby": "catalog:dev",
     "tsx": "catalog:dev",
+    "type-fest": "catalog:tools",
     "typescript": "catalog:dev",
     "typescript-eslint": "catalog:dev",
     "unocss": "catalog:vue",

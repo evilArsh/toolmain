@@ -149,3 +149,4 @@ scripts/**/*.d.ts
 scripts/**/*.d.[cm]ts
 temp
 tsdoc-metadata.json
+!env.d.ts

@@ -1,5 +1,13 @@
 # @toolmain/libs
 
+## 1.1.6
+
+### Patch Changes
+
+- feat: add new libs
+- Updated dependencies
+  - @toolmain/shared@1.2.7
+
 ## 1.1.5
 
 ### Patch Changes

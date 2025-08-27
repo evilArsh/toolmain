@@ -1,5 +1,8 @@
 {
   "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "types": ["unplugin-icons/types/vue"]
+  },
   "include": ["index.ts", "src", "*.mts", "*.ts"],
   "exclude": ["node_modules", "dist", "src/**/*.js", "src/**/*.d.ts", "eslint.config.mts"]
 }

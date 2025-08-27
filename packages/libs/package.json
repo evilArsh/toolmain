@@ -1,6 +1,6 @@
 {
   "name": "@toolmain/libs",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "description": "",
   "license": "MIT",
   "type": "module",
@@ -35,9 +35,11 @@
   },
   "devDependencies": {
     "@babel/types": "catalog:tools",
-    "@types/hash-sum": "catalog:tools"
+    "@types/hash-sum": "catalog:tools",
+    "type-fest": "catalog:tools"
   },
   "peerDependencies": {
-    "vue": "catalog:vue"
+    "vue": "catalog:vue",
+    "element-plus": "catalog:vue"
   }
 }

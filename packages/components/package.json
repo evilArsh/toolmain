@@ -1,6 +1,6 @@
 {
   "name": "@toolmain/components",
-  "version": "1.2.8",
+  "version": "1.2.9",
   "description": "Convient components base on vue3",
   "license": "MIT",
   "type": "module",
@@ -51,6 +51,7 @@
     "three": "catalog:tools",
     "unocss": "catalog:vue",
     "vue": "catalog:vue",
-    "vue-router": "catalog:vue"
+    "vue-router": "catalog:vue",
+    "type-fest": "catalog:tools"
   }
 }
