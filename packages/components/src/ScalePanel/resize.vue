@@ -10,7 +10,7 @@
 </template>
 <script lang="ts" setup>
 import { ScaleConfig } from "./types"
-import useHandle from "./useHandle"
+import { useHandle } from "./useHandle"
 import { useScale } from "./useScale"
 import { MoveType } from "./drag"
 import { computed } from "vue"

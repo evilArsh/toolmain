@@ -1,5 +1,20 @@
 # @toolmain/components
 
+## 1.2.12
+
+### Patch Changes
+
+- fix: fix types
+
+## 1.2.11
+
+### Patch Changes
+
+- fix: fix build problem
+- Updated dependencies
+  - @toolmain/shared@1.2.8
+  - @toolmain/libs@1.1.7
+
 ## 1.2.10
 
 ### Patch Changes

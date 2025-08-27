@@ -1,5 +1,13 @@
 # @toolmain/libs
 
+## 1.1.7
+
+### Patch Changes
+
+- fix: fix build problem
+- Updated dependencies
+  - @toolmain/shared@1.2.8
+
 ## 1.1.6
 
 ### Patch Changes

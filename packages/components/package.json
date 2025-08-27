@@ -1,6 +1,6 @@
 {
   "name": "@toolmain/components",
-  "version": "1.2.10",
+  "version": "1.2.12",
   "description": "Convient components base on vue3",
   "license": "MIT",
   "type": "module",
