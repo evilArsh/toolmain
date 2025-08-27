@@ -77,7 +77,7 @@ export class JSSipWraper extends EventEmitter {
     if (this.ua) {
       // 连接中
       this.ua.on("connecting", (e: UAConnectingEvent) => {
-        const data = vars.cause.resolve({
+        const data = vars.resolve({
           msg: vars.on.ON_CONNECTING,
           uri: this.c.sip.uri,
           id: this.c.sip.sipWorkerid,
@@ -93,7 +93,7 @@ export class JSSipWraper extends EventEmitter {
       })
       // 已连接
       this.ua.on("connected", (_e: ConnectedEvent) => {
-        const data = vars.cause.resolve({
+        const data = vars.resolve({
           msg: vars.on.ON_CONNECTED,
           code: 200,
           id: this.c.sip.sipWorkerid,
@@ -103,7 +103,7 @@ export class JSSipWraper extends EventEmitter {
       })
       // 已断开-注册/取消注册不会触发该事件
       this.ua.on("disconnected", (e: DisconnectEvent) => {
-        const data = vars.cause.resolve({
+        const data = vars.resolve({
           msg: vars.on.ON_DISCONNECTED,
           code: 500,
           uri: this.c.sip.uri,
@@ -115,7 +115,7 @@ export class JSSipWraper extends EventEmitter {
       })
       // 已注册
       this.ua.on("registered", (e: RegisteredEvent) => {
-        const data = vars.cause.resolve({
+        const data = vars.resolve({
           msg: vars.on.ON_REGISTERED,
           uri: this.c.sip.uri,
           id: this.c.sip.sipWorkerid,
@@ -127,7 +127,7 @@ export class JSSipWraper extends EventEmitter {
       })
       // 未注册
       this.ua.on("unregistered", (e: UnRegisteredEvent) => {
-        const data = vars.cause.resolve({
+        const data = vars.resolve({
           msg: vars.on.ON_UNREGISTERED,
           uri: this.c.sip.uri,
           id: this.c.sip.sipWorkerid,
@@ -152,12 +152,12 @@ export class JSSipWraper extends EventEmitter {
         } else {
           // todo
         }
-        const data = vars.cause.resolve(res)
+        const data = vars.resolve(res)
         this.dispatch(vars.on.ON_REGISTRATIONFAILED, data)
       })
       // 注册过期
       this.ua.on("registrationExpiring", (_e: any) => {
-        vars.cause.resolve({
+        vars.resolve({
           msg: vars.on.ON_REGISTRATIONEXPIRING,
           id: this.c.sip.sipWorkerid,
           uri: this.c.sip.uri,
@@ -168,7 +168,7 @@ export class JSSipWraper extends EventEmitter {
       })
       // 为传入或传出的 OPTIONS 请求触发。
       this.ua.on("newOptions", (e: IncomingOptionsEvent | OutgoingOptionsEvent) => {
-        vars.cause.resolve({
+        vars.resolve({
           msg: vars.on.ON_NEWOPTIONS,
           code: 200,
           uri: this.c.sip.uri,
@@ -179,7 +179,7 @@ export class JSSipWraper extends EventEmitter {
       })
       // 为传入的对话 NOTIFY 请求触发。
       this.ua.on("sipEvent", (e: { event: any; request: IncomingRequest }) => {
-        vars.cause.resolve({
+        vars.resolve({
           msg: vars.on.ON_SIPEVENT,
           code: 200,
           uri: this.c.sip.uri,
@@ -202,7 +202,7 @@ export class JSSipWraper extends EventEmitter {
           sessionOrigin,
           session: e.session,
         }
-        const data = vars.cause.resolve({
+        const data = vars.resolve({
           id: this.c.sip.sipWorkerid,
           uri: this.c.sip.uri,
           msg: vars.on.ON_NEWRTCSESSION,
@@ -230,7 +230,7 @@ export class JSSipWraper extends EventEmitter {
         })
         // 连接中
         e.session.on("connecting", (_e: ConnectingEvent) => {
-          const data = vars.cause.resolve({
+          const data = vars.resolve({
             msg: vars.on.ON_SESSTION_CONNECTING,
             id: this.c.sip.sipWorkerid,
             uri: this.c.sip.uri,
@@ -243,7 +243,7 @@ export class JSSipWraper extends EventEmitter {
         // 响铃中
         e.session.on("progress", (e: IncomingEvent | OutgoingEvent) => {
           this.c.call.isRrequestTimeout = false
-          const data = vars.cause.resolve({
+          const data = vars.resolve({
             msg: vars.on.ON_SESSION_PROGRESS,
             uri: this.c.sip.uri,
             id: this.c.sip.sipWorkerid,
@@ -259,7 +259,7 @@ export class JSSipWraper extends EventEmitter {
         // 连接已接受
         e.session.on("accepted", (e: IncomingEvent | OutgoingEvent) => {
           try {
-            const data = vars.cause.resolve({
+            const data = vars.resolve({
               msg: vars.on.ON_SESSTION_ACCEPTED,
               uri: this.c.sip.uri,
               id: this.c.sip.sipWorkerid,
@@ -272,7 +272,7 @@ export class JSSipWraper extends EventEmitter {
             })
             this.dispatchSession(data)
           } catch (_e) {
-            const data = vars.cause.resolve({
+            const data = vars.resolve({
               msg: vars.on.ON_SESSION_ANSWER_FAILED,
               cause: vars.on.ON_SESSION_ANSWER_FAILED,
               code: 500,
@@ -286,7 +286,7 @@ export class JSSipWraper extends EventEmitter {
         })
         // 接通,在这一步可以处理音频播放
         e.session.on("confirmed", (e: IncomingAckEvent | OutgoingAckEvent) => {
-          const data = vars.cause.resolve({
+          const data = vars.resolve({
             msg: vars.on.ON_SESSTION_CONFIRMED,
             uri: this.c.sip.uri,
             id: this.c.sip.sipWorkerid,
@@ -299,7 +299,7 @@ export class JSSipWraper extends EventEmitter {
         })
         // 结束
         e.session.on("ended", (e: EndEvent) => {
-          const data = vars.cause.resolve({
+          const data = vars.resolve({
             msg: vars.on.ON_SESSTION_ENDED,
             uri: this.c.sip.uri,
             id: this.c.sip.sipWorkerid,
@@ -365,16 +365,16 @@ export class JSSipWraper extends EventEmitter {
              * 连接超时，服务器未响应
              */
             data.msg = vars.on.ON_SESSION_TIMEOUT
-            this.dispatchSession(vars.cause.resolve(data))
+            this.dispatchSession(vars.resolve(data))
             this.c.call.isRrequestTimeout = false
           } else {
-            this.dispatchSession(vars.cause.resolve(data))
+            this.dispatchSession(vars.resolve(data))
             this.c.call.isRrequestTimeout = false
           }
         })
         // 保持
         e.session.on("hold", (e: HoldEvent) => {
-          const data = vars.cause.resolve({
+          const data = vars.resolve({
             msg: vars.on.ON_HOLD,
             uri: this.c.sip.uri,
             id: this.c.sip.sipWorkerid,
@@ -387,7 +387,7 @@ export class JSSipWraper extends EventEmitter {
         })
         // 继续
         e.session.on("unhold", (e: HoldEvent) => {
-          const data = vars.cause.resolve({
+          const data = vars.resolve({
             msg: vars.on.ON_RESUME,
             uri: this.c.sip.uri,
             id: this.c.sip.sipWorkerid,
@@ -400,7 +400,7 @@ export class JSSipWraper extends EventEmitter {
         })
         // 静音
         e.session.on("muted", (e: MediaConstraints) => {
-          const data = vars.cause.resolve({
+          const data = vars.resolve({
             msg: vars.on.ON_MUTE,
             uri: this.c.sip.uri,
             id: this.c.sip.sipWorkerid,
@@ -413,7 +413,7 @@ export class JSSipWraper extends EventEmitter {
         })
         // 取消静音
         e.session.on("unmuted", (e: MediaConstraints) => {
-          const data = vars.cause.resolve({
+          const data = vars.resolve({
             msg: vars.on.ON_UNMUTE,
             uri: this.c.sip.uri,
             id: this.c.sip.sipWorkerid,

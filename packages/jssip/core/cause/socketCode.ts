@@ -102,7 +102,7 @@ export const socketCode: Record<string, string[]> = {
    */
   1015: ["TLS handshake", "websocket_TLS 证书错误"],
 }
-export const toCN = (code?: number): string => {
+export const socketToCN = (code?: number): string => {
   if (!code) {
     return ""
   }

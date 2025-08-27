@@ -2,7 +2,7 @@ import * as JsSIP from "jssip"
 import { isOnEvent, isSession, onToCN, Originator } from "./on"
 import { sipCode } from "./sipCode"
 import { type CauseData } from "../type/jssip"
-import * as socket from "./socketCode"
+import { isSocketCode, socketToCN } from "./socketCode"
 
 /**
  * https://jssip.net/documentation/3.10.x/api/causes/
@@ -121,8 +121,8 @@ const toCN = (cause?: string, sCode?: number): string => {
   if (cause) {
     if (isSipErrorCause(cause) || JsSIP.C.causes.SIP_FAILURE_CODE === cause) {
       return sipCodeCN(cause, sCode)
-    } else if (socket.isSocketCode(sCode)) {
-      return socket.toCN(sCode)
+    } else if (isSocketCode(sCode)) {
+      return socketToCN(sCode)
     } else if (isOnEvent(cause)) {
       return onToCN(cause)
     }

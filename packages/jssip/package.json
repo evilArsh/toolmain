@@ -1,6 +1,6 @@
 {
   "name": "@toolmain/jssip",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "",
   "author": "arshdebian@163.com",
   "license": "MIT",
@@ -37,4 +37,3 @@
     "@types/events": "^3.0.0"
   }
 }
-

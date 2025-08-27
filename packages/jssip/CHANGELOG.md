@@ -1,5 +1,11 @@
 # @toolmain/jssip
 
+## 1.0.9
+
+### Patch Changes
+
+- fix types
+
 ## 1.0.7
 
 ### Patch Changes
