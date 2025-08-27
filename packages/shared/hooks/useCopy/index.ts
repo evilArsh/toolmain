@@ -1,7 +1,7 @@
 import { useClipboard } from "@vueuse/core"
 import { ref } from "vue"
 
-export function useCopy() {
+export function useCopy(text?: string) {
   const { copy } = useClipboard()
   const copied = ref(false)
   async function onCopy(data?: string) {
@@ -16,6 +16,7 @@ export function useCopy() {
       copied.value = false
     }
   }
+  text && onCopy(text)
   return {
     onCopy,
     copied,
