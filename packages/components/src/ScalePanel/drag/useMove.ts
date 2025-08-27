@@ -1,7 +1,7 @@
 import { useEvent } from "@toolmain/shared"
 import type { Dir, MoveOptions, DragAttr, EventMap, MoveType } from "./types"
-import useTarget from "./useTarget"
-export default function (): MoveType {
+import { useTarget } from "./useTarget"
+export function useMove(): MoveType {
   const ev = useEvent()
   let moving = false
   const opt: MoveOptions = {

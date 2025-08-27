@@ -1,8 +1,7 @@
-import { CallBackFn } from "@toolmain/shared"
+import { CallBackFn, isUndefined } from "@toolmain/shared"
 import type { ComponentProvider, RawComponent } from "../types"
 import { PropsGenerator, Props } from "./types"
 import { ValueType, PropsType } from "./types"
-import { isUndefined } from "@toolmain/shared"
 import { ref } from "vue"
 
 export function parseProp(propKey: string, prop: Props, parser: PropsGenerator, provider: ComponentProvider): unknown {

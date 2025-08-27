@@ -1,4 +1,3 @@
-import useMove from "./useMove"
-
+export * from "./useMove"
 export * from "./types"
-export { useMove }
+export * from "./useTarget"

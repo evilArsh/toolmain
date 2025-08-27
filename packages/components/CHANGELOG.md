@@ -1,5 +1,23 @@
 # @toolmain/components
 
+## 1.2.15
+
+### Patch Changes
+
+- fix: fix types
+
+## 1.2.14
+
+### Patch Changes
+
+- fix: fix types
+
+## 1.2.13
+
+### Patch Changes
+
+- fix: fix types
+
 ## 1.2.12
 
 ### Patch Changes

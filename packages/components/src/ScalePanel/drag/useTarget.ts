@@ -2,7 +2,7 @@ import { useEvent } from "@toolmain/shared"
 import { initDragAttr, initRect } from "./types"
 import type { DragAttr, Rect, Target } from "./types"
 
-export default (): Target => {
+export function useTarget(): Target {
   let ele: HTMLElement | undefined | null
   let rect: Rect = initRect()
   let attr: DragAttr = initDragAttr()
