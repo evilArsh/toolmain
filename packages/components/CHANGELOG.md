@@ -1,5 +1,11 @@
 # @toolmain/components
 
+## 1.2.10
+
+### Patch Changes
+
+- refactor(components): adjust import statements and expose useHandle
+
 ## 1.2.9
 
 ### Patch Changes
