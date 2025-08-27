@@ -3,3 +3,4 @@ export { ScalePanel }
 export * from "./types"
 export * from "./useScale"
 export * from "./types"
+export * from "./useHandle"

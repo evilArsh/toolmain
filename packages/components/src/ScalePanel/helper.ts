@@ -2,7 +2,7 @@ import { DragOffset, ScaleConfig } from "./types"
 import { MoveOptions, MoveType } from "./drag/types"
 import { ref, ShallowRef, toValue, unref, watch } from "vue"
 import type { Ref, MaybeRef, Reactive } from "vue"
-import useHandle, { Status } from "./useHandle"
+import { useHandle, Status } from "./useHandle"
 import { useDebounceFn } from "@vueuse/core"
 import { CSSProperties, getStyleValue, isBoolean, isNumber, toNumber } from "@toolmain/shared"
 export const values = (style?: CSSProperties): Record<string, string | number | undefined> => {

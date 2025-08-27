@@ -24,7 +24,7 @@ export enum HandleEv {
   AFTER_HIDE = "after_hide",
   AFTER_STICK = "after_stick",
 }
-export default (data: {
+export const useHandle = (data: {
   config: Ref<ScaleConfig>
   targetEle: Readonly<ShallowRef<HTMLElement | null>>
   dragOffset: Reactive<DragOffset>
