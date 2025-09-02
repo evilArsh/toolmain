@@ -40,7 +40,7 @@
 import { ElInput, ElSlider, ElScrollbar, ElCollapse, ElCollapseItem, ElCard, ElText } from "element-plus"
 import { cloneDeep } from "@toolmain/shared"
 import type { ComponentLibrary, ComponentProvider, ComponentUIGroup, DeliverParam, RawComponent } from "../../types"
-import { computed, ref } from "vue";
+import { computed, ref } from "vue"
 const props = defineProps<{
   lib: ComponentLibrary
   provider: ComponentProvider

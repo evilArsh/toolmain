@@ -9,6 +9,7 @@ import pluginVue from "eslint-plugin-vue"
 import pluginPrettier from "eslint-plugin-prettier"
 import configPrettier from "eslint-config-prettier/flat"
 import pluginPrettierRecommand from "eslint-plugin-prettier/recommended"
+// @ts-expect-error ts-ignore
 import pluginPromise from "eslint-plugin-promise"
 import pluginImport from "eslint-plugin-import"
 // import pluginN from "eslint-plugin-n"

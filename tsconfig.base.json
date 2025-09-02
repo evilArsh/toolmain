@@ -23,12 +23,11 @@
     "forceConsistentCasingInFileNames": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "types": ["vite/client"],
     "paths": {
       "@toolmain/components": ["./packages/components/index.ts"],
       "@toolmain/shared": ["./packages/shared/index.ts"],
       "@toolmain/libs": ["./packages/libs/index.ts"]
     }
   },
-  "exclude": ["node_modules", "**/**.md", "**/dist"]
+  "exclude": ["**/node_modules", "**/*.md", "**/dist"]
 }

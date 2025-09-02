@@ -13,4 +13,3 @@ for (const item of items) {
   console.log(`Removing ${item}`)
   await fs.rm(item, { force: true, recursive: true })
 }
-

@@ -36,10 +36,12 @@
   "devDependencies": {
     "@babel/types": "catalog:tools",
     "@types/hash-sum": "catalog:tools",
-    "type-fest": "catalog:tools"
+    "type-fest": "catalog:tools",
+    "vue": "catalog:vue"
   },
   "peerDependencies": {
     "vue": "catalog:vue",
     "element-plus": "catalog:vue"
   }
 }
+

@@ -16,10 +16,9 @@ const __dirname = dirname(fileURLToPath(import.meta.url))
 const defaultConfig = (_mode: string, _command: string): UserConfig => {
   const config: UserConfig = {
     base: "/",
-    root: "./",
     server: {
       host: "0.0.0.0",
-      port: 8080,
+      port: 9000,
       strictPort: true,
       open: false,
     },
@@ -55,9 +54,7 @@ const defaultConfig = (_mode: string, _command: string): UserConfig => {
       Components({
         resolvers: [
           IconsResolver(),
-          ElementPlusResolver({
-            importStyle: "sass",
-          }),
+          ElementPlusResolver(),
         ],
         dts: false,
         globs: ["./src/components/*/index.vue"],

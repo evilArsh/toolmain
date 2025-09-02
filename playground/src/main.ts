@@ -1,11 +1,9 @@
 import { createApp } from "vue"
 import { createPinia } from "pinia"
-import "element-plus/theme-chalk/src/message-box.scss"
-import "element-plus/theme-chalk/src/message.scss"
-import "element-plus/theme-chalk/src/notification.scss"
 import "virtual:uno.css"
-import App from "./index.vue"
-import router from "./routes"
+import "element-plus/dist/index.css"
+import App from "./app.vue"
+import router from "./routes/index"
 import { useHtmlFontSize } from "@toolmain/shared"
 const app = createApp(App)
 useHtmlFontSize(app)

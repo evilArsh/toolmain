@@ -138,6 +138,10 @@ components.d.ts
 
 stats.html
 cache
+playground/**/*.js
+playground/**/*.[cm]js
+playground/**/*.d.ts
+playground/**/*.d.[cm]ts
 packages/**/*.js
 packages/**/*.[cm]js
 packages/**/*.d.ts
@@ -150,3 +154,4 @@ scripts/**/*.d.[cm]ts
 temp
 tsdoc-metadata.json
 !env.d.ts
+eslint.config.mjs
