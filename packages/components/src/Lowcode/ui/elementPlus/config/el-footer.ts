@@ -1,6 +1,6 @@
 import { ComponentLabel, PropsType, RawComponent } from "../../../types"
 
-export default {
+export const ElFooter: RawComponent = {
   label: "el-footer",
   desc: "element-plus@el-footer",
   props: {
@@ -17,4 +17,4 @@ export default {
       props: {},
     },
   },
-} as RawComponent
+}

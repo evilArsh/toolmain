@@ -33,6 +33,7 @@ export type ComponentEvents = {
    */
   args: string[]
   returnType?: string
+  version?: string
 }
 
 /**

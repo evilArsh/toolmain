@@ -1,5 +1,5 @@
 import { ComponentLabel, PropsType, RawComponent } from "../../../types"
-export default {
+export const ElSelectConfig: RawComponent = {
   label: "el-select",
   desc: "element-plus@el-select",
   props: {
@@ -314,7 +314,7 @@ export default {
       label: ComponentLabel.NULL,
       desc: "option 组件列表",
       props: {},
-      children: ["el-option", "el-option-group"],
+      // children: ["el-option", "el-option-group"],
     },
     header: {
       label: ComponentLabel.NULL,
@@ -357,4 +357,4 @@ export default {
       version: "2.7.4",
     },
   },
-} as RawComponent
+}

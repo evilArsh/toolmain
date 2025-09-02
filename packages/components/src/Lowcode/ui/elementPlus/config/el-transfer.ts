@@ -1,5 +1,5 @@
 import { ComponentLabel, PropsType, RawComponent } from "../../../types"
-export default {
+export const ElTransfer: RawComponent = {
   label: "el-transfer",
   desc: "element-plus@el-transfer",
   props: {
@@ -123,4 +123,4 @@ export default {
       version: "2.9.0",
     },
   },
-} as RawComponent
+}

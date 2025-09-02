@@ -1,6 +1,6 @@
 import { PropsType, ComponentLabel, RawComponent } from "../../../types"
 
-export default {
+export const ElTextComponent: RawComponent = {
   label: "el-text",
   desc: "element-plus@el-text",
   props: {
@@ -45,4 +45,4 @@ export default {
       props: {},
     },
   },
-} as RawComponent
+}

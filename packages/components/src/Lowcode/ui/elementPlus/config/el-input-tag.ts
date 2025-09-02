@@ -1,6 +1,6 @@
 import { ComponentLabel, PropsType, RawComponent } from "../../../types"
 
-export default {
+export const ElInputTag: RawComponent = {
   label: "el-input-tag",
   desc: "element-plus@el-input-tag",
   props: {
@@ -161,4 +161,4 @@ export default {
       props: {},
     },
   },
-} as RawComponent
+}

@@ -1,6 +1,6 @@
 import { PropsType, ComponentLabel, RawComponent } from "../../../types"
 
-export default {
+export const ElTree: RawComponent = {
   label: "el-tree",
   desc: "element-plus@el-tree",
   props: {
@@ -217,4 +217,4 @@ export default {
       desc: "拖拽成功完成时触发的事件。共四个参数，依次为：被拖拽节点对应的 Node、结束拖拽时最后进入的节点、被拖拽节点的放置位置（before、after、inner）、event",
     },
   },
-} as RawComponent
+}

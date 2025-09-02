@@ -155,3 +155,6 @@ temp
 tsdoc-metadata.json
 !env.d.ts
 eslint.config.mjs
+eslint.config.d.mts
+./*.d.ts
+./*.d.[cm]ts

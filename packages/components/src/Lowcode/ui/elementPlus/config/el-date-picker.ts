@@ -1,6 +1,6 @@
 import { ComponentLabel, PropsType, RawComponent } from "../../../types"
 
-export default {
+export const ElDatePicker: RawComponent = {
   label: "el-date-picker",
   desc: "element-plus@el-date-picker",
   props: {
@@ -107,18 +107,6 @@ export default {
       desc: "可选，绑定值的格式。不指定则绑定值为 Date 对象",
       allowEmpty: true,
     },
-    id: {
-      type: [PropsType.String, PropsType.JSON],
-      desc: "等价于原生 input id 属性",
-      allowEmpty: true,
-      finalType: PropsType.String,
-    },
-    name: {
-      type: [PropsType.String, PropsType.JSON],
-      desc: "等价于原生 input name 属性",
-      default: "",
-      finalType: PropsType.String,
-    },
     "unlink-panels": {
       type: PropsType.Boolean,
       desc: "在范围选择器里取消两个日期面板之间的联动",
@@ -126,15 +114,14 @@ export default {
     },
     "prefix-icon": {
       type: PropsType.Icon,
-      desc: "自定义前缀图标 如果 type 的值是 TimeLikeType，那么就是 Clock，不然就是 Calendar",
+      desc: "自定义前缀图标",
       allowEmpty: true,
     },
-    // "clear-icon": {
-    //   type: [PropsType.String, PropsType.JSON],
-    //   desc: "自定义清除图标",
-    //   default: "CircleClose",
-    //   finalType: PropsType.String,
-    // },
+    "clear-icon": {
+      type: PropsType.Icon,
+      desc: "自定义清除图标",
+      allowEmpty: true,
+    },
     "validate-event": {
       type: PropsType.Boolean,
       desc: "是否触发表单验证",
@@ -142,66 +129,75 @@ export default {
     },
     "disabled-date": {
       type: PropsType.Function,
-      desc: "一个用来判断该日期是否被禁用的函数，接受一个 Date 对象作为参数。应该返回一个 Boolean 值。",
+      desc: "一个用来判断该日期是否被禁用的函数，接受一个 Date 对象作为参数。 应该返回一个 Boolean 值",
       allowEmpty: true,
-      args: ["data"],
+      args: ["date"],
       returnType: "boolean",
-    },
-    shortcuts: {
-      type: PropsType.JSON,
-      desc: "设置快捷选项，需要传入数组对象",
-      default: JSON.stringify([]),
     },
     "cell-class-name": {
       type: PropsType.Function,
       desc: "设置自定义类名",
       allowEmpty: true,
-      args: ["data"],
-      returnType: "boolean",
+      args: ["date"],
+      returnType: "string",
     },
     teleported: {
       type: PropsType.Boolean,
-      desc: "是否将 date-picker 的下拉列表插入至 body 元素",
+      desc: "是否将 popover 的下拉列表渲染至 body 下",
       default: true,
     },
-    "empty-values": {
-      type: PropsType.JSON,
-      desc: "组件的空值配置 参考 config-provider",
-      default: JSON.stringify([]),
-      version: "2.7.0",
-    },
-    "value-on-clear": {
-      type: [PropsType.String, PropsType.Number, PropsType.Boolean, PropsType.Function],
-      desc: "清空选项的值 参考 config-provider",
+    "aria-label": {
+      type: PropsType.String,
+      desc: "等价于原生 input aria-label 属性",
       allowEmpty: true,
-      version: "2.7.0",
-      finalType: PropsType.String,
+      version: "2.7.2",
     },
-    "fallback-placements": {
+    id: {
       type: PropsType.JSON,
-      desc: "Tooltip 可用的 positions 请查看 popper.js 文档",
+      desc: "等价于原生 input id 属性",
       allowEmpty: true,
-      version: "2.8.4",
+      version: "2.7.2",
     },
-    placement: {
-      type: PropsType.Enum,
-      enums: [
-        "top",
-        "top-start",
-        "top-end",
-        "bottom",
-        "bottom-start",
-        "bottom-end",
-        "left",
-        "left-start",
-        "left-end",
-        "right",
-        "right-start",
-        "right-end",
-      ],
-      desc: "下拉框出现的位置",
-      default: "bottom",
-      version: "2.8.4",
+    name: {
+      type: PropsType.JSON,
+      desc: "等价于原生 input name 属性",
+      allowEmpty: true,
+      version: "2.7.2",
+    },
+    "popper-effect": {
+      type: [PropsType.Enum, PropsType.String],
+      enums: ["dark", "light"],
+      desc: "DatePicker 下拉框的弹出效果",
+      default: "light",
+      finalType: PropsType.Enum,
+    },
+    shortcuts: {
+      type: PropsType.JSON,
+      desc: "设置快捷选项，需要传入数组对象",
+      allowEmpty: true,
+    },
+    "arrow-control": {
+      type: PropsType.Boolean,
+      desc: "是否使用箭头进行选择，仅在 type 为 'date' 时生效",
+      default: false,
+    },
+    label: {
+      type: PropsType.String,
+      desc: "等价于原生 input aria-label 属性",
+      allowEmpty: true,
+      version: "2.8.5",
+    },
+  },
+  slots: {
+    default: {
+      label: ComponentLabel.NULL,
+      desc: "自定义内容",
+      props: {},
+    },
+    "range-separator": {
+      label: ComponentLabel.NULL,
+      desc: "自定义分隔符",
+      props: {},
     },
   },
   events: {
@@ -212,70 +208,30 @@ export default {
     },
     blur: {
       name: "blur",
-      desc: "在组件 Input 失去焦点时触发",
+      desc: "当选择器的输入框失去焦点时触发",
       args: ["event"],
     },
     focus: {
       name: "focus",
-      desc: "在组件 Input 获得焦点时触发",
+      desc: "当选择器的输入框获得焦点时触发",
       args: ["event"],
     },
-    clear: {
-      name: "clear",
-      desc: "可清空的模式下用户点击清空按钮时触发",
-      args: [],
-      version: "2.7.7",
-    },
-    "calendar-change": {
-      name: "calendar-change",
-      desc: "在日历所选日期更改时触发",
+    calendar: {
+      name: "calendar",
+      desc: "在日历所表示的日期更改时触发。仅在 type 为 'week' 时生效",
       args: ["value"],
+      version: "2.8.5",
     },
     "panel-change": {
       name: "panel-change",
       desc: "当日期面板改变时触发",
-      args: ["value"],
+      args: ["value", "mode", "view"],
+      version: "2.8.5",
     },
     "visible-change": {
       name: "visible-change",
       desc: "当 DatePicker 的下拉列表出现/消失时触发",
-      args: ["visible"],
+      args: ["visibility"],
     },
   },
-  slots: {
-    default: {
-      label: ComponentLabel.NULL,
-      desc: "自定义单元格内容",
-      props: {},
-    },
-    "range-separator": {
-      label: ComponentLabel.NULL,
-      desc: "自定义范围分割符内容",
-      props: {},
-    },
-    "prev-month": {
-      label: ComponentLabel.NULL,
-      desc: "上个月的图标",
-      props: {},
-      version: "2.8.0",
-    },
-    "next-month": {
-      label: ComponentLabel.NULL,
-      desc: "下个月的图标",
-      props: {},
-      version: "2.8.0",
-    },
-    "prev-year": {
-      label: ComponentLabel.NULL,
-      desc: "上一年图标",
-      props: {},
-      version: "2.8.0",
-    },
-    "next-year": {
-      label: ComponentLabel.NULL,
-      desc: "下一年图标",
-      props: {},
-      version: "2.8.0",
-    },
-  },
-} as RawComponent
+}

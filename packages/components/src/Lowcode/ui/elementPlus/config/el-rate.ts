@@ -1,5 +1,6 @@
 import { PropsType, RawComponent } from "../../../types"
-export default {
+
+export const ElRate: RawComponent = {
   label: "el-rate",
   desc: "element-plus@el-rate",
   props: {
@@ -120,4 +121,4 @@ export default {
     },
   },
   slots: {},
-} as RawComponent
+}

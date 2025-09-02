@@ -1,7 +1,7 @@
 import { ComponentLabel, PropsType, RawComponent } from "../../../types"
 import { uniqueId } from "@toolmain/shared"
 
-export default {
+export const ElSubMenuComponent: RawComponent = {
   label: "el-sub-menu",
   desc: "element-plus@el-sub-menu",
   props: {
@@ -74,4 +74,4 @@ export default {
       props: {},
     },
   },
-} as RawComponent
+}

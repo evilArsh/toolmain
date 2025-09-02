@@ -1,5 +1,5 @@
 import { ComponentLabel, PropsType, RawComponent } from "../../../types"
-export default {
+export const ElSelectV2: RawComponent = {
   label: "el-select-v2",
   desc: "element-plus@el-select-v2",
   props: {
@@ -363,4 +363,4 @@ export default {
       version: "2.7.4",
     },
   },
-} as RawComponent
+}

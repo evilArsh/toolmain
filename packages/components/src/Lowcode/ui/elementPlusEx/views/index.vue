@@ -25,7 +25,7 @@
 import { cloneDeep } from "@toolmain/shared"
 import { ElInput, ElSlider, ElScrollbar, ElCard } from "element-plus"
 import type { ComponentLibrary, ComponentProvider, DeliverParam, RawComponent } from "../../../types"
-import { computed, ref } from "vue";
+import { computed, ref } from "vue"
 const props = defineProps<{
   lib: ComponentLibrary
   provider: ComponentProvider

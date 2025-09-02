@@ -1,5 +1,6 @@
 import { ComponentLabel, PropsType, RawComponent } from "../../../types"
-export default {
+
+export const ElRadioConfig: RawComponent = {
   label: "el-radio",
   desc: "element-plus@el-radio",
   props: {
@@ -58,4 +59,4 @@ export default {
       props: {},
     },
   },
-} as RawComponent
+}

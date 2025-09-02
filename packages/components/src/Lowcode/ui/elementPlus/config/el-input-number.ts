@@ -1,6 +1,6 @@
 import { ComponentLabel, PropsType, RawComponent } from "../../../types"
 
-export default {
+export const ElInputNumber: RawComponent = {
   label: "el-input-number",
   desc: "element-plus@el-input-number",
   props: {
@@ -99,27 +99,13 @@ export default {
   slots: {
     "decrease-icon": {
       label: ComponentLabel.NULL,
-      desc: "自定义输入框按钮减少图标",
+      desc: "自定义递减图标",
       props: {},
-      version: "2.6.3",
     },
     "increase-icon": {
       label: ComponentLabel.NULL,
-      desc: "自定义输入框按钮增加图标",
+      desc: "自定义递增图标",
       props: {},
-      version: "2.6.3",
-    },
-    prefix: {
-      label: ComponentLabel.NULL,
-      desc: "输入框头部内容",
-      props: {},
-      version: "2.8.4",
-    },
-    suffix: {
-      label: ComponentLabel.NULL,
-      desc: "输入框尾部内容",
-      props: {},
-      version: "2.8.4",
     },
   },
   events: {
@@ -138,5 +124,10 @@ export default {
       desc: "在组件 Input 获得焦点时触发",
       args: ["event"],
     },
+    input: {
+      name: "input",
+      desc: "在 Input 值改变时触发",
+      args: ["value"],
+    },
   },
-} as RawComponent
+}

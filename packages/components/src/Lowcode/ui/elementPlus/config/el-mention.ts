@@ -1,7 +1,7 @@
 import { ComponentLabel, PropsType, RawComponent } from "../../../types"
-import input from "./el-input"
+import { ElInput } from "./el-input"
 import { cloneDeep } from "@toolmain/shared"
-export default {
+export const ElMention: RawComponent = {
   label: "el-mention",
   desc: "element-plus@el-mention",
   props: {
@@ -76,7 +76,7 @@ export default {
       desc: "popper.js 参数，参考 popper.js 文档",
       allowEmpty: true,
     },
-    ...cloneDeep(input.props),
+    ...cloneDeep(ElInput.props),
   },
   events: {
     search: {
@@ -89,7 +89,7 @@ export default {
       desc: "当用户选择选项时触发",
       args: ["option", "prefix"],
     },
-    ...cloneDeep(input.events),
+    ...cloneDeep(ElInput.events),
   },
   slots: {
     label: {
@@ -112,6 +112,6 @@ export default {
       desc: "下拉列表底部的内容",
       props: {},
     },
-    ...cloneDeep(input.slots),
+    ...cloneDeep(ElInput.slots),
   },
-} as RawComponent
+}

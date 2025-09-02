@@ -14,7 +14,9 @@
     "test:cov": "vitest run --coverage --project=\"browser (chromium)\" --project=unit",
     "test:browser": "vitest --project=\"browser*\"",
     "test:chromium": "vitest --project=\"browser (chromium)\"",
-    "typecheck": "vue-tsc --noEmit -p tsconfig.json --composite false"
+    "typecheck": "vue-tsc --noEmit -p tsconfig.json --composite false",
+    "lint": "eslint",
+    "lint-fix": "eslint --fix"
   },
   "keywords": [],
   "author": "arsh <https://github.com/evilArsh>",

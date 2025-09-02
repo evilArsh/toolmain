@@ -1,6 +1,6 @@
 import { ComponentLabel, PropsType, RawComponent } from "../../../types"
 
-export default {
+export const ElCascader: RawComponent = {
   label: "el-cascader",
   desc: "element-plus@el-cascader",
   props: {
@@ -98,95 +98,12 @@ export default {
       type: PropsType.Enum,
       enums: ["success", "info", "warning", "danger"],
       desc: "标签类型",
-      default: "info",
-    },
-    "tag-effect": {
-      type: PropsType.Enum,
-      enums: ["dark", "light", "plain"],
-      desc: "tag effect",
-      default: "light",
-      version: "2.7.8",
+      allowEmpty: true,
     },
     "validate-event": {
       type: PropsType.Boolean,
-      desc: "输入时是否触发表单的校验",
+      desc: "是否触发表单验证",
       default: true,
-    },
-    "max-collapse-tags": {
-      type: PropsType.Number,
-      desc: "需要显示的 Tag 的最大数量 只有当 collapse-tags 设置为 true 时才会生效",
-      default: 1,
-      version: "2.3.10",
-    },
-    "empty-values": {
-      type: PropsType.JSON,
-      desc: "组件的空值配置 参考config-provider",
-      allowEmpty: true,
-      version: "2.7.0",
-    },
-    "value-on-clear": {
-      type: [PropsType.String, PropsType.Number, PropsType.Boolean, PropsType.Function],
-      desc: "清空选项的值 参考 config-provider",
-      allowEmpty: true,
-      version: "2.7.0",
-      finalType: PropsType.String,
-    },
-    persistent: {
-      type: PropsType.Boolean,
-      desc: "当下拉框未被激活并且persistent设置为false，下拉框容器会被删除",
-      default: true,
-      version: "2.7.8",
-    },
-    "fallback-placements": {
-      type: PropsType.JSON,
-      desc: "Tooltip 可用的 positions 请查看popper.js 文档",
-      allowEmpty: true,
-      version: "2.8.1",
-    },
-    placement: {
-      type: PropsType.Enum,
-      enums: ["top", "top-start", "top-end", "bottom", "bottom-start", "bottom-end"],
-      desc: "下拉框出现的位置",
-      default: "bottom-start",
-      version: "2.8.1",
-    },
-  },
-  events: {
-    change: {
-      name: "change",
-      desc: "当绑定值变化时触发的事件",
-      args: ["value"],
-    },
-    "expand-change": {
-      name: "expand-change",
-      desc: "当展开节点发生变化时触发",
-      args: ["expandedNodes"],
-    },
-    blur: {
-      name: "blur",
-      desc: "当失去焦点时触发",
-      args: ["event"],
-    },
-    focus: {
-      name: "focus",
-      desc: "当获得焦点时触发",
-      args: ["event"],
-    },
-    clear: {
-      name: "clear",
-      desc: "可清空的单选模式下用户点击清空按钮时触发",
-      args: [],
-      version: "2.7.7",
-    },
-    "visible-change": {
-      name: "visible-change",
-      desc: "下拉框出现/隐藏时触发",
-      args: ["visible"],
-    },
-    "remove-tag": {
-      name: "remove-tag",
-      desc: "在多选模式下，移除Tag时触发",
-      args: ["tag"],
     },
   },
   slots: {
@@ -213,4 +130,41 @@ export default {
       version: "2.9.5",
     },
   },
-} as RawComponent
+  events: {
+    change: {
+      name: "change",
+      desc: "当绑定值变化时触发",
+      args: ["value"],
+    },
+    expand: {
+      name: "expand",
+      desc: "展开节点时触发",
+      args: ["value"],
+    },
+    blur: {
+      name: "blur",
+      desc: "当失去焦点时触发",
+      args: ["event"],
+    },
+    focus: {
+      name: "focus",
+      desc: "当获得焦点时触发",
+      args: ["event"],
+    },
+    clear: {
+      name: "clear",
+      desc: "当清空选项时触发",
+      args: [],
+    },
+    "visible-change": {
+      name: "visible-change",
+      desc: "下拉框出现/隐藏时触发",
+      args: ["visible"],
+    },
+    "remove-tag": {
+      name: "remove-tag",
+      desc: "在多选模式下，移除Tag时触发",
+      args: ["tag"],
+    },
+  },
+}

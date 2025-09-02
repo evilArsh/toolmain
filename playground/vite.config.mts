@@ -52,10 +52,7 @@ const defaultConfig = (_mode: string, _command: string): UserConfig => {
         resolvers: [IconsResolver(), ElementPlusResolver()],
       }),
       Components({
-        resolvers: [
-          IconsResolver(),
-          ElementPlusResolver(),
-        ],
+        resolvers: [IconsResolver(), ElementPlusResolver()],
         dts: false,
         globs: ["./src/components/*/index.vue"],
       }),

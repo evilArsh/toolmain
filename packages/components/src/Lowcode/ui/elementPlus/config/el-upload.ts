@@ -1,6 +1,6 @@
 import { PropsType, ComponentLabel, RawComponent } from "../../../types"
 
-export default {
+export const ElUpload: RawComponent = {
   label: "el-upload",
   desc: "element-plus@el-upload",
   props: {
@@ -12,7 +12,7 @@ export default {
     action: {
       type: PropsType.String,
       desc: "请求 URL",
-      required: true,
+      allowEmpty: false,
     },
     headers: {
       type: PropsType.JSON,
@@ -181,4 +181,4 @@ export default {
       props: {},
     },
   },
-} as RawComponent
+}

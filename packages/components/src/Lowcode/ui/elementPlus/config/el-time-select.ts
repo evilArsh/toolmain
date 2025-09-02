@@ -1,5 +1,5 @@
 import { PropsType, RawComponent } from "../../../types"
-export default {
+export const ElTimeSelectComponent: RawComponent = {
   label: "el-time-select",
   desc: "element-plus@el-time-select",
   props: {
@@ -129,4 +129,4 @@ export default {
       version: "2.7.7",
     },
   },
-} as RawComponent
+}

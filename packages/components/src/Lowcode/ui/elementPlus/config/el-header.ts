@@ -1,6 +1,6 @@
 import { ComponentLabel, PropsType, RawComponent } from "../../../types"
 
-export default {
+export const ElHeader: RawComponent = {
   label: "el-header",
   desc: "element-plus@el-header",
   props: {
@@ -17,4 +17,4 @@ export default {
       props: {},
     },
   },
-} as RawComponent
+}

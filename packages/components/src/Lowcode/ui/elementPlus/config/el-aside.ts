@@ -1,6 +1,6 @@
 import { ComponentLabel, PropsType, RawComponent } from "../../../types"
 
-export default {
+export const ElAside: RawComponent = {
   label: "el-aside",
   desc: "element-plus@el-aside",
   props: {
@@ -17,4 +17,4 @@ export default {
       props: {},
     },
   },
-} as RawComponent
+}

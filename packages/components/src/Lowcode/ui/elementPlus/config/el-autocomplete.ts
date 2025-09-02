@@ -1,6 +1,6 @@
 import { ComponentLabel, PropsType, RawComponent } from "../../../types"
 
-export default {
+export const ElAutocomplete: RawComponent = {
   label: "el-autocomplete",
   desc: "element-plus@el-autocomplete",
   props: {
@@ -159,4 +159,4 @@ export default {
       args: ["value"],
     },
   },
-} as RawComponent
+}

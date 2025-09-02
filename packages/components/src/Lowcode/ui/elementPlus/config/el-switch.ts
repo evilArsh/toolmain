@@ -1,5 +1,6 @@
 import { ComponentLabel, PropsType, RawComponent } from "../../../types"
-export default {
+
+export const ElSwitchComponent: RawComponent = {
   label: "el-switch",
   desc: "element-plus@el-switch",
   props: {
@@ -131,4 +132,4 @@ export default {
       version: "2.4.4",
     },
   },
-} as RawComponent
+}

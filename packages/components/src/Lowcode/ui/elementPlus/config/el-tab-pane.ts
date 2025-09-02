@@ -1,6 +1,6 @@
 import { PropsType, ComponentLabel, RawComponent } from "../../../types"
 
-export default {
+export const ElTabPaneComponent: RawComponent = {
   label: "el-tab-pane",
   desc: "element-plus@el-tab-pane",
   props: {
@@ -45,4 +45,4 @@ export default {
       props: {},
     },
   },
-} as RawComponent
+}

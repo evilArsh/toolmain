@@ -1,6 +1,6 @@
 import { ComponentLabel, PropsType, RawComponent } from "../../../types"
 
-export default {
+export const ElCheckboxButton: RawComponent = {
   label: "el-checkbox-button",
   desc: "element-plus@el-checkbox-button",
   props: {
@@ -54,4 +54,4 @@ export default {
       props: {},
     },
   },
-} as RawComponent
+}

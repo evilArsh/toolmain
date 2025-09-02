@@ -1,6 +1,6 @@
 import { ComponentLabel, PropsType, RawComponent } from "../../../types"
 
-export default {
+export const ElInput: RawComponent = {
   label: "el-input",
   desc: "element-plus@el-input",
   props: {
@@ -96,88 +96,92 @@ export default {
     },
     autocomplete: {
       type: PropsType.String,
-      desc: "原生 `autocomplete` 属性",
+      desc: "原生属性",
       default: "off",
     },
     name: {
       type: PropsType.String,
-      desc: "等价于原生 input `name` 属性",
+      desc: "等价于原生 input name 属性",
       allowEmpty: true,
     },
     readonly: {
       type: PropsType.Boolean,
-      desc: "原生 `readonly` 属性，是否只读",
+      desc: "原生 readonly 属性，是否只读",
       default: false,
     },
     max: {
-      type: PropsType.Number,
-      desc: "原生 `max` 属性，设置最大值",
+      type: [PropsType.String, PropsType.Number],
+      desc: "原生属性",
+      finalType: PropsType.Number,
       allowEmpty: true,
     },
     min: {
-      type: PropsType.Number,
-      desc: "原生属性，设置最小值",
+      type: [PropsType.String, PropsType.Number],
+      desc: "原生属性",
+      finalType: PropsType.Number,
       allowEmpty: true,
     },
     step: {
-      type: PropsType.Number,
-      desc: "原生属性，设置输入字段的合法数字间隔",
+      type: [PropsType.String, PropsType.Number],
+      desc: "原生属性",
+      finalType: PropsType.Number,
       allowEmpty: true,
     },
     resize: {
       type: PropsType.Enum,
-      desc: "控制是否能被用户缩放",
       enums: ["none", "both", "horizontal", "vertical"],
-      allowEmpty: true,
-    },
-    form: {
-      type: PropsType.String,
-      desc: "原生属性",
+      desc: "控制是否能被用户缩放",
       allowEmpty: true,
     },
     "aria-label": {
       type: PropsType.String,
-      desc: "等价于原生 input `aria-label` 属性",
+      desc: "等价于原生 input aria-label 属性",
       allowEmpty: true,
       version: "2.7.2",
     },
-    tabindex: {
-      type: [PropsType.String, PropsType.Number],
-      desc: "输入框的 tabindex",
-      finalType: PropsType.Number,
+    "aria-describedby": {
+      type: PropsType.String,
+      desc: "等价于原生 input aria-describedby 属性",
       allowEmpty: true,
+      version: "2.7.2",
     },
     "validate-event": {
       type: PropsType.Boolean,
-      desc: "输入时是否触发表单的校验",
+      desc: "是否触发表单验证",
       default: true,
     },
     "input-style": {
-      type: [PropsType.String, PropsType.JSON],
+      type: [PropsType.JSON, PropsType.String],
       desc: "input 元素或 textarea 元素的 style",
-      finalType: PropsType.String,
+      default: JSON.stringify({}),
+      finalType: PropsType.JSON,
+    },
+    label: {
+      type: PropsType.String,
+      desc: "等价于原生 input aria-label 属性",
       allowEmpty: true,
+      version: "2.8.5",
     },
   },
   slots: {
     prefix: {
       label: ComponentLabel.NULL,
-      desc: '输入框头部内容，只对非 `type="textarea"` 有效',
+      desc: "输入框头部内容",
       props: {},
     },
     suffix: {
       label: ComponentLabel.NULL,
-      desc: '输入框尾部内容，只对非 `type="textarea"` 有效',
+      desc: "输入框尾部内容",
       props: {},
     },
     prepend: {
       label: ComponentLabel.NULL,
-      desc: '输入框前置内容，只对非 `type="textarea"` 有效',
+      desc: "输入框前置内容，在 prefix 之前",
       props: {},
     },
     append: {
       label: ComponentLabel.NULL,
-      desc: '输入框后置内容，只对非 `type="textarea"` 有效',
+      desc: "输入框后置内容，在 suffix 之后",
       props: {},
     },
   },
@@ -192,14 +196,14 @@ export default {
       desc: "当选择器的输入框获得焦点时触发",
       args: ["event"],
     },
-    change: {
-      name: "change",
-      desc: "仅当 modelValue 改变时，当输入框失去焦点或用户按Enter时触发",
-      args: ["value"],
-    },
     input: {
       name: "input",
       desc: "在 Input 值改变时触发",
+      args: ["value"],
+    },
+    change: {
+      name: "change",
+      desc: "仅在输入框失去焦点或用户按下回车时触发",
       args: ["value"],
     },
     clear: {
@@ -207,5 +211,23 @@ export default {
       desc: "在点击由 clearable 属性生成的清空按钮时触发",
       args: [],
     },
+    mouseleave: {
+      name: "mouseleave",
+      desc: "仅在输入框失去焦点或用户按下回车时触发",
+      args: ["event"],
+      version: "2.7.2",
+    },
+    mouseenter: {
+      name: "mouseenter",
+      desc: "仅在输入框失去焦点或用户按下回车时触发",
+      args: ["event"],
+      version: "2.7.2",
+    },
+    keydown: {
+      name: "keydown",
+      desc: "当用户按下任意键时触发",
+      args: ["event"],
+      version: "2.7.2",
+    },
   },
-} as RawComponent
+}

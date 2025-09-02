@@ -1,5 +1,5 @@
 import { PropsType, RawComponent } from "../../../types"
-export default {
+export const ElSlider: RawComponent = {
   label: "el-slider",
   desc: "element-plus@el-slider",
   props: {
@@ -166,4 +166,4 @@ export default {
       returnType: "boolean",
     },
   },
-} as RawComponent
+}

@@ -1,7 +1,7 @@
 import { ComponentLabel, PropsType, RawComponent } from "../../../types"
 import { EpComponentFlag } from "../componentParser"
 
-export default {
+export const ElButton: RawComponent = {
   label: "el-button",
   desc: "element-plus@el-button",
   props: {
@@ -120,4 +120,4 @@ export default {
       props: {},
     },
   },
-} as RawComponent
+}

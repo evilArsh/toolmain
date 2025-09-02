@@ -1,5 +1,5 @@
 import { PropsType, RawComponent } from "../../../types"
-export default {
+export const ElTimePickerComponent: RawComponent = {
   label: "el-time-picker",
   desc: "element-plus@el-time-picker",
   props: {
@@ -187,4 +187,4 @@ export default {
       args: ["visible"],
     },
   },
-} as RawComponent
+}

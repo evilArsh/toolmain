@@ -1,6 +1,6 @@
 import { PropsType, RawComponent } from "../../../types"
 
-export default {
+export const ElColorPicker: RawComponent = {
   label: "el-color-picker",
   desc: "element-plus@el-color-picker",
   props: {
@@ -94,4 +94,4 @@ export default {
       version: "2.4.0",
     },
   },
-} as RawComponent
+}
