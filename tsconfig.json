@@ -4,12 +4,8 @@
     "composite": true,
     "declaration": true,
     "declarationDir": "./types",
-    "paths": {
-      "@toolmain/components": ["./packages/components/index.ts"],
-      "@toolmain/shared": ["./packages/shared/index.ts"],
-      "@toolmain/libs": ["./packages/libs/index.ts"]
-    }
+    "types": ["vitest", "vitest-browser-vue"]
   },
-  "include": ["*.ts", "packages", "scripts", "playground"],
+  "include": ["*.ts", "packages/*", "scripts", "playground"],
   "exclude": ["node_modules"]
 }

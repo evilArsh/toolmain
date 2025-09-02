@@ -24,7 +24,10 @@
   "dependencies": {
     "@toolmain/components": "workspace:^",
     "@toolmain/libs": "workspace:^",
-    "@toolmain/shared": "workspace:^"
+    "@toolmain/shared": "workspace:^",
+    "@vitest/browser": "catalog:test",
+    "@vitest/ui": "catalog:test",
+    "@vue/test-utils": "catalog:test"
   },
   "devDependencies": {
     "@changesets/cli": "catalog:dev",
@@ -40,7 +43,7 @@
     "@typescript-eslint/eslint-plugin": "catalog:dev",
     "@vitejs/plugin-vue": "catalog:dev",
     "@vitejs/plugin-vue-jsx": "catalog:dev",
-    "@vitest/coverage-v8": "catalog:dev",
+    "@vitest/coverage-v8": "catalog:test",
     "@vueuse/core": "catalog:vue",
     "axios": "catalog:tools",
     "commitlint": "catalog:dev",
@@ -58,7 +61,7 @@
     "jiti": "catalog:dev",
     "jsdom": "catalog:dev",
     "lint-staged": "catalog:dev",
-    "msw": "catalog:dev",
+    "msw": "catalog:test",
     "p-queue": "catalog:tools",
     "pinia": "catalog:vue",
     "prettier": "catalog:dev",
@@ -80,8 +83,8 @@
     "vite": "catalog:dev",
     "vite-plugin-css-injected-by-js": "catalog:dev",
     "vite-plugin-vue-devtools": "catalog:dev",
-    "vitest": "catalog:dev",
-    "vitest-browser-vue": "catalog:dev",
+    "vitest": "catalog:test",
+    "vitest-browser-vue": "catalog:test",
     "vue": "catalog:vue",
     "vue-eslint-parser": "catalog:dev",
     "vue-i18n": "catalog:vue",

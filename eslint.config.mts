@@ -41,6 +41,7 @@ export const config: InfiniteDepthConfigWithExtends[] = [
       "**/rollup.config.{js,mjs,cjs}",
       "yarn.lock",
       "pnpm-lock.yaml",
+      "pnpm-workspace.yaml",
       "package-lock.json",
       "uno.config.{ts,mts,js,mjs}",
       "electron.vite.config.{ts,mts,js,mjs}",
