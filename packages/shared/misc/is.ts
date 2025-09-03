@@ -5,6 +5,12 @@ const toTypeString = (value: unknown): string => objectToString.call(value)
  */
 export const isArray = Array.isArray
 /**
+ * 判断是否是数组并且长度大于0
+ */
+export const isArrayLength = (val: unknown): val is any[] => {
+  return isArray(val) && val.length > 0
+}
+/**
  * 判断是否是`Map`
  */
 export const isMap = (val: unknown): val is Map<any, any> => toTypeString(val) === "[object Map]"
@@ -57,16 +63,35 @@ export const isUndefined = (val: unknown): val is undefined => typeof val === "u
 export const isBoolean = (val: unknown): val is boolean => typeof val === "boolean"
 
 /**
- * 验证是否是合法的http url
+ * 验证是否是合法的 url
+ * eg:
+ * ```js
+ * isUrl('https://www.example.com', 'https') // true
+ * isUrl('https://www.example.com') // true
+ * isUrl('www.example.com') // false
+ * isUrl('ws://www.example.com', 'ws') // true
+ * isUrl('https://www.example.com', 'http') // false
+ * isUrl('https://www.example.com', /https?/) // true
+ * ```
  */
-export const isValidHttpUrl = (url: string): boolean => {
+export const isUrl = (url: string, protocol?: string | RegExp): boolean => {
   try {
     const u = new URL(url)
-    return u.protocol === "http:" || u.protocol === "https:"
+    if (!protocol) return true
+    const p = u.protocol.replace(/:$/, "")
+    if (isRegExp(protocol)) {
+      return protocol.test(p)
+    }
+    return p === protocol
   } catch (_e) {
     return false
   }
 }
+
+/**
+ * 验证是否是 HTTP URL
+ */
+export const isHTTPUrl = (url: string) => isUrl(url, /https?/)
 /**
  * 判断是否是base64图片
  */

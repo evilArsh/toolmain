@@ -1,6 +1,5 @@
-import { onBeforeUnmount, ref, watch, WatchHandle } from "vue"
+import { onBeforeUnmount, ref, shallowReactive, watch, WatchHandle } from "vue"
 import hotkeys from "hotkeys-js"
-import { merge } from "@toolmain/shared"
 import PQueue from "p-queue"
 
 export type ShortcutOptions = {
@@ -12,24 +11,29 @@ export type ShortcutOptions = {
   splitKey?: string
   single?: boolean
 }
+export type ShortcutHandler = {
+  key: string
+  handler: WatchHandle
+  queue: PQueue
+}
 export function useShortcut() {
-  let handler: Array<{ key: string; handler: WatchHandle }> = []
-  const queue = new PQueue({ concurrency: 1 })
+  const handler = shallowReactive<ShortcutHandler[]>([])
   hotkeys.filter = () => {
     return true
   }
   function cleanAll() {
     handler.forEach(h => {
-      hotkeys.unbind(h.key)
       h.handler.stop()
+      hotkeys.unbind(h.key)
     })
-    handler = []
+    handler.length = 0
   }
   function clean(key: string) {
     hotkeys.unbind(key)
     const index = handler.findIndex(h => h.key === key)
     if (index === -1) return
     handler[index].handler.stop()
+    handler[index].queue.clear()
     handler.splice(index, 1)
   }
   function listen(
@@ -38,28 +42,24 @@ export function useShortcut() {
     config?: ShortcutOptions
   ) {
     const key = ref(shortcut)
-    const watchHandler = watch(
-      key,
-      (val, old) => {
-        if (old) {
-          queue.clear()
-          clean(old)
-        }
-        hotkeys(val, merge({}, config, { keyup: true, capture: true }), (event, handler) => {
-          const key = handler.key
-          queue.add(async () => callback(event.type === "keydown", key))
-        })
-      },
-      { immediate: true }
-    )
-    handler.push({
-      key: key.value,
-      handler: watchHandler,
+    const queue = new PQueue({ concurrency: 1 })
+    const doListen = (key: string) => {
+      hotkeys(key, { ...config, keyup: true, capture: true }, (event, handler) => {
+        const key = handler.key
+        queue.add(async () => callback(event.type === "keydown", key))
+      })
+    }
+    const watchHandler = watch(key, (val, old) => {
+      if (old) clean(old)
+      doListen(val)
     })
+    doListen(key.value)
+    handler.push({ key: key.value, handler: watchHandler, queue })
     function trigger(...args: unknown[]) {
       const keyValue = key.value
       queue.add(async () => callback(true, keyValue, ...args))
     }
+
     return {
       key,
       trigger,
@@ -69,6 +69,7 @@ export function useShortcut() {
     cleanAll()
   })
   return {
+    handler,
     cleanAll,
     clean,
     listen,

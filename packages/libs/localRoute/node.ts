@@ -2,7 +2,7 @@ import type { AsyncComponnet } from "./types"
 export class Node {
   private path: string
   private component?: AsyncComponnet
-  private readonly children: Node[]
+  private children: Node[]
   constructor(path: string) {
     this.path = path
     this.children = []
@@ -23,6 +23,13 @@ export class Node {
 
   pushChild(node: Node): this {
     this.children.push(node)
+    return this
+  }
+  /**
+   * replace all chldren with new `nodes`
+   */
+  replaceChild(nodes: Node[]): this {
+    this.children = nodes
     return this
   }
 

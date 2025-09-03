@@ -141,7 +141,7 @@ export class RouterTree {
     })
     return routes.sort((a, b) => b.path.length - a.path.length)
   }
-  iter<T extends IterableRoute<T>>(callback: (node: Router) => T) {
+  iter<T extends IterableRoute<T>>(callback: (node: Router) => T): T[] {
     const routes = this.generate()
     const iterate = (route: Router): T => {
       const dst: T = callback(route)
@@ -151,6 +151,24 @@ export class RouterTree {
       return dst
     }
     return routes.map(route => iterate(route))
+  }
+  iterNode(callback: (node: Node) => Node | undefined): Node[] {
+    const iterate = (route: Node): Node | undefined => {
+      const dst: Node | undefined = callback(route)
+      if (dst) {
+        dst.replaceChild(
+          dst
+            .getChild()
+            .map(v => iterate(v))
+            .filter(n => !!n)
+        )
+      }
+      return dst
+    }
+    return this.root
+      .getChild()
+      .map(route => iterate(route))
+      .filter(n => !!n)
   }
   /**
    * 添加路由节点
