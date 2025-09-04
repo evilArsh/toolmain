@@ -4,12 +4,14 @@ frontend development toolkit for "Wage Warrior" within vue environment!it provid
 
 ## Install
 
+you can overview the components,hooks
+
 ```shell
 git clone https://github.com/evilArsh/toolmain.git
 
 pnpm i
 
-pnpm run dev
+pnpm dev
 ```
 
 ## 📚 documentation

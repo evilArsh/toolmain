@@ -1,5 +1,14 @@
 # @toolmain/components
 
+## 1.2.16
+
+### Patch Changes
+
+- feat: add new components,functions,
+- Updated dependencies
+  - @toolmain/shared@1.2.9
+  - @toolmain/libs@1.1.8
+
 ## 1.2.15
 
 ### Patch Changes

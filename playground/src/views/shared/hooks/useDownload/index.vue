@@ -28,13 +28,14 @@ shiki.codeToHtml(code, "ts").then(res => {
 })
 </script>
 <template>
-  <div class="w-full flex">
-    <el-card title="useDownload">
-      <div class="text-1.4rem" v-html="node"></div>
-      <template #footer>
-        <el-button @click="downloadCode(code, 'ts', 'useDownload')">download</el-button>
-      </template>
-    </el-card>
-  </div>
+  <el-card class="w-full">
+    <template #header>
+      <el-text>useDownload</el-text>
+    </template>
+    <div class="text-1.4rem" v-html="node"></div>
+    <template #footer>
+      <el-button @click="downloadCode(code, 'ts', 'useDownload')">download</el-button>
+    </template>
+  </el-card>
 </template>
 <style lang="scss" scoped></style>

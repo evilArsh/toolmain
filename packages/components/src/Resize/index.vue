@@ -1,21 +1,25 @@
 <script lang="ts" setup>
 import { CSSProperties, getStyleValue, px } from "@toolmain/shared"
 import { ScaleConfig, useScale, ScaleEv } from "@toolmain/components"
-import { ref, computed, onBeforeUnmount } from "vue"
+import { ref, computed, onBeforeUnmount, useTemplateRef } from "vue"
 
 const props = defineProps<{
   /**
-   * 大小,水平移动时指定为宽度,垂直移动时指定为高度
+   * drag bar size, specified as width when moving horizontally, and height when moving vertically
    */
   size: number | string
   /**
-   * 方向
+   * drag bar is attached to the `direction` of the `target` element
    */
   direction: "top" | "right" | "bottom" | "left"
   /**
-   * 目标元素
+   * the targe element which size will be changed, if not set,
+   * represent current element's parent element
    */
   target?: HTMLElement | null
+  /**
+   * the target element's style
+   */
   modelValue: CSSProperties
 }>()
 const emit = defineEmits<{
@@ -23,13 +27,13 @@ const emit = defineEmits<{
   (e: "afterScale"): void
   (e: "scaling"): void
 }>()
-
+const selfRef = useTemplateRef("self")
 const scaleConfig = ref<ScaleConfig>({
   containerStyle: props.modelValue,
 })
 const { onMouseDown, on, dispose } = useScale({
   config: scaleConfig,
-  targetEle: computed<Readonly<HTMLElement | null | undefined>>(() => props.target),
+  targetEle: computed<Readonly<HTMLElement | null | undefined>>(() => props.target ?? selfRef.value?.parentElement),
 })
 const handlerStyle = computed<CSSProperties>(() => {
   switch (props.direction) {
@@ -70,7 +74,7 @@ on(ScaleEv.AFTER_SCALE, () => {
 onBeforeUnmount(dispose)
 </script>
 <template>
-  <div class="resize-handler" :style="handlerStyle" @mousedown="onMouseDown($event, props.direction)"></div>
+  <div ref="self" class="resize-handler" :style="handlerStyle" @mousedown="onMouseDown($event, props.direction)"></div>
 </template>
 <style lang="scss" scoped>
 .resize-handler {

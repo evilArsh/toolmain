@@ -158,3 +158,4 @@ eslint.config.mjs
 eslint.config.d.mts
 ./*.d.ts
 ./*.d.[cm]ts
+uno.config.d.ts

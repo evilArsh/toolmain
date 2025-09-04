@@ -50,13 +50,15 @@ export function useShortcut() {
       })
     }
     const watchHandler = watch(key, (val, old) => {
-      if (old) clean(old)
+      if (old) hotkeys.unbind(old)
+      if (!val) return
       doListen(val)
     })
     doListen(key.value)
     handler.push({ key: key.value, handler: watchHandler, queue })
     function trigger(...args: unknown[]) {
       const keyValue = key.value
+      if (!keyValue) return
       queue.add(async () => callback(true, keyValue, ...args))
     }
 

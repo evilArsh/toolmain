@@ -32,6 +32,7 @@
     "vue-router": "catalog:vue"
   },
   "devDependencies": {
-    "unocss": "catalog:vue"
+    "unocss": "catalog:vue",
+    "unplugin-icons": "catalog:dev"
   }
 }

@@ -1,5 +1,11 @@
 # @toolmain/shared
 
+## 1.2.9
+
+### Patch Changes
+
+- feat: add new components,functions,
+
 ## 1.2.8
 
 ### Patch Changes

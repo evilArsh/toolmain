@@ -20,7 +20,7 @@ const targetBottom = useTemplateRef("targetBottom")
         <el-text type="primary">content</el-text>
       </div>
       <div ref="targetLeft" :style="targetLeftStyle" class="card relative h-full flex-center flex-shrink-0 max-w-full">
-        <Resize v-model="targetLeftStyle" :target="targetLeft" size="3px" direction="left" />
+        <Resize v-model="targetLeftStyle" size="8px" direction="left" />
         <el-text type="primary">target</el-text>
       </div>
     </div>
@@ -31,7 +31,7 @@ const targetBottom = useTemplateRef("targetBottom")
         <el-text type="primary">content</el-text>
       </div>
       <div ref="targetTop" :style="targetTopStyle" class="card flex-center flex-shrink-0 relative">
-        <Resize v-model="targetTopStyle" :target="targetTop" size="3px" direction="top" />
+        <Resize v-model="targetTopStyle" size="8px" direction="top" />
         <el-text type="primary">target</el-text>
       </div>
     </div>
@@ -39,7 +39,7 @@ const targetBottom = useTemplateRef("targetBottom")
     <div border="dashed 1px red" class="p-3rem h-20rem relative flex">
       <el-tag class="absolute left-0 bottom-0 z-100">right</el-tag>
       <div ref="targetRight" :style="targetRightStyle" class="card relative h-full flex-shrink-0 flex-center">
-        <Resize v-model="targetRightStyle" :target="targetRight" size="3px" direction="right" />
+        <Resize v-model="targetRightStyle" size="8px" direction="right" />
         <el-text type="primary">target</el-text>
       </div>
       <div class="card flex-1 flex-center">
@@ -50,7 +50,7 @@ const targetBottom = useTemplateRef("targetBottom")
     <div border="dashed 1px red" class="p-3rem relative flex flex-col h-30rem overflow-hidden">
       <el-tag class="absolute left-0 bottom-0 z-100">bottom</el-tag>
       <div ref="targetBottom" :style="targetBottomStyle" class="card flex-center flex-shrink-0 relative">
-        <Resize v-model="targetBottomStyle" :target="targetBottom" size="3px" direction="bottom" />
+        <Resize v-model="targetBottomStyle" size="8px" direction="bottom" />
         <el-text type="primary">target</el-text>
       </div>
       <div class="card flex-1 flex-center">
