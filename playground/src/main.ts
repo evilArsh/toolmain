@@ -4,7 +4,7 @@ import "virtual:uno.css"
 import "element-plus/dist/index.css"
 import { createShiki } from "@toolmain/shared"
 import App from "./app.vue"
-import router from "./routes/index"
+import { router } from "./routes/index"
 import { useHtmlFontSize } from "@toolmain/shared"
 const app = createApp(App)
 useHtmlFontSize(app)

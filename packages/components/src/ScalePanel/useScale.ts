@@ -67,6 +67,20 @@ export const useScale = (data: {
     },
   }
   const target = { x: 0, y: 0, clientX: 0, clientY: 0, left: 0, top: 0, width: 0, height: 0 }
+  const resolveDir = (dir: string) => {
+    switch (dir.trim().toLowerCase()) {
+      case "left":
+        return "l"
+      case "right":
+        return "r"
+      case "top":
+        return "t"
+      case "bottom":
+        return "b"
+      default:
+        return dir
+    }
+  }
   function onSelectStart(e: Event) {
     e.preventDefault()
   }
@@ -93,7 +107,7 @@ export const useScale = (data: {
   // 锚点按下
   function onMouseDown(e: MouseEvent, direction: string) {
     document.addEventListener("selectstart", onSelectStart)
-    dir = direction
+    dir = resolveDir(direction)
     e.stopPropagation()
     e.preventDefault()
     tUpdate()

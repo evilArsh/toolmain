@@ -3,20 +3,23 @@ import { createWebHistory, createRouter, type RouteRecordRaw } from "vue-router"
 
 export const initNode = new RouterTree({
   index: "/",
+  redirect: true,
+  redirectToChild: true,
 }).resolve(fetchVue())
+
 export const initRoutes = initNode.iter<RouteRecordRaw>(router => {
   return router as RouteRecordRaw
 })
-const defaultPath = "/playground"
-const router = createRouter({
+
+export const router = createRouter({
   history: createWebHistory(),
   routes: initRoutes.concat([
     {
       path: "/:pathMatch(.*)*",
-      redirect: defaultPath,
+      redirect: "/",
     },
   ]),
 })
+// console.log("[root]", initNode.root)
+console.log("[initRoutes]", initRoutes)
 console.log("[routes]", router.getRoutes())
-
-export default router

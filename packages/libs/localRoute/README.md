@@ -2,32 +2,18 @@
 
 ```typescript
 import { createWebHistory, createRouter, type RouteRecordRaw } from "vue-router"
-import { localRoute } from "@toolmain/libs"
+import { fetchVue, RouterTree } from "@toolmain/libs"
 
 export const initNode = new localRoute.tpl.RouterTree({
   index: "/",
-  layout: async () => await import("path/to/layout/component.vue"),
-  redirect: true,
-  redirectToChild: true,
-}).resolve(localRoute.fetch.fetchVue())
+}).resolve(fetchVue())
 
 export const initRoutes = initNode.iter<RouteRecordRaw>(router => {
-  return {
-    path: router.path,
-    redirect: router.redirect,
-    children: [],
-    component: router.component ?? undefined,
-  } as RouteRecordRaw
+  return router as RouteRecordRaw
 })
-const defaultPath = "/index"
 const router = createRouter({
   history: createWebHistory(),
-  routes: [
-    initRoutes,
-    { path: "", redirect: defaultPath },
-    { path: "/", redirect: defaultPath },
-    { path: "/:pathMatch(.*)*", redirect: defaultPath },
-  ],
+  routes: [...initRoutes, { path: "/:pathMatch(.*)*", redirect: defaultPath }],
 })
 export default router
 ```
@@ -48,16 +34,15 @@ export default router
 |  |  |  |  |--index.vue
 |  |  |  |--B
 |  |  |  |  |--index.vue
-|  |  |--subpages
+|  |  |--profile
 |  |  |  |--home
 |  |  |  |  |--index.vue
+|  |  |  |  |--home-test.vue
 |  |  |  |--profile
 |  |  |  |  |--index.vue
 |  |  |  |--index.vue
 ```
 
-1. `user/` 和 `login/` 目录不在 `subpages/` 目录下，会被解析为 `/web/user` 和 `/web/login` 根路由，顶级 `<router-view>` 将跳过父级 `/web` 并仅使用子路由组件。
+1. 非 `index.*` 结尾的文件会被解析为独立的路由，比如 `/web/profile/home/home-test`
 
-2. `subpages/` 目录下的 `home/` 和 `profile/` 被视为 `/web` 的子路由，最终路由为 `/web/home` 和 `/web/profile` 。只有 `web/` 目录下存在 `index.vue` 文件并且存在 `<router-view>` 才会渲染出子组件
-
-3. 根目录下的文件和文件夹会被作为 为根路由解析
+2. 当目录下存在 `index.*` 时，该目录会被视为存在子路由，比如在 `/web/profile` 中，`home` 和 `profile` 会被放在路由的 `children` 中，不存在时，顶级 `<router-view>` 将跳过父级并仅使用子路由组件，比如 `/web/user/A` 将直接作为根路由

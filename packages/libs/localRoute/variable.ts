@@ -5,7 +5,7 @@ export const NameReg = /[^\\/:*?"<>|]+/
 /**
  * 子页面标识
  */
-export const SubpageReg = /\/subpages\//
+// export const SubpageReg = /\/subpages\//
 
 /**
  * 组件标识
@@ -27,7 +27,7 @@ export const SeparatorReg = /\//
  * 路径分隔符
  */
 export const Separator = "/"
-export const Subpages = "subpages"
+// export const Subpages = "subpages"
 /**
  * 默认 `index.([jt]sx|vue)` 文件
  */

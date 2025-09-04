@@ -5,21 +5,11 @@ export interface IterableRoute<T> {
   children?: T[] | null
 }
 /**
- * 每个路由元数据
- */
-export interface RouterMeta {
-  [key: string]: unknown
-  title: string
-  path: string
-  fullPath: string
-  redirect?: string
-}
-/**
  * 通用单个路由结构
  */
 export interface Router {
   path: string
-  // meta: RouterMeta
+  fullPath: string
   redirect?: string
   component?: AsyncComponnet
   children?: Router[]
@@ -45,6 +35,14 @@ export interface RouterTreeConfig {
    *  路由根目录 @default `/src/views/`
    */
   viewsDir?: string | RegExp
+  /**
+   * 是否开启重定向；默认重定向到子路由`index`路由
+   */
+  redirect?: boolean
+  /**
+   * 当已开启重定向时，并且没有默认子 `index` 路由时，是否重定向到第一个子路由。
+   */
+  redirectToChild?: boolean
 }
 /**
  * `import.meta.glob`加载路由数据配置
