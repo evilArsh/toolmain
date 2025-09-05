@@ -45,7 +45,6 @@ export class RouterTree {
     })
     return this
   }
-
   /**
    * 对节点树进行遍历迭代
    */
@@ -54,7 +53,9 @@ export class RouterTree {
     const gen = (current: Node, currentAbsPath: string, currentRouter?: Router) => {
       const children = current.getChild()
       children.forEach(child => {
-        // index.*
+        /**
+         * index.*
+         */
         if (vars.DefaultPathReg.test(child.getPath())) {
           if (currentRouter) {
             /**
@@ -89,14 +90,11 @@ export class RouterTree {
               })
             }
           }
-        } else if (vars.FileExtReg.test(child.getPath())) {
-          const fullPath = resolvePath([currentAbsPath, child.getPath().replace(vars.FileExtReg, "")], true, false)
-          routes.push({
-            path: fullPath,
-            component: child.getComponent(),
-            fullPath,
-          })
         } else {
+          /**
+           * foo.*
+           */
+          const isFile = vars.FileExtReg.test(child.getPath())
           currentRouter = currentRouter ?? routes.find(r => r.path === currentAbsPath)
           if (!currentRouter) {
             const fullPath = resolvePath(currentAbsPath)
@@ -108,11 +106,12 @@ export class RouterTree {
             }
             routes.push(currentRouter)
           }
+          const currentPath = isFile ? child.getPath().replace(vars.FileExtReg, "") : child.getPath()
           const r: Router = {
-            path: child.getPath(),
+            path: currentPath,
             component: child.getComponent(),
             children: [],
-            fullPath: resolvePath([currentAbsPath, child.getPath()], true),
+            fullPath: resolvePath([currentAbsPath, currentPath], true),
           }
           if (this.#config.redirect) {
             if (this.#config.redirectToChild) {
@@ -126,7 +125,9 @@ export class RouterTree {
             }
           }
           pushRouterChild(currentRouter, r)
-          gen(child, resolvePath([currentAbsPath, child.getPath()]), r)
+          if (!isFile) {
+            gen(child, resolvePath([currentAbsPath, child.getPath()]), r)
+          }
         }
       })
     }

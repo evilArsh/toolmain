@@ -27,22 +27,20 @@ export default router
 |  |--web
 |  |  |--login
 |  |  |  |--A
-|  |  |  |  |--index.vue
-|  |  |--index.vue
+|  |  |  |  |--index.*
+|  |  |--index.*
 |  |  |--user
 |  |  |  |--A
-|  |  |  |  |--index.vue
+|  |  |  |  |--index.*
 |  |  |  |--B
-|  |  |  |  |--index.vue
+|  |  |  |  |--index.*
 |  |  |--profile
 |  |  |  |--home
-|  |  |  |  |--index.vue
-|  |  |  |  |--home-test.vue
+|  |  |  |  |--index.*
+|  |  |  |  |--home-test.*
 |  |  |  |--profile
-|  |  |  |  |--index.vue
-|  |  |  |--index.vue
+|  |  |  |  |--index.*
+|  |  |  |--index.*
 ```
 
-1. 非 `index.*` 结尾的文件会被解析为独立的路由，比如 `/web/profile/home/home-test`
-
-2. 当目录下存在 `index.*` 时，该目录会被视为存在子路由，比如在 `/web/profile` 中，`home` 和 `profile` 会被放在路由的 `children` 中，不存在时，顶级 `<router-view>` 将跳过父级并仅使用子路由组件，比如 `/web/user/A` 将直接作为根路由
+1. 当目录下存在 `index.*` 时，该目录会被视为存在子路由，比如在 `/web/profile` 中，`home` 和 `profile` 会被放在路由的 `children` 中, 此时 `index.*` 中必须存在 `<RouterView />` 或者 `<Outlet />` 否则子组件将无法被渲染; 不存在 `index.*` 时，顶级路由导航组件将跳过父级并仅使用子路由组件，比如 `/web/user/A` 将直接作为根路由

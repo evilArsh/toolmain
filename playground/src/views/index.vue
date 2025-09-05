@@ -37,15 +37,17 @@ watchEffect(() => {
       <div class="main-content-inner">
         <Nav>
           <template #submenu>
-            <el-tree
-              :current-node-key="tree.current"
-              :data="node"
-              :props="tree.props"
-              node-key="fullPath"
-              :expand-on-click-node="false"
-              default-expand-all
-              highlight-current
-              @node-click="tree.onNodeClick"></el-tree>
+            <el-scrollbar>
+              <el-tree
+                :current-node-key="tree.current"
+                :data="node"
+                :props="tree.props"
+                node-key="fullPath"
+                :expand-on-click-node="false"
+                default-expand-all
+                highlight-current
+                @node-click="tree.onNodeClick"></el-tree>
+            </el-scrollbar>
           </template>
           <template #content>
             <router-view></router-view>
