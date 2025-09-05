@@ -1,9 +1,10 @@
-import { onBeforeUnmount, ref, shallowReactive, watch, WatchHandle } from "vue"
+import { onBeforeUnmount, ref, ShallowReactive, shallowReactive, watch, WatchHandle } from "vue"
 import hotkeys from "hotkeys-js"
 import PQueue from "p-queue"
+import { uniqueId } from "../../misc"
 
 export type ShortcutOptions = {
-  scope?: string
+  // scope?: string
   element?: HTMLElement | null
   keyup?: boolean | null
   keydown?: boolean | null
@@ -12,26 +13,29 @@ export type ShortcutOptions = {
   single?: boolean
 }
 export type ShortcutHandler = {
+  id: string
+  /**
+   * current listening key, the key may be changed dynamically
+   */
   key: string
   handler: WatchHandle
   queue: PQueue
 }
 export function useShortcut() {
-  const handler = shallowReactive<ShortcutHandler[]>([])
+  const scope = "use-shortcut-scope"
+  const handler: ShallowReactive<ShortcutHandler[]> = shallowReactive<ShortcutHandler[]>([])
   hotkeys.filter = () => {
     return true
   }
+  hotkeys.setScope(scope)
   function cleanAll() {
-    handler.forEach(h => {
-      h.handler.stop()
-      hotkeys.unbind(h.key)
-    })
+    Array.from(handler.map(h => h.id)).forEach(clean)
     handler.length = 0
   }
-  function clean(key: string) {
-    hotkeys.unbind(key)
-    const index = handler.findIndex(h => h.key === key)
+  function clean(id: string) {
+    const index = handler.findIndex(h => h.id === id)
     if (index === -1) return
+    hotkeys.unbind(handler[index].key, scope)
     handler[index].handler.stop()
     handler[index].queue.clear()
     handler.splice(index, 1)
@@ -41,28 +45,36 @@ export function useShortcut() {
     callback: (active: boolean, key: string, ...args: unknown[]) => Promise<void> | void,
     config?: ShortcutOptions
   ) {
+    const id = uniqueId()
     const key = ref(shortcut)
     const queue = new PQueue({ concurrency: 1 })
-    const doListen = (key: string) => {
-      hotkeys(key, { ...config, keyup: true, capture: true }, (event, handler) => {
+    const listen = (val: string, old?: string) => {
+      if (!val) return
+      if (val === old) return
+      const current = handler.find(h => h.id === id)
+      if (!current) return
+      current.key = val
+      if (old) hotkeys.unbind(old, scope)
+      hotkeys(val, { ...config, keyup: true, capture: true, scope }, (event, handler) => {
         const key = handler.key
         queue.add(async () => callback(event.type === "keydown", key))
       })
     }
-    const watchHandler = watch(key, (val, old) => {
-      if (old) hotkeys.unbind(old)
-      if (!val) return
-      doListen(val)
+    const watcher = watch(key, listen)
+    handler.push({
+      id,
+      key: key.value,
+      handler: watcher,
+      queue,
     })
-    doListen(key.value)
-    handler.push({ key: key.value, handler: watchHandler, queue })
+    listen(key.value)
     function trigger(...args: unknown[]) {
       const keyValue = key.value
       if (!keyValue) return
       queue.add(async () => callback(true, keyValue, ...args))
     }
-
     return {
+      id,
       key,
       trigger,
     }
