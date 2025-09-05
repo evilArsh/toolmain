@@ -10,10 +10,8 @@
     "build": "pnpm clean && pnpm -r run build",
     "run:publish": "tsx scripts/publish.ts",
     "clean": "tsx scripts/clean.ts",
-    "test": "pnpm run test:unit",
-    "test:cov": "vitest run --coverage --project=\"browser (chromium)\" --project=unit",
-    "test:browser": "vitest --project=\"browser*\"",
-    "test:chromium": "vitest --project=\"browser (chromium)\"",
+    "test": "vitest run --project=unit --project=browser",
+    "test:cov": "vitest run --coverage --project=unit --project=browser",
     "typecheck": "vue-tsc --noEmit -p tsconfig.json --composite false",
     "lint": "eslint",
     "lint-fix": "eslint --fix"

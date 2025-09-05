@@ -148,6 +148,17 @@ describe("shared/misc/index.ts", () => {
     expect(resolvePath("/https://text.com/", false, true)).toBe("https:/text.com/")
     expect(resolvePath("/https://text.com/", true, false)).toBe("/https:/text.com")
     expect(resolvePath("/https://text.com/", false, false)).toBe("https:/text.com")
+
+    expect(resolvePath("sip://text.com", true, true)).toBe("sip://text.com/")
+    expect(resolvePath("sip://text.com", false, true)).toBe("sip://text.com/")
+    expect(resolvePath("sip://text.com", true, false)).toBe("sip://text.com")
+    expect(resolvePath("sip://text.com", false, false)).toBe("sip://text.com")
+
+    expect(resolvePath("sip:/text.com", true, true)).toBe("sip://text.com/")
+    expect(resolvePath("sip:/text.com", false, true)).toBe("sip://text.com/")
+    expect(resolvePath("sip:/text.com", true, false)).toBe("sip://text.com")
+    expect(resolvePath("sip:/text.com", false, false)).toBe("sip://text.com")
+
     expect(resolvePath(["foo", "bar"], true, true)).toBe("/foo/bar/")
     expect(resolvePath(["foo", "bar"], false, true)).toBe("foo/bar/")
     expect(resolvePath(["foo", "bar"], true, false)).toBe("/foo/bar")

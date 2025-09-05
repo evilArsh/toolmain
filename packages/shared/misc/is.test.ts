@@ -16,8 +16,8 @@ describe("shared/misc/is.ts", () => {
   it("[isHTTPUrl]", () => {
     expect(isHTTPUrl("https://example.com")).toBeTruthy()
     expect(isHTTPUrl("http://example.com")).toBeTruthy()
-    expect(isHTTPUrl("https:/example.com")).toBeFalsy()
-    expect(isHTTPUrl("http:/example.com")).toBeFalsy()
+    expect(isHTTPUrl("https:/example.com")).toBeTruthy()
+    expect(isHTTPUrl("http:/example.com")).toBeTruthy()
     expect(isHTTPUrl("example.com")).toBeFalsy()
   })
 })
