@@ -10,14 +10,14 @@ catalogs:
     '@changesets/cli': ^2.29.6
     '@commitlint/config-conventional': ^19.8.1
     '@eslint/js': ^9.34.0
-    '@iconify/json': ^2.2.380
+    '@iconify/json': ^2.2.381
     '@iconify/types': ^2.0.0
     '@microsoft/api-extractor': ^7.52.11
     '@rollup/plugin-json': ^6.1.0
     '@rollup/plugin-terser': ^0.4.4
     '@rollup/plugin-typescript': ^12.1.4
-    '@types/node': ^24.3.0
-    '@typescript-eslint/eslint-plugin': ^8.41.0
+    '@types/node': ^24.3.1
+    '@typescript-eslint/eslint-plugin': ^8.42.0
     '@vitejs/plugin-vue': ^6.0.1
     '@vitejs/plugin-vue-jsx': ^5.1.1
     commitlint: ^19.8.1
@@ -39,11 +39,11 @@ catalogs:
     rollup-plugin-dts: ^6.2.3
     rollup-plugin-esbuild: ^6.2.1
     rollup-plugin-visualizer: ^6.0.3
-    sass: ^1.91.0
+    sass: ^1.92.0
     tinyglobby: ^0.2.14
     tsx: ^4.20.5
     typescript: ^5.9.2
-    typescript-eslint: ^8.41.0
+    typescript-eslint: ^8.42.0
     unplugin-auto-import: ^20.1.0
     unplugin-icons: ^22.2.0
     unplugin-vue-components: ^29.0.0
@@ -88,7 +88,7 @@ catalogs:
     element-plus: ^2.11.1
     pinia: ^3.0.3
     unocss: ^66.5.0
-    vue: ^3.5.20
+    vue: ^3.5.21
     vue-i18n: ^11.1.11
     vue-router: ^4.5.1
 

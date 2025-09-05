@@ -220,6 +220,7 @@
 </template>
 <script lang="ts" setup>
 import {
+  ElCard,
   ElRadioButton,
   ElRadioGroup,
   ElDescriptions,

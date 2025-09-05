@@ -1,14 +1,31 @@
-import { code1xx, code2xx, code3xx, code4xx, code5xx } from "@toolmain/shared"
+import {
+  code1xx,
+  code2xx,
+  code3xx,
+  code4xx,
+  code5xx,
+  errorToText,
+  isArray,
+  isBigInt,
+  isBoolean,
+  isString,
+  isSymbol,
+  isUndefined,
+} from "@toolmain/shared"
 import { ElMessage } from "element-plus"
+import { Primitive } from "type-fest"
 
-export type ElMessageType = "success" | "warning" | "info" | "error"
-export interface ElMessage {
+export type ElMessageType = "primary" | "success" | "warning" | "info" | "error"
+export type ElMessage = {
   msg: string
   code?: number
   type?: ElMessageType
 }
 
 const msgMap: Record<ElMessageType, (txt: string) => void> = {
+  primary: content => {
+    ElMessage({ type: "primary", message: content })
+  },
   success: content => {
     ElMessage({ type: "success", message: content })
   },
@@ -24,7 +41,9 @@ const msgMap: Record<ElMessageType, (txt: string) => void> = {
 }
 
 function codeToType(code: number): ElMessageType {
-  if (code2xx(code) || code1xx(code)) {
+  if (code1xx(code)) {
+    return "primary"
+  } else if (code2xx(code)) {
     return "success"
   } else if (code3xx(code)) {
     return "info"
@@ -33,43 +52,106 @@ function codeToType(code: number): ElMessageType {
   } else if (code5xx(code)) {
     return "error"
   } else {
-    return "info"
+    return "primary"
   }
 }
 
 /**
- * element-plus 消息弹窗
+ * element-plus 消息通知
  *
- * @param message 消息内容为字符串时，默认为`info`
+ * 消息内容为字符串时，默认为`primary`
  * ```plain
  * code类型:
- *  1xx|2xx success
+ *  1xx     primary
+ *  2xx     success
  *  3xx     info
  *  4xx     warning
  *  5xx|6xx error
- *  default info
+ *  default primary
  * ```
  * @example
  * ```ts
  * msg({code:500,msg:"error"})
  * msg({code:200,msg:"success"})
+ * msg({code:200,msg:"ok",type:"error"})
  * msg("ok")
+ * msg("ok","primary")
  * ```
  * `type` 和 `code` 同时存在时,`type`优先
  */
-export function msg(message: ElMessage | string): void {
-  if (typeof message === "string") {
-    msg({
-      msg: message,
-      code: 300,
-    })
-    return
+export function msg(message: ElMessage | Primitive | Array<any> | Error, type?: ElMessageType): void {
+  if (
+    typeof message === "number" ||
+    isString(message) ||
+    isBoolean(message) ||
+    isBigInt(message) ||
+    isSymbol(message) ||
+    isUndefined(message) ||
+    message === null
+  ) {
+    return msg({ msg: String(message), code: 100, type })
+  } else if (isArray(message)) {
+    return msg({ msg: message.join(","), code: 100, type })
+  } else if (message instanceof Error) {
+    return msg({ msg: errorToText(message), code: 500, type })
   }
-  if (message.type) {
-    msgMap[message.type](message.msg)
-  } else if (message.code) {
-    msgMap[codeToType(message.code)](message.msg)
+  if (message.msg) {
+    if (message.type || type) {
+      const m = msgMap[type ?? message.type ?? "primary"]
+      if (m) return m(message.msg)
+      return msg({ msg: message.msg, code: message.code })
+    } else if (message.code) {
+      return msgMap[codeToType(message.code)](message.msg)
+    } else {
+      return msgMap.primary(message.msg)
+    }
   } else {
-    msgMap.success(message.msg)
+    return msg(JSON.stringify(message), type)
   }
+}
+
+/**
+ * element-plus 消息通知，等价于：
+ * ```js
+ * msg(message, "primary")
+ * ```
+ */
+export function msgPrimary(message: ElMessage | Primitive | Array<any> | Error): void {
+  return msg(message, "primary")
+}
+/**
+ * element-plus 消息通知，等价于：
+ * ```js
+ * msg(message, "success")
+ * ```
+ */
+export function msgSuccess(message: ElMessage | Primitive | Array<any> | Error): void {
+  return msg(message, "success")
+}
+/**
+ * element-plus 消息通知，等价于：
+ * ```js
+ * msg(message, "warning")
+ * ```
+ */
+export function msgWarning(message: ElMessage | Primitive | Array<any> | Error): void {
+  return msg(message, "warning")
+}
+/**
+ * element-plus 消息通知，等价于：
+ * ```js
+ * msg(message, "info")
+ * ```
+ */
+export function msgInfo(message: ElMessage | Primitive | Array<any> | Error): void {
+  return msg(message, "info")
+}
+/**
+ * element-plus 消息通知，等价于：
+ * ```js
+ * msg(message, "error")
+ * ```
+ */
+export function msgError(message: ElMessage | Primitive | Array<any> | Error): void {
+  return msg(message, "error")
 }

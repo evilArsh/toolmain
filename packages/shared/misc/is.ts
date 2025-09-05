@@ -63,6 +63,10 @@ export const isUndefined = (val: unknown): val is undefined => typeof val === "u
 export const isBoolean = (val: unknown): val is boolean => typeof val === "boolean"
 
 /**
+ * 验证是否是`bigint`
+ */
+export const isBigInt = (val: unknown): val is bigint => typeof val === "bigint"
+/**
  * 验证是否是合法的 url
  * eg:
  * ```js

@@ -51,7 +51,8 @@
     "axios": "catalog:tools",
     "element-plus": "catalog:vue",
     "vue": "catalog:vue",
-    "vue-i18n": "catalog:vue"
+    "vue-i18n": "catalog:vue",
+    "type-fest": "catalog:tools"
   },
   "peerDependencies": {
     "@vueuse/core": "catalog:vue",
@@ -61,3 +62,4 @@
     "vue-i18n": "catalog:vue"
   }
 }
+
