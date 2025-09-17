@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest"
-import { cloneDeep, errorToText, px, resolvePath, toNumber } from "."
+import { cloneDeep, errorToText, merge, px, resolvePath, toNumber } from "."
 import { AxiosError, AxiosRequestHeaders } from "axios"
 
 describe("shared/misc/index.ts", () => {
@@ -28,6 +28,26 @@ describe("shared/misc/index.ts", () => {
       expect(objCloned[index]).not.toBe(val)
     })
     expect(objCloned).not.toBe(obj)
+  })
+
+  it("[merge] Object", () => {
+    const obj = { a: [1, 2, 3], b: { name: "b" }, c: { name: "c" } }
+
+    expect(merge({}, obj, { a: [4], b: { age: 18 }, c: undefined })).toEqual({
+      a: [4, 2, 3],
+      b: { age: 18, name: "b" },
+      c: { name: "c" },
+    })
+    expect(merge({}, obj, { a: [4], b: { age: 18 } })).toEqual({
+      a: [4, 2, 3],
+      b: { age: 18, name: "b" },
+      c: { name: "c" },
+    })
+    expect(merge({}, obj, { a: 1, b: { age: 18 } })).toEqual({
+      a: 1,
+      b: { age: 18, name: "b" },
+      c: { name: "c" },
+    })
   })
 
   it("[errorToText]", () => {
