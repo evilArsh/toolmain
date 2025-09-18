@@ -1,5 +1,11 @@
 # @toolmain/shared
 
+## 1.2.12
+
+### Patch Changes
+
+- add new isXX function
+
 ## 1.2.11
 
 ### Patch Changes
