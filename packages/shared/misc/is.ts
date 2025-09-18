@@ -58,6 +58,14 @@ export const isPromise = <T = any>(val: unknown): val is Promise<T> => {
  */
 export const isUndefined = (val: unknown): val is undefined => typeof val === "undefined"
 /**
+ * 判断是否是`null`
+ */
+export const isNull = (val: unknown): val is null => val === null
+/**
+ * 判断是否是`null`或`undefined`
+ */
+export const isNil = (val: unknown): val is null | undefined => isNull(val) || isUndefined(val)
+/**
  * 判断是否是`boolean`
  */
 export const isBoolean = (val: unknown): val is boolean => typeof val === "boolean"
