@@ -1,5 +1,11 @@
 # @toolmain/shared
 
+## 1.2.13
+
+### Patch Changes
+
+- fix build error
+
 ## 1.2.12
 
 ### Patch Changes
