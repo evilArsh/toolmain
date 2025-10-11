@@ -1,6 +1,6 @@
 {
   "name": "@toolmain/shared",
-  "version": "1.2.13",
+  "version": "1.2.14",
   "description": "utility toolkit collections",
   "license": "MIT",
   "type": "module",
@@ -47,11 +47,6 @@
   "devDependencies": {
     "@types/hast": "catalog:tools",
     "@types/lodash.merge": "catalog:tools",
-    "@vueuse/core": "catalog:vue",
-    "axios": "catalog:tools",
-    "element-plus": "catalog:vue",
-    "vue": "catalog:vue",
-    "vue-i18n": "catalog:vue",
     "type-fest": "catalog:tools"
   },
   "peerDependencies": {

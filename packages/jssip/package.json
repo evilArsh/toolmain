@@ -1,6 +1,6 @@
 {
   "name": "@toolmain/jssip",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "",
   "author": "arshdebian@163.com",
   "license": "MIT",
@@ -30,10 +30,10 @@
   ],
   "dependencies": {
     "events": "^3.3.0",
-    "jssip": "3.10.0",
-    "ulid": "^2.3.0"
+    "jssip": "3.10.1",
+    "ulid": "^3.0.1"
   },
   "devDependencies": {
-    "@types/events": "^3.0.0"
+    "@types/events": "^3.0.3"
   }
 }

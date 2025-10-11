@@ -21,7 +21,7 @@ const defaultConfig = (_mode: string, _command: string): UserConfig => {
         fileName: "index",
       },
       rollupOptions: {
-        external: ["vue", "@vueuse/core", /@toolmain.*/, "vue-router", "element-plus", "pinia", "three"],
+        external: ["vue", "@vueuse/core", /@toolmain.*/, "vue-router", "element-plus", "pinia", "three", "dexie"],
         output: {
           globals: {
             vue: "Vue",
@@ -30,6 +30,7 @@ const defaultConfig = (_mode: string, _command: string): UserConfig => {
             "@vueuse/core": "VueUse",
             "vue-router": "VueRouter",
             "element-plus": "ElementPlus",
+            dexie: "Dexie",
           },
         },
       },

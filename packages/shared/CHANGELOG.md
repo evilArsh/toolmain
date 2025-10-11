@@ -1,5 +1,11 @@
 # @toolmain/shared
 
+## 1.2.14
+
+### Patch Changes
+
+- update deps
+
 ## 1.2.13
 
 ### Patch Changes

@@ -1,5 +1,20 @@
 # @toolmain/components
 
+## 1.2.19
+
+### Patch Changes
+
+- update dexie dependency
+
+## 1.2.18
+
+### Patch Changes
+
+- update deps
+- Updated dependencies
+  - @toolmain/shared@1.2.14
+  - @toolmain/libs@1.1.10
+
 ## 1.2.17
 
 ### Patch Changes

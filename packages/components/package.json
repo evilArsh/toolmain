@@ -1,6 +1,6 @@
 {
   "name": "@toolmain/components",
-  "version": "1.2.17",
+  "version": "1.2.19",
   "description": "Convient components base on vue3",
   "license": "MIT",
   "type": "module",
@@ -30,6 +30,7 @@
   "peerDependencies": {
     "@types/three": "catalog:tools",
     "@vueuse/core": "catalog:vue",
+    "dexie": "catalog:tools",
     "element-plus": "catalog:vue",
     "pinia": "catalog:vue",
     "three": "catalog:tools",
@@ -38,20 +39,8 @@
     "vue-router": "catalog:vue"
   },
   "dependencies": {
-    "@toolmain/shared": "workspace:^",
     "@toolmain/libs": "workspace:^",
-    "dexie": "catalog:tools",
+    "@toolmain/shared": "workspace:^",
     "three-mesh-bvh": "catalog:tools"
-  },
-  "devDependencies": {
-    "@types/three": "catalog:tools",
-    "@vueuse/core": "catalog:vue",
-    "element-plus": "catalog:vue",
-    "pinia": "catalog:vue",
-    "three": "catalog:tools",
-    "unocss": "catalog:vue",
-    "vue": "catalog:vue",
-    "vue-router": "catalog:vue",
-    "type-fest": "catalog:tools"
   }
 }

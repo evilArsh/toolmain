@@ -1,5 +1,13 @@
 # @toolmain/libs
 
+## 1.1.10
+
+### Patch Changes
+
+- update deps
+- Updated dependencies
+  - @toolmain/shared@1.2.14
+
 ## 1.1.9
 
 ### Patch Changes
