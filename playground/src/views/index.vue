@@ -1,9 +1,15 @@
 <script setup lang="ts">
 import { RouterView, useRoute, useRouter } from "vue-router"
 import { initRoutes } from "@/routes/index"
-import Nav from "@/components/nav.vue"
 import { markRaw, reactive, shallowRef, watchEffect } from "vue"
 import { Router } from "@toolmain/libs"
+import { CSSProperties } from "@toolmain/shared"
+import { Resize } from "@toolmain/components"
+import { ref } from "vue"
+
+const targetStyle = ref<CSSProperties>({
+  width: "350px",
+})
 const router = useRouter()
 const route = useRoute()
 const useMenu = () => {
@@ -35,24 +41,27 @@ watchEffect(() => {
     <div class="main-content">
       <!-- <div class="main-content-header"></div> -->
       <div class="main-content-inner">
-        <Nav>
-          <template #submenu>
-            <el-scrollbar>
-              <el-tree
-                :current-node-key="tree.current"
-                :data="node"
-                :props="tree.props"
-                node-key="fullPath"
-                :expand-on-click-node="false"
-                default-expand-all
-                highlight-current
-                @node-click="tree.onNodeClick"></el-tree>
-            </el-scrollbar>
-          </template>
-          <template #content>
+        <div class="subnav-container">
+          <div class="subnav-provider" :style="targetStyle">
+            <Resize v-model="targetStyle" size="8px" direction="right" />
+            <el-card class="subnav-card" body-class="flex flex-1 flex-col overflow-hidden" shadow="never">
+              <el-scrollbar>
+                <el-tree
+                  :current-node-key="tree.current"
+                  :data="node"
+                  :props="tree.props"
+                  node-key="fullPath"
+                  :expand-on-click-node="false"
+                  default-expand-all
+                  highlight-current
+                  @node-click="tree.onNodeClick"></el-tree>
+              </el-scrollbar>
+            </el-card>
+          </div>
+          <div class="subnav-content">
             <router-view></router-view>
-          </template>
-        </Nav>
+          </div>
+        </div>
       </div>
     </div>
   </div>
