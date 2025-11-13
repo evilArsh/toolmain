@@ -1,20 +1,36 @@
 <script lang="ts" setup>
 import { formatSecond, useShortcut } from "@toolmain/shared"
 import { ref, watchEffect } from "vue"
+import { ElMessageBox } from "element-plus"
 const list = ref<{ key: string; active: boolean; time: string }[]>([])
 const timeout = ref(0)
 const { listen } = useShortcut()
-const { key, trigger } = listen("ctrl+c", async (active, key) => {
+const { key, trigger } = listen(
+  "ctrl+c",
+  async (active, key) => {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        active && list.value.unshift({ key, active, time: formatSecond() })
+        resolve()
+      }, timeout.value * 1000)
+    })
+  },
+  {
+    beforeTrigger(event, _key) {
+      console.log(event)
+      if (event.target instanceof HTMLElement) {
+        if (event.target.tagName === "INPUT" || event.target.tagName === "TEXTAREA") {
+          return true
+        }
+      }
+      return false
+    },
+  }
+)
+const { key: key2 } = listen("ctrl+shift+c", async (active, key) => {
   return new Promise(resolve => {
     setTimeout(() => {
-      active && list.value.unshift({ key, active, time: formatSecond() })
-      resolve()
-    }, timeout.value * 1000)
-  })
-})
-const { key: key2 } = listen("ctrl+shift+v", async (active, key) => {
-  return new Promise(resolve => {
-    setTimeout(() => {
+      active && testBtn1()
       active && list.value.unshift({ key, active, time: formatSecond() })
       resolve()
     }, timeout.value * 1000)
@@ -30,6 +46,9 @@ const tempKey = ref("")
 const tempObj = ref<{ label: string; value: string }>({ label: "ctrl+b", value: "ctrl+b" })
 function onKeyChange() {
   key.value = tempKey.value
+}
+function testBtn1() {
+  ElMessageBox.confirm("text", "tip")
 }
 watchEffect(() => {
   if (tempObj.value) {
@@ -56,6 +75,7 @@ watchEffect(() => {
       <div class="flex flex-wrap gap-1rem items-center">
         <el-button @click="list = []">clean</el-button>
         <el-button @click="trigger">trigger</el-button>
+        <el-button @click="testBtn1">confirm</el-button>
         <div class="flex items-center gap-1rem p2px bg-blue">
           <el-input v-model="tempKey"> </el-input>
           <el-button @click="onKeyChange">change</el-button>

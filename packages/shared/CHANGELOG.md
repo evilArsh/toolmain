@@ -1,5 +1,11 @@
 # @toolmain/shared
 
+## 1.3.0
+
+### Minor Changes
+
+- feat: add `beforeTrigger` hooks to `useShortcut`
+
 ## 1.2.14
 
 ### Patch Changes

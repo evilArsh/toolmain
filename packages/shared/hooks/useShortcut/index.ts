@@ -11,6 +11,10 @@ export type ShortcutOptions = {
   capture?: boolean
   splitKey?: string
   single?: boolean
+  /**
+   * if return false, will prevent from triggering shortcut event
+   */
+  beforeTrigger?: (event: KeyboardEvent, key: string) => boolean
 }
 export type ShortcutHandler = {
   id: string
@@ -57,6 +61,9 @@ export function useShortcut() {
       if (old) hotkeys.unbind(old, scope)
       hotkeys(val, { ...config, keyup: true, capture: true, scope }, (event, handler) => {
         const key = handler.key
+        if (config?.beforeTrigger && !config.beforeTrigger(event, key)) {
+          return
+        }
         queue.add(async () => callback(event.type === "keydown", key))
       })
     }
@@ -79,6 +86,8 @@ export function useShortcut() {
       trigger,
     }
   }
+  function pause() {}
+  function resume() {}
   onBeforeUnmount(() => {
     cleanAll()
   })
@@ -87,5 +96,7 @@ export function useShortcut() {
     cleanAll,
     clean,
     listen,
+    resume,
+    pause,
   }
 }
