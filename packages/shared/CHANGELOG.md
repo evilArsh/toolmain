@@ -1,5 +1,11 @@
 # @toolmain/shared
 
+## 1.3.2
+
+### Patch Changes
+
+- chore: add types
+
 ## 1.3.1
 
 ### Patch Changes

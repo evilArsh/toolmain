@@ -1,4 +1,4 @@
-import { onBeforeUnmount, readonly, ref, ShallowReactive, shallowReactive, watch, WatchHandle } from "vue"
+import { onBeforeUnmount, readonly, Ref, ref, ShallowReactive, shallowReactive, watch, WatchHandle } from "vue"
 import hotkeys from "hotkeys-js"
 import PQueue from "p-queue"
 import { uniqueId } from "../../misc"
@@ -25,7 +25,39 @@ export type ShortcutHandler = {
   handler: WatchHandle
   queue: PQueue
 }
-export function useShortcut() {
+export interface ShortcutListenHandler {
+  id: string
+  /**
+   * shortcut key, it can be dynamically modified
+   */
+  key: Ref<string>
+  /**
+   * manually trigger shortcut event
+   */
+  trigger: (...args: unknown[]) => void
+  taskCount: Readonly<Ref<number>>
+  /**
+   * `false` means that all tasks were finished, includes empty task queue and no pending task
+   */
+  taskPending: Readonly<Ref<boolean>>
+}
+export interface ShortcutManager {
+  handler: ShallowReactive<ShortcutHandler[]>
+  /**
+   * clean all event listener
+   */
+  cleanAll: () => void
+  /**
+   * clean specified shortcut listener by `id`
+   */
+  clean: (id: string) => void
+  listen: (
+    shortcut: string,
+    callback: (active: boolean, key: string, ...args: unknown[]) => Promise<void> | void,
+    config?: ShortcutOptions
+  ) => ShortcutListenHandler
+}
+export function useShortcut(): ShortcutManager {
   const scope = "use-shortcut-scope"
   const handler: ShallowReactive<ShortcutHandler[]> = shallowReactive<ShortcutHandler[]>([])
   hotkeys.filter = () => {
@@ -36,7 +68,7 @@ export function useShortcut() {
     shortcut: string,
     callback: (active: boolean, key: string, ...args: unknown[]) => Promise<void> | void,
     config?: ShortcutOptions
-  ) {
+  ): ShortcutListenHandler {
     const id = uniqueId()
     const key = ref(shortcut)
     const queue = new PQueue({ concurrency: 1 })
@@ -95,9 +127,6 @@ export function useShortcut() {
       key,
       trigger,
       taskCount: readonly(taskCount),
-      /**
-       * `false` means that all tasks were finished, includes empty task queue and no pending task
-       */
       taskPending: readonly(taskPending),
     }
   }
