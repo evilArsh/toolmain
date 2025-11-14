@@ -1,5 +1,13 @@
 # @toolmain/libs
 
+## 1.1.11
+
+### Patch Changes
+
+- update useShortcut
+- Updated dependencies
+  - @toolmain/shared@1.3.1
+
 ## 1.1.10
 
 ### Patch Changes

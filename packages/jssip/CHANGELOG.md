@@ -1,5 +1,11 @@
 # @toolmain/jssip
 
+## 1.0.11
+
+### Patch Changes
+
+- update useShortcut
+
 ## 1.0.10
 
 ### Patch Changes

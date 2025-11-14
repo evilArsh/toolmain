@@ -5,7 +5,7 @@ import { ElMessageBox } from "element-plus"
 const list = ref<{ key: string; active: boolean; time: string }[]>([])
 const timeout = ref(0)
 const { listen } = useShortcut()
-const { key, trigger } = listen(
+const { key, trigger, taskCount, taskPending } = listen(
   "ctrl+c",
   async (active, key) => {
     return new Promise(resolve => {
@@ -17,7 +17,6 @@ const { key, trigger } = listen(
   },
   {
     beforeTrigger(event, _key) {
-      console.log(event)
       if (event.target instanceof HTMLElement) {
         if (event.target.tagName === "INPUT" || event.target.tagName === "TEXTAREA") {
           return true
@@ -27,7 +26,11 @@ const { key, trigger } = listen(
     },
   }
 )
-const { key: key2 } = listen("ctrl+shift+c", async (active, key) => {
+const {
+  key: key2,
+  taskCount: taskCount2,
+  taskPending: taskPending2,
+} = listen("ctrl+shift+c", async (active, key) => {
   return new Promise(resolve => {
     setTimeout(() => {
       active && testBtn1()
@@ -38,8 +41,17 @@ const { key: key2 } = listen("ctrl+shift+c", async (active, key) => {
 })
 
 const { listen: listen3 } = useShortcut()
-const { key: key3 } = listen3("ctrl+v", async (active, key) => {
-  active && list.value.unshift({ key, active, time: formatSecond() })
+const {
+  key: key3,
+  taskCount: taskCount3,
+  taskPending: taskPending3,
+} = listen3("ctrl+v", async (active, key) => {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      active && list.value.unshift({ key, active, time: formatSecond() })
+      resolve()
+    }, timeout.value * 1000)
+  })
 })
 
 const tempKey = ref("")
@@ -59,7 +71,11 @@ watchEffect(() => {
 <template>
   <el-card class="w-full">
     <template #header>
-      <el-text>useShortcut ：{{ key }},{{ key2 }},{{ key3 }}</el-text>
+      <div class="flex flex-col gap-1rem">
+        <el-text class="self-start!">{{ key }},count:{{ taskCount }},pending:{{ taskPending }}</el-text>
+        <el-text class="self-start!">{{ key2 }},count:{{ taskCount2 }},pending:{{ taskPending2 }}</el-text>
+        <el-text class="self-start!">{{ key3 }},count:{{ taskCount3 }},pending:{{ taskPending3 }}</el-text>
+      </div>
     </template>
     <el-scrollbar height="50rem">
       <div class="flex flex-col justify-end gap-1rem">

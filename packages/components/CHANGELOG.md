@@ -1,5 +1,14 @@
 # @toolmain/components
 
+## 1.2.20
+
+### Patch Changes
+
+- update useShortcut
+- Updated dependencies
+  - @toolmain/shared@1.3.1
+  - @toolmain/libs@1.1.11
+
 ## 1.2.19
 
 ### Patch Changes
