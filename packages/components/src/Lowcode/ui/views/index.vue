@@ -3,7 +3,7 @@
     <div>
       <el-input v-model="keyword" placeholder="搜索">
         <template #prefix>
-          <i class="i-ep:search"></i>
+          <i class="i-ep-search"></i>
         </template>
       </el-input>
       <el-slider v-model="showCols" :step="1" :min="2" :max="10" show-stops />

@@ -1,7 +1,7 @@
 <template>
   <div v-show="showTip" class="tipWrap flex flex-col gap-10px">
     <div @click="showTip = false" class="close flex items-center justify-center cursor-pointer hover:bg-gray-500">
-      <i class="i-ep:close text-12px"></i>
+      <i class="i-ep-close text-12px"></i>
     </div>
     <TipWrap :data="single.data" v-show="showSingle"></TipWrap>
     <div v-for="item in independent.dataList" :key="item.url" class="flex flex-col gap-10px">

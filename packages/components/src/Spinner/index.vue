@@ -24,7 +24,7 @@ const existed = computed(() => {
 })
 </script>
 <template>
-  <i-ep:loading v-if="existed" class="spin-element" :class="{ show }"></i-ep:loading>
+  <i-ep-loading v-if="existed" class="spin-element" :class="{ show }"></i-ep-loading>
 </template>
 <style lang="scss" scoped>
 .spin-element {

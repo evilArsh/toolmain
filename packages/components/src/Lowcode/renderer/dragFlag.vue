@@ -1,11 +1,11 @@
 <template>
-  <i-ic:outline-control-camera
+  <i-ic-outline-control-camera
     class="text-16px cursor-pointer c-red absolute top-0 left-0"
     :id
     @mousedown="onMouseDown"
     @mouseup="onMouseUp">
     >
-  </i-ic:outline-control-camera>
+  </i-ic-outline-control-camera>
 </template>
 <script lang="ts" setup>
 import { ref } from "vue"

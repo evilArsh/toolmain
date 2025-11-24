@@ -8,7 +8,7 @@
               <div v-for="(item, index) in form.log" :key="index" class="flex flex-1 gap-5px items-start">
                 <div class="flex flex-col gap-5px">
                   <div class="flex items-center gap-5px">
-                    <i class="i-ep:delete c-red cursor-pointer" @click="hdl.onLogDel(index, 1)"></i>
+                    <i class="i-ep-delete c-red cursor-pointer" @click="hdl.onLogDel(index, 1)"></i>
                     <el-tag v-if="item.code < 200" type="primary">{{ item.code }}</el-tag>
                     <el-tag v-else-if="item.code < 300" type="success">{{ item.code }}</el-tag>
                     <el-tag v-else-if="item.code < 400" type="warning">{{ item.code }}</el-tag>
@@ -19,7 +19,7 @@
                     <el-button type="primary" size="small" @click="quickHdl.onTeleport(item.data, 'point')">
                       <template #icon>
                         <el-tooltip content="移动到鼠标指向的点" placement="top-start">
-                          <i class="i-ep:info-filled"></i>
+                          <i class="i-ep-info-filled"></i>
                         </el-tooltip>
                       </template>
                       瞬移point
@@ -27,7 +27,7 @@
                     <el-button type="primary" size="small" @click="quickHdl.onTeleport(item.data, 'position')">
                       <template #icon>
                         <el-tooltip content="移动到对象position位置" placement="top-start">
-                          <i class="i-ep:info-filled"></i>
+                          <i class="i-ep-info-filled"></i>
                         </el-tooltip>
                       </template>
                       瞬移position
