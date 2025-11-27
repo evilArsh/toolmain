@@ -1,5 +1,14 @@
 # @toolmain/components
 
+## 1.2.21
+
+### Patch Changes
+
+- chore: bump dependencies versions
+- Updated dependencies
+  - @toolmain/shared@1.3.3
+  - @toolmain/libs@1.1.12
+
 ## 1.2.20
 
 ### Patch Changes
