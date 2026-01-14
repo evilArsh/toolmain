@@ -1,5 +1,15 @@
 # @toolmain/shared
 
+## 1.3.4
+
+### Patch Changes
+
+- feat(msg): enhance msg function with custom props and improved type handling
+
+  refactor: reorganize JsSIP imports and update dependencies
+
+  chore: clean up unused refs and update dependencies
+
 ## 1.3.3
 
 ### Patch Changes
