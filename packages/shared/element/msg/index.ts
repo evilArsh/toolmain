@@ -8,11 +8,12 @@ import {
   isArray,
   isBigInt,
   isBoolean,
+  isNull,
   isString,
   isSymbol,
   isUndefined,
 } from "@toolmain/shared"
-import { ElMessage } from "element-plus"
+import { ElMessage, MessageProps } from "element-plus"
 import { Primitive } from "type-fest"
 
 export type ElMessageType = "primary" | "success" | "warning" | "info" | "error"
@@ -22,21 +23,21 @@ export type ElMessage = {
   type?: ElMessageType
 }
 
-const msgMap: Record<ElMessageType, (txt: string) => void> = {
-  primary: content => {
-    ElMessage({ type: "primary", message: content })
+const msgMap: Record<ElMessageType, (txt: string, props?: Partial<MessageProps>) => void> = {
+  primary: (content, props) => {
+    ElMessage({ type: "primary", message: content, ...props })
   },
-  success: content => {
-    ElMessage({ type: "success", message: content })
+  success: (content, props) => {
+    ElMessage({ type: "success", message: content, ...props })
   },
-  warning: content => {
-    ElMessage({ type: "warning", message: content })
+  warning: (content, props) => {
+    ElMessage({ type: "warning", message: content, ...props })
   },
-  info: content => {
-    ElMessage({ type: "info", message: content })
+  info: (content, props) => {
+    ElMessage({ type: "info", message: content, ...props })
   },
-  error: content => {
-    ElMessage({ type: "error", message: content })
+  error: (content, props) => {
+    ElMessage({ type: "error", message: content, ...props })
   },
 }
 
@@ -79,7 +80,10 @@ function codeToType(code: number): ElMessageType {
  * ```
  * `type` 和 `code` 同时存在时,`type`优先
  */
-export function msg(message: ElMessage | Primitive | Array<any> | Error, type?: ElMessageType): void {
+export function msg(
+  message: ElMessage | Primitive | Array<any> | Error,
+  typeOrProps?: ElMessageType | Partial<MessageProps>
+): void {
   if (
     typeof message === "number" ||
     isString(message) ||
@@ -87,26 +91,29 @@ export function msg(message: ElMessage | Primitive | Array<any> | Error, type?: 
     isBigInt(message) ||
     isSymbol(message) ||
     isUndefined(message) ||
-    message === null
+    isNull(message)
   ) {
-    return msg({ msg: String(message), code: 100, type })
+    return msg({ msg: String(message), code: 100 }, typeOrProps)
   } else if (isArray(message)) {
-    return msg({ msg: message.join(","), code: 100, type })
+    return msg({ msg: message.join(","), code: 100 }, typeOrProps)
   } else if (message instanceof Error) {
-    return msg({ msg: errorToText(message), code: 500, type })
+    return msg({ msg: errorToText(message), code: 500 }, typeOrProps)
+  }
+  if (isString(typeOrProps)) {
+    return msg({ msg: message.msg, code: message.code }, { type: typeOrProps })
   }
   if (message.msg) {
-    if (message.type || type) {
-      const m = msgMap[type ?? message.type ?? "primary"]
-      if (m) return m(message.msg)
-      return msg({ msg: message.msg, code: message.code })
+    if (message.type || typeOrProps?.type) {
+      const m = msgMap[typeOrProps?.type ?? message.type ?? "primary"]
+      if (m) return m(message.msg, typeOrProps)
+      return msg({ msg: message.msg, code: message.code }, typeOrProps)
     } else if (message.code) {
-      return msgMap[codeToType(message.code)](message.msg)
+      return msgMap[codeToType(message.code)](message.msg, typeOrProps)
     } else {
-      return msgMap.primary(message.msg)
+      return msgMap.primary(message.msg, typeOrProps)
     }
   } else {
-    return msg(JSON.stringify(message), type)
+    return msg(JSON.stringify(message), typeOrProps)
   }
 }
 

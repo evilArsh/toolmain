@@ -14,6 +14,9 @@
       msg({code:500,msg:"消息弹框",type:"error"})
     </el-button>
     <el-button @click="hdl.onClick({ code: 500, msg: '消息弹框' })"> msg({code:500,msg:"消息弹框"}) </el-button>
+    <el-button @click="hdl.onClick({ code: 500, msg: '消息弹框' }, { plain: true, offset: 100 })">
+      msg({ code: 500, msg: '消息弹框' }, undefined, { plain: true, offset: 100 })
+    </el-button>
   </div>
 </template>
 <script setup>

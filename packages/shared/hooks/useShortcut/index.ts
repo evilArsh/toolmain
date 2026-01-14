@@ -5,9 +5,9 @@ import { uniqueId } from "../../misc"
 
 export type ShortcutOptions = {
   // scope?: string
-  element?: HTMLElement | null
-  keyup?: boolean | null
-  keydown?: boolean | null
+  element?: HTMLElement | Document
+  keyup?: boolean
+  keydown?: boolean
   capture?: boolean
   splitKey?: string
   single?: boolean
