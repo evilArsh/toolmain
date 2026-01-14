@@ -1,4 +1,4 @@
-import { type CallOptions } from "jssip/lib/UA"
+import { type CallOptions } from "jssip/src/UA"
 import { type JsSipConfig } from "./jssip"
 
 export enum cmd {

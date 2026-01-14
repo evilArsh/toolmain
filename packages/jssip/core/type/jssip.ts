@@ -1,6 +1,6 @@
-import { type UAConfiguration } from "jssip/lib/UA"
+import { type UAConfiguration } from "jssip/src/UA"
 import { type Originator } from "../cause/on"
-import { type RTCSession } from "jssip/lib/RTCSession"
+import { type RTCSession } from "jssip/src/RTCSession"
 
 export interface Config {
   call: JsSipCallConfig

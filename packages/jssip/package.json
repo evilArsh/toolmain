@@ -30,8 +30,8 @@
   ],
   "dependencies": {
     "events": "^3.3.0",
-    "jssip": "3.10.1",
-    "ulid": "^3.0.1"
+    "jssip": "3.11.1",
+    "ulid": "^3.0.2"
   },
   "devDependencies": {
     "@types/events": "^3.0.3"

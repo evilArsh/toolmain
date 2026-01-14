@@ -1,29 +1,4 @@
-import type {
-  ConnectingEvent,
-  EndEvent,
-  HoldEvent,
-  IceCandidateEvent,
-  IncomingAckEvent,
-  IncomingEvent,
-  MediaConstraints,
-  OutgoingAckEvent,
-  OutgoingEvent,
-  PeerConnectionEvent,
-} from "jssip/lib/RTCSession"
-import type {
-  CallOptions,
-  ConnectedEvent,
-  IncomingOptionsEvent,
-  IncomingRTCSessionEvent,
-  OutgoingOptionsEvent,
-  OutgoingRTCSessionEvent,
-  RegisteredEvent,
-  UAConnectingEvent,
-  UnRegisteredEvent,
-} from "jssip/lib/UA"
 import { ulid } from "ulid"
-import type { DisconnectEvent } from "jssip/lib/WebSocketInterface"
-import type { IncomingRequest, IncomingResponse } from "jssip/lib/SIPMessage"
 import * as vars from "./cause/index"
 import * as JsSIP from "jssip"
 import { type CauseData, type Config, type JsSipConfig, type Session } from "./type/jssip"
@@ -41,6 +16,31 @@ import type {
   CMDUnmute,
 } from "./type/cmd"
 import { Originator } from "./cause/on"
+import {
+  ConnectedEvent,
+  DisconnectEvent,
+  IncomingOptionsEvent,
+  IncomingRTCSessionEvent,
+  OutgoingOptionsEvent,
+  OutgoingRTCSessionEvent,
+  RegisteredEvent,
+  UnRegisteredEvent,
+  ConnectingEvent,
+  CallOptions,
+} from "jssip/src/UA"
+import { IncomingRequest, IncomingResponse } from "jssip/src/SIPMessage"
+import {
+  ConnectingEvent as RTCConnectingEvent,
+  PeerConnectionEvent,
+  IncomingEvent,
+  EndEvent,
+  HoldEvent,
+  IceCandidateEvent,
+  IncomingAckEvent,
+  OutgoingAckEvent,
+  OutgoingEvent,
+  MediaStreamTypes,
+} from "jssip/src/RTCSession"
 
 // JsSIP.debug.disable("JsSIP:*")
 export class JSSipWraper extends EventEmitter {
@@ -76,7 +76,7 @@ export class JSSipWraper extends EventEmitter {
   private __listenEvent() {
     if (this.ua) {
       // 连接中
-      this.ua.on("connecting", (e: UAConnectingEvent) => {
+      this.ua.on("connecting", (e: ConnectingEvent) => {
         const data = vars.resolve({
           msg: vars.on.ON_CONNECTING,
           uri: this.c.sip.uri,
@@ -156,7 +156,7 @@ export class JSSipWraper extends EventEmitter {
         this.dispatch(vars.on.ON_REGISTRATIONFAILED, data)
       })
       // 注册过期
-      this.ua.on("registrationExpiring", (_e: any) => {
+      this.ua.on("registrationExpiring", () => {
         vars.resolve({
           msg: vars.on.ON_REGISTRATIONEXPIRING,
           id: this.c.sip.sipWorkerid,
@@ -229,7 +229,7 @@ export class JSSipWraper extends EventEmitter {
           })
         })
         // 连接中
-        e.session.on("connecting", (_e: ConnectingEvent) => {
+        e.session.on("connecting", (_e: RTCConnectingEvent) => {
           const data = vars.resolve({
             msg: vars.on.ON_SESSTION_CONNECTING,
             id: this.c.sip.sipWorkerid,
@@ -399,7 +399,7 @@ export class JSSipWraper extends EventEmitter {
           this.dispatchSession(data)
         })
         // 静音
-        e.session.on("muted", (e: MediaConstraints) => {
+        e.session.on("muted", (e: MediaStreamTypes) => {
           const data = vars.resolve({
             msg: vars.on.ON_MUTE,
             uri: this.c.sip.uri,
@@ -412,7 +412,7 @@ export class JSSipWraper extends EventEmitter {
           this.dispatchSession(data)
         })
         // 取消静音
-        e.session.on("unmuted", (e: MediaConstraints) => {
+        e.session.on("unmuted", (e: MediaStreamTypes) => {
           const data = vars.resolve({
             msg: vars.on.ON_UNMUTE,
             uri: this.c.sip.uri,
