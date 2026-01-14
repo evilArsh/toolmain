@@ -21,7 +21,7 @@ const props = defineProps<{
 
 const shadowRef = useTemplateRef("shadowRef")
 // 子元素的引用：可以调用组件expose的方法
-const childRef = shallowRef<unknown>()
+// const childRef = shallowRef<unknown>()
 // 子元素HTML node：用于获取子元素尺寸
 const childEl = shallowRef<HTMLElement>()
 

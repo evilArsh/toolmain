@@ -107,7 +107,7 @@ export function useCollider(bot: Bot) {
     tempBox.max.addScalar(capsule.radius)
     geometry.boundsTree.shapecast({
       intersectsBounds: box => box.intersectsBox(tempBox),
-      intersectsTriangle: tri => {
+      intersectsTriangle: (tri: any) => {
         // check if the triangle is intersecting the capsule and adjust the
         // capsule position if it is.
         const triPoint = tempVector

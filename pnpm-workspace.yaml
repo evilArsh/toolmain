@@ -7,61 +7,61 @@ catalog:
 
 catalogs:
   dev:
-    '@changesets/cli': ^2.29.7
-    '@commitlint/config-conventional': ^20.0.0
-    '@eslint/js': ^9.39.1
-    '@iconify/json': ^2.2.411
+    '@changesets/cli': ^2.29.8
+    '@commitlint/config-conventional': ^20.3.1
+    '@eslint/js': ^9.39.2
+    '@iconify/json': ^2.2.427
     '@iconify/types': ^2.0.0
-    '@microsoft/api-extractor': ^7.55.1
+    '@microsoft/api-extractor': ^7.55.2
     '@rollup/plugin-json': ^6.1.0
     '@rollup/plugin-terser': ^0.4.4
     '@rollup/plugin-typescript': ^12.3.0
-    '@types/node': ^24.10.1
-    '@typescript-eslint/eslint-plugin': ^8.48.0
-    '@vitejs/plugin-vue': ^6.0.2
-    '@vitejs/plugin-vue-jsx': ^5.1.2
-    commitlint: ^20.1.0
-    eslint: ^9.39.1
+    '@types/node': ^25.0.8
+    '@typescript-eslint/eslint-plugin': ^8.53.0
+    '@vitejs/plugin-vue': ^6.0.3
+    '@vitejs/plugin-vue-jsx': ^5.1.3
+    commitlint: ^20.3.1
+    eslint: ^9.39.2
     eslint-config-prettier: ^10.1.8
     eslint-plugin-import: ^2.32.0
-    eslint-plugin-n: ^17.23.1
+    eslint-plugin-n: ^17.23.2
     eslint-plugin-prettier: ^5.5.4
     eslint-plugin-promise: ^7.2.1
-    eslint-plugin-vue: ^10.6.1
-    globals: ^16.5.0
+    eslint-plugin-vue: ^10.6.2
+    globals: ^17.0.0
     husky: ^9.1.7
     jiti: ^2.6.1
-    jsdom: ^27.2.0
+    jsdom: ^27.4.0
     lint-staged: ^16.2.7
-    prettier: ^3.7.1
+    prettier: ^3.7.4
     prettier-eslint: ^16.4.2
-    rollup: ^4.53.3
+    rollup: ^4.55.1
     rollup-plugin-dts: ^6.3.0
     rollup-plugin-esbuild: ^6.2.1
     rollup-plugin-visualizer: ^6.0.5
-    sass: ^1.94.2
+    sass: ^1.97.2
     tinyglobby: ^0.2.15
-    tsx: ^4.20.6
+    tsx: ^4.21.0
     typescript: ^5.9.3
-    typescript-eslint: ^8.48.0
+    typescript-eslint: ^8.53.0
     unplugin-auto-import: ^20.3.0
     unplugin-icons: ^22.5.0
     unplugin-vue-components: ^30.0.0
-    vite: ^7.2.4
+    vite: ^7.3.1
     vite-plugin-css-injected-by-js: ^3.5.2
     vite-plugin-vue-devtools: ^8.0.5
     vue-eslint-parser: ^10.2.0
-    vue-tsc: ^3.1.5
+    vue-tsc: ^3.2.2
   test:
-    '@vitest/browser': ^4.0.14
-    '@vitest/coverage-v8': ^4.0.14
-    '@vitest/ui': ^4.0.14
+    '@vitest/browser': ^4.0.17
+    '@vitest/coverage-v8': ^4.0.17
+    '@vitest/ui': ^4.0.17
     '@vue/test-utils': ^2.4.6
-    msw: ^2.12.3
-    vitest: ^4.0.14
+    msw: ^2.12.7
+    vitest: ^4.0.17
     vitest-browser-vue: ^2.0.1
   tools:
-    '@babel/types': ^7.28.5
+    '@babel/types': ^7.28.6
     '@types/hash-sum': ^1.0.2
     '@types/hast': ^3.0.4
     '@types/lodash.merge': ^4.6.9
@@ -71,28 +71,31 @@ catalogs:
     dayjs: ^1.11.19
     dexie: ^4.2.1
     hash-sum: ^2.0.0
-    hotkeys-js: ^3.13.15
+    hotkeys-js: ^4.0.0
     lodash.merge: ^4.6.2
     nanoid: ^5.1.6
-    p-queue: ^9.0.1
+    p-queue: ^9.1.0
     rfdc: ^1.4.1
     serialize-error: ^12.0.0
-    shiki: ^3.17.0
+    shiki: ^3.21.0
     style-value-types: ^5.1.2
     sucrase: ^3.35.1
     three: ^0.180.0
-    three-mesh-bvh: ^0.9.2
-    type-fest: ^5.2.0
+    three-mesh-bvh: ^0.9.5
+    type-fest: ^5.4.0
   vue:
     '@vueuse/core': ^14.1.0
-    element-plus: ^2.11.8
+    element-plus: ^2.13.1
     pinia: ^3.0.4
-    unocss: ^66.5.9
-    vue: ^3.5.25
-    vue-i18n: ^11.2.2
-    vue-router: ^4.6.3
+    unocss: ^66.5.12
+    vue: ^3.5.26
+    vue-i18n: ^11.2.8
+    vue-router: ^4.6.4
 
 onlyBuiltDependencies:
+  - '@parcel/watcher'
   - core-js
   - esbuild
+  - msw
   - sharp
+  - vue-demi
