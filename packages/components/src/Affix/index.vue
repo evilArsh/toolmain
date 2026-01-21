@@ -1,19 +1,22 @@
 <script lang="ts" setup>
 import { px } from "@toolmain/shared"
-import { useElementBounding, useIntersectionObserver, useThrottleFn } from "@vueuse/core"
-import { computed, CSSProperties, onBeforeUnmount, onMounted, reactive, shallowRef, useTemplateRef } from "vue"
-
+import { useElementBounding, useThrottleFn } from "@vueuse/core"
+import { CSSProperties, onBeforeUnmount, onMounted, shallowRef, useTemplateRef } from "vue"
+import { Direction, getTargetEl, useIntersection } from "./intersection"
 const {
   position = "top",
   target = "",
   offset = 0,
 } = defineProps<{
   /**
-   * 选择top时,如果元素滚动到[底部]消失或即将消失，会回到原位置
+   * 选择top时，如果元素滚动到[底部]消失或即将消失，会回到原位置
    *
    * 选择bottom时则是滚动到[顶部]时触发
    */
   position?: "top" | "bottom"
+  /**
+   * element query selector
+   */
   target?: string
   offset?: number
 }>()
@@ -23,48 +26,27 @@ const {
 const affixRef = useTemplateRef("affix")
 const affixInner = useTemplateRef("affixInner")
 /**
+ * 当前固钉定位时参考元素
+ */
+const targetEl = shallowRef<HTMLElement | null>(null)
+/**
  * 当前固钉包裹的子元素
  */
 const childEl = shallowRef<HTMLElement | null>()
-const threshold = 2
-/**
- * 当前固钉定位时参考元素
- */
-const targetEl = shallowRef<HTMLElement | null>()
 const { width, height } = useElementBounding(childEl)
-const hasTarget = computed(() => !!targetEl.value)
+
+const { affixX, affixY, onUpdate, affixHeight, event, updateAffixBounding } = useIntersection(affixRef, targetEl)
+
 const affixStyle = shallowRef<CSSProperties>({})
 const affixScale = shallowRef<CSSProperties>({})
-enum Direction {
-  Left = "left",
-  Right = "right",
-  Top = "top",
-  Bottom = "bottom",
-}
-const event = reactive({
-  disableTeleport: true,
-  target: {
-    isIntersecting: false,
-    intersectionRatio: 0.0,
-    directions: [] as Direction[],
-  },
-  affix: {
-    isIntersecting: false,
-    intersectionRatio: 0.0,
-    needFloat: false,
-    directions: [] as Direction[],
-  },
-})
-const {
-  x: affixX,
-  y: affixY,
-  // width: affixWidth,
-  height: affixHeight,
-  update: updateAffixBounding,
-} = useElementBounding(affixRef)
-const needRecalc = () => {
+
+const needReCalc = () => {
+  // console.log(
+  //   `[参考元素可视 ${event.target.isIntersecting} ${event.target.intersectionRatio}]
+  // [固钉可视 ${event.affix.isIntersecting} ${event.affix.intersectionRatio}]`
+  // )
   // 有参考元素
-  if (hasTarget.value) {
+  if (targetEl.value) {
     // 【参考元素可视】并且(【固钉不可视】或者【部分可视】)
     if (event.target.isIntersecting) {
       if (!event.affix.isIntersecting || event.affix.intersectionRatio < 0.5) {
@@ -90,7 +72,7 @@ const update = () => {
   ) {
     event.affix.needFloat = false
   } else {
-    if (needRecalc()) {
+    if (needReCalc()) {
       const nearTop = affixY.value + affixHeight.value / 2 <= window.innerHeight / 2
       event.affix.needFloat = position === Direction.Top ? nearTop : !nearTop
     }
@@ -110,45 +92,11 @@ const update = () => {
     affixScale.value = {}
   }
 }
-function getIntersectDirection(entry: IntersectionObserverEntry, directions: Direction[]) {
-  const { boundingClientRect: target, intersectionRect: inter, rootBounds: root } = entry
-  if (!root) {
-    return
-  }
-  if (entry.isIntersecting) {
-    directions.length = 0
-    if (inter.y - target.y > threshold) directions.push(Direction.Top)
-    if (target.y - inter.y > threshold) directions.push(Direction.Bottom)
-    if (inter.x - target.x > threshold) directions.push(Direction.Left)
-    if (target.x + target.width - (inter.x + inter.width) > threshold) directions.push(Direction.Right)
-  }
-}
-const affixObCallback: IntersectionObserverCallback = ([entry]) => {
-  event.affix.isIntersecting = entry.isIntersecting
-  getIntersectDirection(entry, event.affix.directions)
-  event.affix.intersectionRatio = entry.intersectionRatio
-  update()
-}
-const targetObCallback: IntersectionObserverCallback = ([entry]) => {
-  event.target.isIntersecting = entry.isIntersecting
-  getIntersectDirection(entry, event.target.directions)
-  event.target.intersectionRatio = entry.intersectionRatio
-  update()
-}
-const affixOb = useIntersectionObserver(affixRef, affixObCallback, {
-  root: window.document.documentElement,
-  threshold: [0, 0.01, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 0.99, 1],
-})
-const targetOb = useIntersectionObserver(targetEl, targetObCallback, {
-  root: window.document.documentElement,
-  threshold: [0, 0.01, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 0.99, 1],
-})
+
 function init() {
   childEl.value = affixInner.value?.firstElementChild as HTMLElement | null
-  if (target) {
-    targetEl.value = document.querySelector(target) as HTMLElement | null
-  }
-  updateAffixBounding()
+  targetEl.value = getTargetEl(target)
+  onUpdate(update)
 }
 const throttledUpdate = useThrottleFn(update, 250, true)
 onMounted(() => {
@@ -157,12 +105,10 @@ onMounted(() => {
 })
 onBeforeUnmount(() => {
   window.removeEventListener("resize", throttledUpdate)
-  affixOb.stop()
-  targetOb.stop()
 })
 defineExpose({
   update: () => {
-    if (needRecalc()) {
+    if (needReCalc()) {
       update()
     }
   },

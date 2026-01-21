@@ -1,5 +1,11 @@
 # @toolmain/components
 
+## 1.2.23
+
+### Patch Changes
+
+- perf: improve `Affix` accurancy
+
 ## 1.2.22
 
 ### Patch Changes
