@@ -11,7 +11,7 @@ import { ElCard, ElScrollbar } from "element-plus"
     <template v-if="$slots.header" #header>
       <slot name="header"></slot>
     </template>
-    <el-scrollbar class="flex-1" view-class="p-10px h-full">
+    <el-scrollbar class="flex-1" view-class="h-full p-[var(--dialog-scroll-view-padding)]">
       <slot></slot>
     </el-scrollbar>
     <template v-if="$slots.footer" #footer>
@@ -22,6 +22,7 @@ import { ElCard, ElScrollbar } from "element-plus"
 <style lang="scss" scoped>
 .dialog-panel {
   --dialog-padding: 1rem;
+  --dialog-scroll-view-padding: 10px;
   --el-card-padding: var(--dialog-padding);
   flex: 1;
   display: flex;

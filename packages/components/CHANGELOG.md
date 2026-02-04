@@ -1,5 +1,11 @@
 # @toolmain/components
 
+## 1.2.24
+
+### Patch Changes
+
+- feat(components): replace hardcoded padding with CSS variable in DialogPanel
+
 ## 1.2.23
 
 ### Patch Changes
