@@ -134,7 +134,7 @@ defineExpose({
     border-radius: 1rem;
     &.fix {
       position: fixed;
-      box-shadow: var(--affix-shadow);
+      box-shadow: var(--affix-fix-shadow);
       background-color: var(--affix-fix-bg-color);
     }
   }

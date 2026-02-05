@@ -1,5 +1,11 @@
 # @toolmain/components
 
+## 1.2.26
+
+### Patch Changes
+
+- fix: Affix css var error
+
 ## 1.2.25
 
 ### Patch Changes
