@@ -127,13 +127,15 @@ defineExpose({
 </template>
 <style lang="scss" scoped>
 .comp-affix {
+  --affix-fix-shadow: var(--el-box-shadow);
+  --affix-fix-bg-color: var(--el-card-bg-color);
   .comp-affix-inner {
     transition: box-shadow 0.3s;
     border-radius: 1rem;
     &.fix {
       position: fixed;
-      box-shadow: var(--el-box-shadow);
-      background-color: var(--el-card-bg-color);
+      box-shadow: var(--affix-shadow);
+      background-color: var(--affix-fix-bg-color);
     }
   }
 }

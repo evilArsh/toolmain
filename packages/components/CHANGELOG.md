@@ -1,5 +1,11 @@
 # @toolmain/components
 
+## 1.2.25
+
+### Patch Changes
+
+- perf(affix): refactor CSS custom properties and intersection observer handling
+
 ## 1.2.24
 
 ### Patch Changes

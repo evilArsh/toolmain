@@ -61,13 +61,12 @@ export function useIntersection(affixRef: ShallowRef<HTMLElement | null>, target
   const affixOb = useIntersectionObserver(
     affixRef,
     entry => {
-      const lastest = entry.pop()
-      // console.log(`[affix]`, lastest)
-      if (!lastest) return
-      event.affix.isIntersecting = lastest.isIntersecting
-      updateIntersectDirection(lastest, event.affix.directions)
-      event.affix.intersectionRatio = lastest.intersectionRatio
-      updateCallback.value?.()
+      entry.forEach(latest => {
+        event.affix.isIntersecting = latest.isIntersecting
+        updateIntersectDirection(latest, event.affix.directions)
+        event.affix.intersectionRatio = latest.intersectionRatio
+        updateCallback.value?.()
+      })
     },
     {
       root: window.document.documentElement,
@@ -77,13 +76,12 @@ export function useIntersection(affixRef: ShallowRef<HTMLElement | null>, target
   const targetOb = useIntersectionObserver(
     targetEl,
     entry => {
-      const lastest = entry.pop()
-      // console.log(`[target]`, lastest)
-      if (!lastest) return
-      event.target.isIntersecting = lastest.isIntersecting
-      updateIntersectDirection(lastest, event.target.directions)
-      event.target.intersectionRatio = lastest.intersectionRatio
-      updateCallback.value?.()
+      entry.forEach(latest => {
+        event.target.isIntersecting = latest.isIntersecting
+        updateIntersectDirection(latest, event.target.directions)
+        event.target.intersectionRatio = latest.intersectionRatio
+        updateCallback.value?.()
+      })
     },
     {
       root: window.document.documentElement,
