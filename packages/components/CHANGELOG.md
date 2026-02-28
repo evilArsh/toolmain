@@ -1,5 +1,14 @@
 # @toolmain/components
 
+## 1.2.27
+
+### Patch Changes
+
+- chore: update dependencies
+- Updated dependencies
+  - @toolmain/libs@1.1.14
+  - @toolmain/shared@1.3.5
+
 ## 1.2.26
 
 ### Patch Changes
